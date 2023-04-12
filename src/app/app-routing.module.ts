@@ -32,6 +32,8 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+import { RequestsComponent } from './pages/requests/requests.component';
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -67,8 +69,10 @@ const routes: Routes = [
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
+  {path:'requests' ,component: RequestsComponent},
+  { path: 'path-string', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) }
+ 
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
