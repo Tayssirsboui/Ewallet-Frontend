@@ -1,4 +1,5 @@
 import { Component ,ElementRef} from '@angular/core';
+import { TokenStorageService } from './_services/token-storage.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
@@ -7,7 +8,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'admindashboard';
-  constructor(private elementRef: ElementRef,  public  _router: Router) { }
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  nom?: string;
+  constructor(private elementRef: ElementRef,  public  _router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
 
@@ -15,5 +20,18 @@ export class AppComponent {
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";
     this.elementRef.nativeElement.appendChild(s);
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+     
+      this.nom = user.nom;
+    }
+  }
+
+  
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
 }

@@ -11,33 +11,46 @@
                             <h5 class="card-title text-center pb-0 fs-4">Créer un Compte</h5>
                             <p class="text-center small">Entrez vos détails personnels pour créer un compte</p>
                          </div>
-                         <form class="row g-3 needs-validation" novalidate>
+                         <form class="row g-3 needs-validation" *ngIf="!isSuccessful"
+                         name="form"
+                         (ngSubmit)="f.form.valid && onSubmit()"
+                         #f="ngForm"
+                         
+                        novalidate>
                             <div class="col-12">
-                               <label for="yourName" class="form-label">Votre Nom</label> <input type="text" name="name" class="form-control" id="yourName" required>
+                               <label for="votreNom" class="form-label">Votre Nom</label> <input type="text" name="nom" class="form-control" id="VotreNom"  [(ngModel)]="form.nom" required #nom="ngModel" minlength="3"
+                               maxlength="20"
+                               >
+                            
                                <div class="invalid-feedback">S'il vous plaît, entrez votre nom!</div>
                             </div>
                             <div class="col-12">
-                               <label for="yourEmail" class="form-label">Votre Email</label> <input type="email" name="email" class="form-control" id="yourEmail" required>
+                               <label for="votreEmail" class="form-label">Votre Email</label> <input type="email" name="email" class="form-control" id="votreEmail"    [(ngModel)]="form.email" required  #email="ngModel">
+                               
                                <div class="invalid-feedback">s'il vous plaît, entrez une adresse email valide!</div>
                             </div>
-                            <div class="col-12">
-                               <label for="yourUsername" class="form-label">Nom</label>
+                            <!-- <div class="col-12">
+                               <label for="votreNom" class="form-label">Nom</label>
                                <div class="input-group has-validation">
-                                  <span class="input-group-text" id="inputGroupPrepend">@</span> <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                  <span class="input-group-text" id="inputGroupPrepend">@</span> <input type="text" name="nom" class="form-control" id="votreNom" required>
                                   <div class="invalid-feedback">S'il vous plaît, choisissez un nom.</div>
                                </div>
-                            </div>
+                            </div> -->
                             <div class="col-12">
-                               <label for="yourPassword" class="form-label">Mot de passe</label> <input type="password" name="password" class="form-control" id="yourPassword" required>
+                               <label for="votremotDePasse" class="form-label">Mot de passe</label> <input type="motDePasse" name="motDePasse" class="form-control" id="votremotDePasse"  [(ngModel)]="form.motDePasse" 
+                               required #motDePasse="ngModel"
+                               minlength="6"
+                               >
+                              
                                <div class="invalid-feedback">S'il vous plaît, entrez votre mot de passe!</div>
                             </div>
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                <div class="form-check">
                                   <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required> <label class="form-check-label" for="acceptTerms">Je suis d'accord et j'accepte les <a href="#">termes et les conditions</a></label>
                                   <div class="invalid-feedback">Vous devez accepter avant de soumettre.</div>
                                </div>
-                            </div>
-                            <div class="col-12"> <button class="btn btn-primary w-100" type="submit">Créer Compte</button></div>
+                            </div> -->
+                            <div class="col-12"> <button class="btn btn-primary w-100" type="submit" onsubmit="">Créer Compte</button></div>
                             <div class="col-12">
                                <p class="small mb-0">Vous avez déjà un compte? <a routerLink="/pages-login">Connexion</a></p>
                             </div>

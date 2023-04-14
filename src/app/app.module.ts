@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,8 +41,11 @@ import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { RequestsComponent } from './pages/requests/requests.component';
-
+import {HttpClientModule} from '@angular/common/http'
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CategoriesModule } from './pages/categories/categories.module';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -89,13 +90,11 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
   ],
   imports: [
     BrowserModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FullCalendarModule,
+    CategoriesModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
-
-
 
 
 
@@ -25,12 +24,9 @@ export class PagesRegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
-
   onSubmit(): void {
     const { nom, email, motDePasse } = this.form;
-
+  
     this.authService.register(nom, email, motDePasse).subscribe(
       (data:any) => {
         console.log(data);
