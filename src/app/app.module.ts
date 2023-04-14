@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -38,6 +39,17 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
+import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+import { ChartsComponent } from './pages/depenses/charts/charts.component';
+import { DepensesModule } from './pages/depenses/depenses.module';
+
+
+
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -76,11 +88,24 @@ import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
     PagesRegisterComponent,
     PagesLoginComponent,
     PagesError404Component,
-    PagesBlankComponent
+    PagesBlankComponent,
+    
+    
+    
+
+    
+    
+
+    
+  
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DepensesModule,
+  
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

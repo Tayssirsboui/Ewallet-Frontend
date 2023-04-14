@@ -32,6 +32,11 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+import { ChartsComponent } from './pages/depenses/charts/charts.component';
+
+
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -67,6 +72,12 @@ const routes: Routes = [
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
+  { path: 'calendrier', component: CalendrierComponent },
+  { path: 'charts', component: ChartsComponent },
+  { path: 'path-string', loadChildren: () => import('./pages/depenses/depenses.module').then(m => m.DepensesModule) },
+  { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
+  
+  
 ];
 
 @NgModule({
