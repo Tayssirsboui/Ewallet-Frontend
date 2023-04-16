@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { RevenusRoutingModule } from './revenus-routing.module';
 import { RevenusComponent } from './revenus.component';
+import { CalendrierrevenuComponent } from './calendrierrevenu/calendrierrevenu.component';
+import { ChartsrevenuComponent } from './chartsrevenu/chartsrevenu.component';
 
 
 @NgModule({
   declarations: [
-    RevenusComponent
+    RevenusComponent,
+    CalendrierrevenuComponent,
+    ChartsrevenuComponent
   ],
   imports: [
     CommonModule,

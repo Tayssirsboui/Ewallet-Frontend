@@ -42,6 +42,10 @@ import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { DepensesModule } from './pages/depenses/depenses.module';
+import { RevenusModule } from './pages/revenus/revenus.module';
+import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
+import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 
 
 
@@ -104,6 +108,7 @@ import { DepensesModule } from './pages/depenses/depenses.module';
     BrowserModule,
     AppRoutingModule,
     DepensesModule,
+    RevenusModule
   
     
   ],

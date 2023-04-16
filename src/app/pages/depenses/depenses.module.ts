@@ -5,6 +5,7 @@ import { DepensesRoutingModule } from './depenses-routing.module';
 import { DepensesComponent } from './depenses.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { ChartsComponent } from './charts/charts.component';
+import { PaiementprevusComponent } from './paiementprevus/paiementprevus.component';
 
 
 
@@ -13,6 +14,7 @@ import { ChartsComponent } from './charts/charts.component';
     DepensesComponent,
     CalendrierComponent,
     ChartsComponent,
+    PaiementprevusComponent,
     
    
   ],

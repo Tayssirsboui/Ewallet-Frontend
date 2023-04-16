@@ -34,6 +34,9 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
+import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
+import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 
 
 
@@ -74,6 +77,9 @@ const routes: Routes = [
   { path: 'user-profile', component: UsersProfileComponent },
   { path: 'calendrier', component: CalendrierComponent },
   { path: 'charts', component: ChartsComponent },
+  { path: 'calendrierrevenu', component: CalendrierrevenuComponent },
+  { path: 'chartsrevenu', component: ChartsrevenuComponent },
+  { path: 'paiementprevus', component:PaiementprevusComponent},
   { path: 'path-string', loadChildren: () => import('./pages/depenses/depenses.module').then(m => m.DepensesModule) },
   { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
   
