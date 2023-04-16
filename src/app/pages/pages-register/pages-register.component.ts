@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -18,14 +20,16 @@ export class PagesRegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+ 
   
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
     const { nom, email, motDePasse } = this.form;
+   
   
     this.authService.register(nom, email, motDePasse).subscribe(
       (data:any) => {
@@ -38,5 +42,23 @@ export class PagesRegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     );
+    this.router.navigate(['/pages-login']);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Compte crée avec succés'
+    })
+    
   }
 }

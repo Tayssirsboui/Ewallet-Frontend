@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
@@ -18,16 +19,18 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
     isLoginFailed = false;
     errorMessage = '';
   
-    constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+    constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router: Router) { }
   
     ngOnInit(): void {
       if (this.tokenStorage.getToken()) {
         this.isLoggedIn = true;
       }
     }
+
   
     onSubmit(): void {
       const { nom, motDePasse } = this.form;
+      
   
       this.authService.login(nom, motDePasse).subscribe(
         (data:any) => {
@@ -43,6 +46,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
           this.isLoginFailed = true;
         }
       );
+      this.router.navigate(['/dashboard']);
     }
   
     reloadPage(): void {
