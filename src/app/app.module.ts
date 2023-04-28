@@ -39,14 +39,15 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
-import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { DepensesModule } from './pages/depenses/depenses.module';
 import { RevenusModule } from './pages/revenus/revenus.module';
 import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
 
 
 
@@ -93,7 +94,7 @@ import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiemen
     PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
-    
+   
     
     
 
@@ -108,7 +109,10 @@ import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiemen
     BrowserModule,
     AppRoutingModule,
     DepensesModule,
-    RevenusModule
+    RevenusModule,
+    FullCalendarModule
+ 
+    
   
     
   ],

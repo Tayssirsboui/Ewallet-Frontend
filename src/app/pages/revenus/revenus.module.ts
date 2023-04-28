@@ -5,6 +5,7 @@ import { RevenusRoutingModule } from './revenus-routing.module';
 import { RevenusComponent } from './revenus.component';
 import { CalendrierrevenuComponent } from './calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './chartsrevenu/chartsrevenu.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ChartsrevenuComponent } from './chartsrevenu/chartsrevenu.component';
   ],
   imports: [
     CommonModule,
-    RevenusRoutingModule
+    RevenusRoutingModule,
+    FullCalendarModule
   ]
 })
 export class RevenusModule { }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AccordionComponent } from './components/accordion/accordion.component';
@@ -17,7 +18,6 @@ import { IconsBootstrapComponent } from './components/icons-bootstrap/icons-boot
 import { IconsBoxiconsComponent } from './components/icons-boxicons/icons-boxicons.component';
 import { IconsRemixComponent } from './components/icons-remix/icons-remix.component';
 import { ListGroupComponent } from './components/list-group/list-group.component';
-import { ModalComponent } from './components/modal/modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { SpinnersComponent } from './components/spinners/spinners.component';
@@ -41,6 +41,8 @@ import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiemen
 
 
 
+
+
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -60,7 +62,7 @@ const routes: Routes = [
   { path: 'icons-boxicons', component: IconsBoxiconsComponent },
   { path: 'icons-remix', component: IconsRemixComponent },
   { path: 'list-group', component: ListGroupComponent },
-  { path: 'modal', component: ModalComponent },
+ 
   { path: 'pagination', component: PaginationComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'spinners', component: SpinnersComponent },
@@ -80,6 +82,7 @@ const routes: Routes = [
   { path: 'calendrierrevenu', component: CalendrierrevenuComponent },
   { path: 'chartsrevenu', component: ChartsrevenuComponent },
   { path: 'paiementprevus', component:PaiementprevusComponent},
+ 
   { path: 'path-string', loadChildren: () => import('./pages/depenses/depenses.module').then(m => m.DepensesModule) },
   { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
   
