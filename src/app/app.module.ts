@@ -48,6 +48,9 @@ import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 
@@ -94,27 +97,17 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
-   
-    
-    
 
-    
-    
-
-    
-  
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DepensesModule,
     RevenusModule,
-    FullCalendarModule
- 
-    
-  
-    
+    FullCalendarModule,
+    MatDatepickerModule,
+    MatInputModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

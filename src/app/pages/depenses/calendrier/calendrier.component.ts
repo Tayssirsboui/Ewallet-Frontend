@@ -1,5 +1,4 @@
-
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -7,8 +6,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
 
-
-
+import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modal/modal.component';
 
 @Component({
   selector: 'app-calendrier',
@@ -16,6 +15,10 @@ import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
   styleUrls: ['./calendrier.component.css']
 })
 export class CalendrierComponent {
+  @ViewChild('modal')
+  private modalComponent!: ModalComponent;
+  @ViewChild('modalNew')
+  private modalComponentNew!: ModalComponent;
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
@@ -45,9 +48,23 @@ export class CalendrierComponent {
     eventRemove:
     */
   };
+
+  modalConfig = {
+    modalTitle: "SHOW event",
+    dismissButtonLabel: "save",
+    closeButtonLabel: "close",
+  }
+
+  modalConfigNew = {
+    modalTitle: "New event",
+    dismissButtonLabel: "save",
+    closeButtonLabel: "close",
+  }
+
+
   currentEvents: EventApi[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef) {
+  constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal) {
   }
 
   handleCalendarToggle() {
@@ -59,32 +76,38 @@ export class CalendrierComponent {
     calendarOptions.weekends = !calendarOptions.weekends;
   }
 
+  //  new function
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
+    // model Event
+    // new Event()
+    this.modalComponentNew.new()
 
-    calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
-    }
+    // const title = prompt('Please enter a new title for your event');
+    // const calendarApi = selectInfo.view.calendar;
+
+    // calendarApi.unselect(); // clear date selection
+
+    // if (title) {
+    //   calendarApi.addEvent({
+    //     id: createEventId(),
+    //     title,
+    //     start: selectInfo.startStr,
+    //     end: selectInfo.endStr,
+    //     allDay: selectInfo.allDay
+    //   });
+    // }
   }
+  
 
-  handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
+  //  edit function
+  handleEventClick(args: any) {
+     this.modalComponent.open(args.event)
+    // this.modalService.open(modal);
   }
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
-
 }
