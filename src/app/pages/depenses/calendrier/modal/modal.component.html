@@ -1,0 +1,76 @@
+
+<ng-template #modal>
+    <div class="modal-header">
+      <h2 class="modal-title">{{title}}</h2>
+      <button type="button" class="btn btn-danger pull-right" style="float:right">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+
+      <form class="form" role="form" [formGroup]="nouvelledepenseForm">
+
+        <div  class="row mb-3">
+          <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
+          <div class="col-lg-9">
+            <textarea rows="1" class="form-control"
+             > {{item.description}}  </textarea>
+          </div>
+        </div>
+        
+        
+        <div  class="row mb-3">
+          <label class="col-lg-3 col-form-label form-control-label"><strong>montant</strong></label>
+          <div class="col-lg-9">
+            <input class="form-control" type="text" value="{{item.montant}}" >
+          </div>
+        </div>
+        <div  class="row mb-3">
+          <label class="col-lg-3 col-form-label form-control-label"><strong>Date</strong></label>
+          <div class="col-lg-9">
+            
+             <input type="date" class="form-control" value="{{ item.date | date:'MM/dd/yyyy' }}">
+             
+            <!-- <textarea rows="1" class="form-control"
+             > {{item.date}}  </textarea> -->
+
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-lg-3 col-form-label form-control-label"><strong>Catégories</strong></label>
+          <div class="col-lg-9">
+             <select class="form-select" aria-label="Default select example">
+              <option value="categorie1">Transport</option>
+              <option value="categorie2">Loisir</option>
+              <option value="categorie3">Education</option>
+              <option value="categorie3">Logement</option>
+              <option value="categorie3">Alimentation</option>
+              <option value="categorie3">Santé et soins personnels</option>
+             </select>
+          </div>
+       </div>
+      <div class="modal-footer">
+       
+        
+        
+          <button type="button" class="btn btn-info" value="Sauvegarder" (click)="addDepense()">Enregistrer</button><br><br>
+          <button type="button"
+               class="btn btn-secondary"
+               (click)="close()"
+               *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
+               [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
+            {{ modalConfig.closeButtonLabel }}
+          </button>
+          
+          
+
+        </div>
+      
+        
+        
+      </form>
+
+    </div>
+  </ng-template>
