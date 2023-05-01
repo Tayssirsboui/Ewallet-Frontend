@@ -1,5 +1,6 @@
 import {  Component ,ElementRef} from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,8 +16,9 @@ export class AppComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   nom?: string;
-  constructor(private tokenStorageService: TokenStorageService,private elementRef: ElementRef,  public  _router: Router) { }
+  constructor(private tokenStorageService: TokenStorageService,private elementRef: ElementRef,  public  _router: Router,private dialog: MatDialog) { }
  
+
 
   ngOnInit() {
 

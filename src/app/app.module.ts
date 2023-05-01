@@ -8,9 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -66,6 +63,7 @@ import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+
 
 
 
@@ -136,16 +134,6 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     DepensesModule,
     RevenusModule,
     FullCalendarModule
-   
-    
-    
-
-    
-    
-
-    
-  
-    
   ],
  
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
