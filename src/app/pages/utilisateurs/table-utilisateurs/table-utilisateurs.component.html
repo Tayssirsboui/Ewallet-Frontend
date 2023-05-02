@@ -1,0 +1,58 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Data Tables</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+             <li class="breadcrumb-item">Utilisateurs</li>
+             <li class="breadcrumb-item active">Liste Utilisateurs</li>
+          </ol>
+       </nav>
+    </div>
+    <section class="section">
+       <div class="row">
+          <div class="col-lg-12">
+             <div class="card">
+                <div class="card-body">
+                   <h5 class="card-title">Utilisateurs</h5>
+                   
+                   
+                   <div class="col-md-12 " > 
+                    <button class="btn btn-success w-30  right " (click)="openModal()"> <i class=""></i>Ajouter Utilisateur</button>
+             
+                </div>
+                <div *ngIf="afficherFormulaire">
+                    <app-utilisateur-form></app-utilisateur-form>
+                  </div>
+                   <table class="table datatable">
+                      <thead>
+                         <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">prenom</th>
+                            <th scope="col">Email</th>
+                           
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr>
+                            <tr *ngFor="let utilisateur of utilisateurs">
+                                <td>{{ utilisateur.idUtilisateur }}</td>
+                                <td>{{ utilisateur.nom }}</td>
+                                <td>{{ utilisateur.prenom }}</td>
+                                <td>{{ utilisateur.email}}</td>
+                              
+                           
+                                <td> <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button> &nbsp;
+                                     <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
+                                </td>
+                         </tr>
+                        
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+ </main> 

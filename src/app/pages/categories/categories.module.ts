@@ -1,23 +1,24 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { RouterModule } from '@angular/router';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './categories.component';
-import { ListGroupComponent } from './list-group/list-group.component';
+import { TypesCategoriesComponent } from './types-categories/types-categories.component';
+import { CategorieFormComponent } from './categorie-form/categorie-form.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     CategoriesComponent,
-    ListGroupComponent
+    TypesCategoriesComponent,
+    CategorieFormComponent
   ],
   imports: [
     CommonModule,
+    FormsModule, 
     CategoriesRoutingModule,
-    RouterModule.forChild([
-      { path: '', component: ListGroupComponent },
-      
-    ])
+    
   ]
 })
 export class CategoriesModule { }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListGroupComponent } from './list-group.component';
+import { ModalDialogComponent } from './modal-dialog.component';
 
-describe('ListGroupComponent', () => {
-  let component: ListGroupComponent;
-  let fixture: ComponentFixture<ListGroupComponent>;
+describe('ModalDialogComponent', () => {
+  let component: ModalDialogComponent;
+  let fixture: ComponentFixture<ModalDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListGroupComponent ]
+      declarations: [ ModalDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListGroupComponent);
+    fixture = TestBed.createComponent(ModalDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

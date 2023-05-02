@@ -28,13 +28,7 @@
                                <label for="votreEmail" class="form-label">Votre Email</label> <input type="email" name="email" class="form-control" id="votreEmail"    [(ngModel)]="form.email" required  #email="ngModel">
                                <div class="invalid-feedback">s'il vous plaît, entrez une adresse email valide!</div>
                             </div>
-                            <!-- <div class="col-12">
-                               <label for="votreNom" class="form-label">Nom</label>
-                               <div class="input-group has-validation">
-                                  <span class="input-group-text" id="inputGroupPrepend">@</span> <input type="text" name="nom" class="form-control" id="votreNom" required>
-                                  <div class="invalid-feedback">S'il vous plaît, choisissez un nom.</div>
-                               </div>
-                            </div> -->
+                          
                             <div class="col-12">
                                <label for="votremotDePasse" class="form-label">Mot de passe</label> <input type="motDePasse" name="motDePasse" class="form-control" id="votremotDePasse"  [(ngModel)]="form.motDePasse" 
                                required #motDePasse="ngModel"
@@ -43,12 +37,7 @@
                               
                                <div class="invalid-feedback">S'il vous plaît, entrez votre mot de passe!</div>
                             </div>
-                            <!-- <div class="col-12">
-                               <div class="form-check">
-                                  <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required> <label class="form-check-label" for="acceptTerms">Je suis d'accord et j'accepte les <a href="#">termes et les conditions</a></label>
-                                  <div class="invalid-feedback">Vous devez accepter avant de soumettre.</div>
-                               </div>
-                            </div> -->
+                            
                             <div class="col-12"> <button class="btn btn-primary w-100" type="submit" onsubmit="">Créer Compte</button></div>
                             <div class="col-12">
                                <p class="small mb-0">Vous avez déjà un compte? <a routerLink="/pages-login">Connexion</a></p>

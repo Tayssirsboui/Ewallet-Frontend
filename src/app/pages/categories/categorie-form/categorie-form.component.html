@@ -1,0 +1,27 @@
+<div class="card my-5">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #categorieForm="ngForm">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" [(ngModel)]="categorie.typeCategorie" 
+            class="form-control" 
+            id="nom" 
+            name="nom" 
+            placeholder="Entrez le nom du catégorie"
+            required #typeCategorie="ngModel">
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" [(ngModel)]="categorie.description" 
+            class="form-control" 
+            id="description" 
+            name="description" 
+            placeholder="Entrez une description"
+           #description="ngModel">
+        </div>
+        <button type="submit" [disabled]="!categorieForm.form.valid" 
+          class="btn btn-info">Enregistrer</button>
+      </form>
+    </div>
+  </div>

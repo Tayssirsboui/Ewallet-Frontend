@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,10 +48,13 @@ import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { RequestsComponent } from './pages/requests/requests.component';
-import {HttpClientModule} from '@angular/common/http'
-import { FullCalendarModule } from '@fullcalendar/angular';
+import {HTTP_INTERCEPTORS, HttpClientModule,HttpHeaders} from '@angular/common/http'
+//import { FullCalendarModule } from '@fullcalendar/angular';
 import { CategoriesModule } from './pages/categories/categories.module';
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
+// import { FullCalendarComponent } from './pages/full-calendar/full-calendar.component';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
+import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
 
 
 @NgModule({
@@ -82,21 +92,31 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     PagesFaqComponent,
     PagesContactComponent,
     PagesRegisterComponent,
-    PagesLoginComponent,
+     PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
     RequestsComponent,
-    ListGroupComponent
+    ListGroupComponent,
+    // FullCalendarComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FullCalendarModule,
-    CategoriesModule
+    CategoriesModule,
+    UtilisateursModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

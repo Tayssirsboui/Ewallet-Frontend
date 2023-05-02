@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+// import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+// import { AuthService } from 'src/app/_services/auth.service';
 import Swal from 'sweetalert2';
 
 
@@ -20,9 +21,10 @@ export class PagesRegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+   
  
   
-  constructor(private authService: AuthService,private router: Router) { }
+  constructor(private  authService:AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -31,18 +33,22 @@ export class PagesRegisterComponent implements OnInit {
     const { nom, email, motDePasse } = this.form;
    
   
-    this.authService.register(nom, email, motDePasse).subscribe(
-      (data:any) => {
+    this.authService.register(nom, email, motDePasse).subscribe({
+      next: data => {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
-      (err:any) => {
+      error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
-    );
+    });
+
+
+
     this.router.navigate(['/pages-login']);
+
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',

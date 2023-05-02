@@ -19,9 +19,12 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
     isLoginFailed = false;
     errorMessage = '';
   
-    constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router: Router) { }
+    constructor( private tokenStorage: TokenStorageService, private  authService:AuthService,private router: Router) { }
   
     ngOnInit(): void {
+      window.sessionStorage.removeItem("auth-token");
+      window.sessionStorage.removeItem("auth-user");
+
       if (this.tokenStorage.getToken()) {
         this.isLoggedIn = true;
       }
@@ -33,20 +36,24 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
       
   
       this.authService.login(nom, motDePasse).subscribe(
-        (data:any) => {
+        
+        data => {
           this.tokenStorage.saveToken(data.accessToken);
+          localStorage.setItem('accessToken' ,data.accessToken)
           this.tokenStorage.saveUser(data);
   
           this.isLoginFailed = false;
           this.isLoggedIn = true;
-          this.reloadPage();
+          this.router.navigate(['/dashboard']);
+          //this.reloadPage();
         },
-        (err:any) => {
+        err => {
           this.errorMessage = err.error.message;
           this.isLoginFailed = true;
         }
       );
-      this.router.navigate(['/dashboard']);
+      
+     
     }
   
     reloadPage(): void {

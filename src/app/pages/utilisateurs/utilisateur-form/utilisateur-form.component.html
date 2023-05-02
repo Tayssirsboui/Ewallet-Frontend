@@ -1,0 +1,65 @@
+<!-- <div class="card my-5">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #utilisateurForm="ngForm">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" [(ngModel)]="utilisateur.nom" 
+            class="form-control" 
+            id="nom" 
+            name="nom" 
+            placeholder="Entrez le nom de l'utilisateur"
+            required #typeCategorie="ngModel">
+        </div>
+        
+        <div class="form-group">
+          <label for="prenom">Prenom</label>
+          <input type="text" [(ngModel)]="utilisateur.prenom" 
+            class="form-control" 
+            id="prenom" 
+            name="prenom" 
+            placeholder="Entrez un prenom"
+           #prenom="ngModel">
+        </div>
+        <button type="submit" [disabled]="!utilisateurForm.form.valid" 
+          class="btn btn-info">Enregistrer</button>
+      </form>
+    </div>
+  </div> -->
+  <!-- <h1 mat-dialog-title>Ajouter un utilisateur</h1>
+  <div mat-dialog-content>
+    <form>
+      <mat-form-field>
+        <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nom" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Prénom" [(ngModel)]="utilisateur.prenom" />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="utilisateur.email" />
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onAnnuler()">Annuler</button>
+    <button mat-button color="primary" (click)="onAjouter()">Ajouter</button>
+  </div>
+  -->
+  
+<h1 mat-dialog-title>Ajouter un utilisateur</h1>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nom" name="nom">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Prénom" [(ngModel)]="utilisateur.prenom" name="prenom">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="utilisateur.email" name="email">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onAnnuler()">Annuler</button>
+  <button mat-button color="primary" (click)="onAjouter()">Ajouter</button>
+</div>
