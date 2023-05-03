@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AccordionComponent } from './components/accordion/accordion.component';
@@ -17,7 +18,6 @@ import { IconsBootstrapComponent } from './components/icons-bootstrap/icons-boot
 import { IconsBoxiconsComponent } from './components/icons-boxicons/icons-boxicons.component';
 import { IconsRemixComponent } from './components/icons-remix/icons-remix.component';
 import { ListGroupComponent } from './components/list-group/list-group.component';
-import { ModalComponent } from './components/modal/modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { SpinnersComponent } from './components/spinners/spinners.component';
@@ -32,11 +32,20 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+<<<<<<< HEAD
 import { RequestsComponent } from './pages/requests/requests.component';
 import { TypesCategoriesComponent } from './pages/categories/types-categories/types-categories.component';
 import { FullCalendarComponent } from './pages/full-calendar/full-calendar.component';
 import { CategorieFormComponent } from './pages/categories/categorie-form/categorie-form.component';
 import { TableUtilisateursComponent } from './pages/utilisateurs/table-utilisateurs/table-utilisateurs.component';
+=======
+import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+import { ChartsComponent } from './pages/depenses/charts/charts.component';
+import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
+import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
+
+>>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
 
 
 
@@ -61,7 +70,7 @@ const routes: Routes = [
   { path: 'icons-boxicons', component: IconsBoxiconsComponent },
   { path: 'icons-remix', component: IconsRemixComponent },
   { path: 'list-group', component: ListGroupComponent },
-  { path: 'modal', component: ModalComponent },
+ 
   { path: 'pagination', component: PaginationComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'spinners', component: SpinnersComponent },
@@ -76,6 +85,7 @@ const routes: Routes = [
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
+<<<<<<< HEAD
   {path:'requests' ,component: RequestsComponent},
   {path:'types-categories' ,component: TypesCategoriesComponent},
   {path:'categorie-form' ,component: CategorieFormComponent},
@@ -84,6 +94,18 @@ const routes: Routes = [
   { path: 'path-string', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) },
   { path: 'path-string', loadChildren: () => import('./pages/utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule) }
  
+=======
+  { path: 'calendrier', component: CalendrierComponent },
+  { path: 'charts', component: ChartsComponent },
+  { path: 'calendrierrevenu', component: CalendrierrevenuComponent },
+  { path: 'chartsrevenu', component: ChartsrevenuComponent },
+  { path: 'paiementprevus', component:PaiementprevusComponent},
+ 
+  { path: 'path-string', loadChildren: () => import('./pages/depenses/depenses.module').then(m => m.DepensesModule) },
+  { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
+  
+  
+>>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

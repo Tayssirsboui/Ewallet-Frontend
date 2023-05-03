@@ -8,14 +8,20 @@
                    <div class="card mb-3">
                       <div class="card-body">
                          <div class="pt-4 pb-2">
+<<<<<<< HEAD
                             <h5 class="card-title text-center pb-0 fs-4">Accéder à Votre Compte</h5>
                             <p class="text-center small">Entrez Votre Adresse et Votre Mot De Passe</p>
+=======
+                            <h5 class="card-title text-center pb-0 fs-4">Accéder à votre compte </h5>
+                            <p class="text-center small">Entrer l'adresse et le mot de passe </p>
+>>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
                          </div>
                          <form class="row g-3 needs-validation"  *ngIf="!isLoggedIn"
                          name="form"
                          (ngSubmit)="f.form.valid && onSubmit()"
                          #f="ngForm" novalidate>
                             <div class="col-12">
+<<<<<<< HEAD
                                <label for="votreNom" class="form-label">Email</label>
                                <div class="input-group has-validation">
                                    <input type="text" name="nom" class="form-control" id="votrenom" [(ngModel)]="form.nom" required #nom="ngModel"> 
@@ -32,11 +38,34 @@
                             <div class="col-12"> <button class="btn btn-primary w-100" type="submit">Connexion</button></div>
                             <div class="col-12">
                                <p class="small mb-0">Avez Vous Un Compte?   <a routerLink="/pages-register">Créer un Compte</a></p>
+=======
+                               <label for="yourUsername" class="form-label">Adresse</label>
+                               <div class="input-group has-validation">
+                                  <span class="input-group-text" id="inputGroupPrepend">@</span> <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                  <div class="invalid-feedback">saisissez votre adressse!</div>
+                               </div>
+                            </div>
+                            <div class="col-12">
+                               <label for="yourPassword" class="form-label">Mot de passe</label> <input type="password" name="password" class="form-control" id="yourPassword" required>
+                               <div class="invalid-feedback">saisissez votre mot de passe!</div>
+                            </div>
+                            <div class="col-12">
+                               <div class="form-check"> <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe"> <label class="form-check-label" for="rememberMe">Se souvenir de moi</label></div>
+                            </div>
+                            <div class="col-12"> <button class="btn btn-primary w-100" type="submit">
+                              connexion</button></div>
+                            <div class="col-12">
+                               <p class="small mb-0">vous n'avez pas de compte? <a routerLink="/pages-register">Créer un nouveau compte</a></p>
+>>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
                             </div>
                          </form>
                       </div>
                    </div>
+<<<<<<< HEAD
                    <!-- <div class="credits"> Loved by <a href="https://freeetemplates.com/">FreeeTemplates</a></div> -->
+=======
+                   
+>>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
                 </div>
              </div>
           </div>
