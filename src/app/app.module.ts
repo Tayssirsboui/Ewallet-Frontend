@@ -112,7 +112,6 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
      PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
-<<<<<<< HEAD
     RequestsComponent,
     ListGroupComponent,
     // FullCalendarComponent,
@@ -131,8 +130,12 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
-=======
+    MatNativeDateModule,
+    BrowserModule,
+    AppRoutingModule,
+    DepensesModule,
+    RevenusModule,
+    FullCalendarModule
    
     
     
@@ -144,18 +147,7 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
   
     
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DepensesModule,
-    RevenusModule,
-    FullCalendarModule
  
-    
-  
-    
->>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
-  ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
 
   bootstrap: [AppComponent]

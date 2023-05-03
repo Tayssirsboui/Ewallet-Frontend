@@ -32,20 +32,18 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
-<<<<<<< HEAD
 import { RequestsComponent } from './pages/requests/requests.component';
 import { TypesCategoriesComponent } from './pages/categories/types-categories/types-categories.component';
 import { FullCalendarComponent } from './pages/full-calendar/full-calendar.component';
 import { CategorieFormComponent } from './pages/categories/categorie-form/categorie-form.component';
 import { TableUtilisateursComponent } from './pages/utilisateurs/table-utilisateurs/table-utilisateurs.component';
-=======
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
+import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
-import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 
->>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
+
 
 
 
@@ -85,16 +83,14 @@ const routes: Routes = [
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
-<<<<<<< HEAD
   {path:'requests' ,component: RequestsComponent},
   {path:'types-categories' ,component: TypesCategoriesComponent},
   {path:'categorie-form' ,component: CategorieFormComponent},
   {path:'full-calendar' ,component: FullCalendarComponent},
   {path:'table-utilisateurs' ,component: TableUtilisateursComponent},
   { path: 'path-string', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) },
-  { path: 'path-string', loadChildren: () => import('./pages/utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule) }
+  { path: 'path-string', loadChildren: () => import('./pages/utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule) },
  
-=======
   { path: 'calendrier', component: CalendrierComponent },
   { path: 'charts', component: ChartsComponent },
   { path: 'calendrierrevenu', component: CalendrierrevenuComponent },
@@ -105,7 +101,6 @@ const routes: Routes = [
   { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
   
   
->>>>>>> 9855b246955dbf325044ba6ab3540341a5de27e5
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
