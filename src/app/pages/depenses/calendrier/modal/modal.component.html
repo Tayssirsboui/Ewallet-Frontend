@@ -1,11 +1,32 @@
+
 <ng-template #modal>
     <div class="modal-header">
       <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
     </div>
     <div class="modal-body">
-      {{ id }} -     {{ title }} -  {{ start }}
+      
   
-      <!-- event form -->
+      <form class="form" role="form" [formGroup]="newequiForm">
+        <div class="form-group row">
+          <label class="col-lg-3 col-form-label form-control-label"
+            [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }">Nom de matériel</label>
+          <div class="col-lg-9">
+            <input class="form-control" type="text" formControlName="nom">
+            <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
+              <div *ngIf="f['nom'].errors['required']"> Name is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-lg-3 col-form-label form-control-label">Description</label>
+          <div class="col-lg-9">
+            <textarea rows="6" name="message2" id="message2" class="form-control"
+              formControlName="description"></textarea>
+          </div>
+        </div>
+
+      </form>
   
     </div>
     <div class="modal-footer">
@@ -24,4 +45,11 @@
         {{ modalConfig.closeButtonLabel }}
       </button>
     </div>
+    <!-- <div class="card-footer bg-transparent">
+
+      <div class="col-lg-9 pull-right" style="margin-left: 150px; " >
+        <input type="reset" class="btn btn-outline-primary" value="Annuler" (click)="resetNewEquipment()"  style="margin-left: 100px; margin-right:20px " >
+        <input type="button" class="btn btn-outline-secondary" value="Sauvegarder">
+      </div>
+    </div> -->
   </ng-template>

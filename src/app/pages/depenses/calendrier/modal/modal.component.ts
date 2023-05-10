@@ -1,4 +1,5 @@
 import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
 import { ModalConfig } from './modal.config'
 
@@ -16,15 +17,28 @@ export class ModalComponent implements OnInit {
   public title = ""
   public start = ""
   public id = ""
+  newequiForm: FormGroup;
+  submitted = false;
+
 
   // selectedEvent
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,private fb: FormBuilder,) {
+    this.newequiForm = this.fb.group({
+      nom: ['', Validators.required],
+      prix: ['', Validators.required],
+      description: ['', Validators.required],
+      equipment_type_id: ['', Validators.required]
+
+    })
+  }
+  get f() { return this.newequiForm.controls; }
+
 
   ngOnInit(): void { }
 
   // Event /model/event
-  open(event: {id: string, title: string, start: string }): Promise<boolean> {
+  edit(event: {id: string, title: string, start: string }): Promise<boolean> {
     this.id = event.id
     this.title = event.title
     this.start = event.start
@@ -35,9 +49,6 @@ export class ModalComponent implements OnInit {
   }
 
   new(): Promise<boolean> {
-    this.id =""
-    this.title = ""
-    this.start = ""
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent)
       this.modalRef.result.then(resolve, resolve)
@@ -51,6 +62,7 @@ export class ModalComponent implements OnInit {
       this.modalRef.close(result)
     }
   }
+
 
   async dismiss(): Promise<void> {
     if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {

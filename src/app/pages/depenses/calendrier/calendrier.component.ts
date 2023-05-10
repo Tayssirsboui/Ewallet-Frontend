@@ -98,11 +98,11 @@ export class CalendrierComponent {
     //   });
     // }
   }
-  
+
 
   //  edit function
   handleEventClick(args: any) {
-     this.modalComponent.open(args.event)
+     this.modalComponent.edit(args.event)
     // this.modalService.open(modal);
   }
 
