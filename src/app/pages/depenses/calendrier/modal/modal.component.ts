@@ -19,6 +19,8 @@ export class ModalComponent implements OnInit {
   public id = ""
   newequiForm: FormGroup;
   submitted = false;
+  myForm: any;
+  backendService: any;
 
 
   // selectedEvent
@@ -68,6 +70,21 @@ export class ModalComponent implements OnInit {
     if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {
       const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss())
       this.modalRef.dismiss(result)
+    }
+  }
+  onSubmit() {
+    if (this.myForm.valid) {
+      const formData = this.myForm.value;
+      this.backendService.postFormData(formData).subscribe(
+        (        response: any) => {
+          console.log('Success:', response);
+          // Faire quelque chose en cas de succès
+        },
+        (        error: any) => {
+          console.error('Error:', error);
+          // Faire quelque chose en cas d'erreur
+        }
+      );
     }
   }
 }

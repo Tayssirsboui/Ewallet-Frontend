@@ -9,41 +9,54 @@
       <form class="form" role="form" [formGroup]="newequiForm">
         <div class="form-group row">
           <label class="col-lg-3 col-form-label form-control-label"
-            [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }">Nom de matériel</label>
+            [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }">Nom </label>
           <div class="col-lg-9">
             <input class="form-control" type="text" formControlName="nom">
             <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
               <div *ngIf="f['nom'].errors['required']"> Name is required</div>
             </div>
           </div>
-        </div>
+        </div><br>
 
         <div class="form-group row">
           <label class="col-lg-3 col-form-label form-control-label">Description</label>
           <div class="col-lg-9">
-            <textarea rows="6" name="message2" id="message2" class="form-control"
+            <textarea rows="1" name="message2" id="message2" class="form-control"
+              formControlName="description"></textarea>
+          </div>
+        </div><br>
+        <div class="form-group row">
+          <label class="col-lg-3 col-form-label form-control-label">Budget</label>
+          <div class="col-lg-9">
+            <textarea rows="1" name="message2" id="message2" class="form-control"
               formControlName="description"></textarea>
           </div>
         </div>
+
 
       </form>
   
     </div>
     <div class="modal-footer">
-      <button type="button"
-              class="btn btn-outline-secondary"
-              (click)="dismiss()"
-              *ngIf="modalConfig.hideDismissButton === undefined || !modalConfig.hideDismissButton()"
-              [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
+      <form [formGroup]="myForm" (click)="onSubmit() ">
+        <button type="button"
+            class="btn btn-primary"
+            
+            *ngIf="modalConfig.hideDismissButton === undefined || !modalConfig.hideDismissButton()"
+            [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
         {{ modalConfig.dismissButtonLabel }}
-      </button>
-      <button type="button"
-              class="btn btn-outline-primary"
+        </button>
+      </form>
+      <form [formGroup]="myForm">
+        <button type="button"
+              class="btn btn-danger"
               (click)="close()"
               *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
               [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
         {{ modalConfig.closeButtonLabel }}
       </button>
+      </form>
+      
     </div>
     <!-- <div class="card-footer bg-transparent">
 
