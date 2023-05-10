@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyDialogComponentComponent } from './my-dialog-component/my-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './calendrier/modal/modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -34,7 +35,9 @@ import { ModalComponent } from './calendrier/modal/modal.component';
     FullCalendarModule,
     MatDialogModule,
     MatDialogModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+
 
 
   ],
