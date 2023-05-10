@@ -8,17 +8,38 @@ import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
 
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
-
+import {  OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+// import {Validation} from 'src/app/utils/validation';
 @Component({
   selector: 'app-calendrier',
   templateUrl:'./calendrier.component.html',
   styleUrls: ['./calendrier.component.css']
 })
-export class CalendrierComponent {
+export class CalendrierComponent implements OnInit
+{
+  
+
+  form: FormGroup = new FormGroup({
+    fullname: new FormControl(''),
+    username: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
+    acceptTerms: new FormControl(false),
+  });
+  submitted = false;
+  
+
   @ViewChild('modal')
   private modalComponent!: ModalComponent;
   @ViewChild('modalNew')
+ 
   private modalComponentNew!: ModalComponent;
+
+  @ViewChild('content')
+  private content:any
+ 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
@@ -64,7 +85,7 @@ export class CalendrierComponent {
 
   currentEvents: EventApi[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal) {
+  constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal,private formBuilder: FormBuilder) {
   }
 
   handleCalendarToggle() {
@@ -80,8 +101,8 @@ export class CalendrierComponent {
   handleDateSelect(selectInfo: DateSelectArg) {
     // model Event
     // new Event()
-    this.modalComponentNew.new()
-
+    //this.modalComponentNew.new()
+    this.modalService.open(this.content,{ windowClass: 'customModal', backdrop: 'static', keyboard: false, centered: true })
 
     // const title = prompt('Please enter a new title for your event');
     // const calendarApi = selectInfo.view.calendar;
@@ -110,4 +131,50 @@ export class CalendrierComponent {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
+  ngOnInit():void{this.form = this.formBuilder.group(
+    {
+      fullname: ['', Validators.required],
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(20)
+        ]
+      ],
+      email: ['', [Validators.required, Validators.email]],
+    //   password: [
+    //     '',
+    //     [
+    //       Validators.required,
+    //       Validators.minLength(6),
+    //       Validators.maxLength(40)
+    //     ]
+    //   ],
+    //   confirmPassword: ['', Validators.required],
+    //   acceptTerms: [false, Validators.requiredTrue]
+    // },
+    // {
+    //   validators: [Validation.match('password', 'confirmPassword')]
+    // }
+  // );}
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    console.log(JSON.stringify(this.form.value, null, 2));
+  }
+
+  onReset(): void {
+    this.submitted = false;
+    this.form.reset();
+  }
 }
+

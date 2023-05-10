@@ -10,12 +10,14 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MyDialogComponentComponent } from './my-dialog-component/my-dialog-component.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { ModalComponent } from './calendrier/modal/modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import {MatInputModule} from '@angular/material/input';
+
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ModalComponent } from './calendrier/modal/modal.component';
 
 
 
@@ -26,21 +28,22 @@ import { ModalComponent } from './calendrier/modal/modal.component';
     ChartsComponent,
     PaiementprevusComponent,
     MyDialogComponentComponent,
-    ModalComponent
+    ModalComponent,
+    
+    
+    
+   
+   
   ],
   imports: [
     CommonModule,
     DepensesRoutingModule,
     FullCalendarModule,
-    MatDialogModule,
-    MatDialogModule,
-    NgbModule
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
 
-
-  ],
-  exports: [MatDialogModule],
-  entryComponents: [CalendrierComponent]
-
-
+  ]
 })
 export class DepensesModule { }
