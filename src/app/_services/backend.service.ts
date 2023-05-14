@@ -9,7 +9,7 @@ export class BackendService {
   postFormData(formData: any) {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'http://localhost:8080/api'; // Remplacez l'URL de base par l'URL de votre backend
+  private baseUrl = 'http://localhost:8080/api/depenses'; 
 
   constructor(private http: HttpClient) { }
 

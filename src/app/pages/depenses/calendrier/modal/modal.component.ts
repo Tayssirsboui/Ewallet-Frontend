@@ -73,6 +73,7 @@ export class ModalComponent implements OnInit {
     }
   }
   onSubmit() {
+    this.submitted=true
     if (this.myForm.valid) {
       const formData = this.myForm.value;
       this.backendService.postFormData(formData).subscribe(
