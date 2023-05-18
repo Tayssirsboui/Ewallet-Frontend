@@ -42,6 +42,7 @@ import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+import { SyncfusionSchedulerComponent } from './pages/syncfusion-scheduler/syncfusion-scheduler.component';
 
 
 
@@ -100,6 +101,7 @@ const routes: Routes = [
   { path: 'path-string', loadChildren: () => import('./pages/depenses/depenses.module').then(m => m.DepensesModule) },
   { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
   
+  {path:'syncfusion-scheduler' ,component: SyncfusionSchedulerComponent},
   
 ];
 @NgModule({

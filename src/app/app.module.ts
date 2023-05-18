@@ -66,6 +66,8 @@ import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+import { SyncfusionSchedulerComponent } from './pages/syncfusion-scheduler/syncfusion-scheduler.component';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 
 
 
@@ -115,7 +117,8 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     RequestsComponent,
     ListGroupComponent,
     // FullCalendarComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    SyncfusionSchedulerComponent
   ],
   imports: [
     BrowserModule,
@@ -135,7 +138,8 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     AppRoutingModule,
     DepensesModule,
     RevenusModule,
-    FullCalendarModule
+    FullCalendarModule,
+    ScheduleModule
    
     
     
