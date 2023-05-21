@@ -16,7 +16,7 @@ import { MyDialogComponentComponent } from './my-dialog-component/my-dialog-comp
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './calendrier/modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {  HttpClientModule } from '@angular/common/http';
 
 
 

@@ -1,6 +1,7 @@
 import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
+import { BackendService } from 'src/app/_services/backend.service';
 import { ModalConfig } from './modal.config'
 
 @Component({
@@ -17,24 +18,20 @@ export class ModalComponent implements OnInit {
   public title = ""
   public start = ""
   public id = ""
-  newequiForm: FormGroup;
+  neweventForm: FormGroup;
   submitted = false;
-  myForm: any;
-  backendService: any;
-
+  Data:any;
 
   // selectedEvent
 
-  constructor(private modalService: NgbModal,private fb: FormBuilder,) {
-    this.newequiForm = this.fb.group({
-      nom: ['', Validators.required],
-      prix: ['', Validators.required],
+  constructor(private modalService: NgbModal,private fb: FormBuilder,private backendService: BackendService) {
+    this.neweventForm = this.fb.group({
       description: ['', Validators.required],
-      equipment_type_id: ['', Validators.required]
+      montant: ['', Validators.required],
 
     })
   }
-  get f() { return this.newequiForm.controls; }
+  get f() { return this.neweventForm.controls; }
 
 
   ngOnInit(): void { }
@@ -72,20 +69,33 @@ export class ModalComponent implements OnInit {
       this.modalRef.dismiss(result)
     }
   }
-  onSubmit() {
-    this.submitted=true
-    if (this.myForm.valid) {
-      const formData = this.myForm.value;
-      this.backendService.postFormData(formData).subscribe(
-        (        response: any) => {
+
+
+  Newevent() {
+    this.Data = {
+
+        description: this.neweventForm?.get("description")?.value,
+        montant: this.neweventForm?.get("montant")?.value,
+
+      },
+
+    // debugger
+    this.submitted = true;
+    debugger
+    if (this.neweventForm.invalid) {
+      return;
+    } else {
+      this.backendService.createEvent(this.Data).subscribe(
+        (response:any) => {
           console.log('Success:', response);
-          // Faire quelque chose en cas de succès
+
         },
-        (        error: any) => {
+        ( error: any) => {
           console.error('Error:', error);
-          // Faire quelque chose en cas d'erreur
         }
       );
     }
+    this.submitted = false;
   }
+
 }

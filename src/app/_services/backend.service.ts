@@ -9,12 +9,12 @@ export class BackendService {
   postFormData(formData: any) {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'http://localhost:8080/api/depenses'; 
+  private baseUrl = 'http://localhost:8080/api/depenses';
 
   constructor(private http: HttpClient) { }
 
-  createData(formData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/data`, formData);
+  createEvent(formData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, formData);
   }
 
   getData(id: number): Observable<any> {

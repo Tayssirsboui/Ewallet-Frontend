@@ -4,43 +4,35 @@
       <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
     </div>
     <div class="modal-body">
-      
-  
-      <form class="form" role="form" [formGroup]="newequiForm" (ngSubmit)="onSubmit()">
-        <div class="form-group row">
-          <label class="col-lg-3 col-form-label form-control-label"
-            [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }">Nom </label>
-          <div class="col-lg-9">
-            <input class="form-control" type="text" formControlName="nom">
-            <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
-              <div *ngIf="f['nom'].errors['required']"> Name is required</div>
-            </div>
-          </div>
-        </div><br>
+
+      <form class="form" role="form" [formGroup]="neweventForm">
 
         <div class="form-group row">
           <label class="col-lg-3 col-form-label form-control-label">Description</label>
           <div class="col-lg-9">
-            <textarea rows="1" name="message2" id="message2" class="form-control"
+            <textarea rows="1" class="form-control"
               formControlName="description"></textarea>
           </div>
         </div><br>
         <div class="form-group row">
-          <label class="col-lg-3 col-form-label form-control-label">Budget</label>
+          <label class="col-lg-3 col-form-label form-control-label">montant</label>
           <div class="col-lg-9">
-            <textarea rows="1" name="message2" id="message2" class="form-control"
-              formControlName="description"></textarea>
+            <input class="form-control" type="text" formControlName="montant">
           </div>
         </div><br>
 
-        <div class="form-group row">
-          <button type="submit" class="btn btn-primary">Enregistrer</button><br><br>
-          <button type="submit" class="btn btn-danger">Annuler</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" value="Sauvegarder" (click)="Newevent()">Enregistrer</button><br><br>
+          <button type="button"
+               class="btn btn-outline-primary"
+               (click)="close()"
+               *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
+               [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
+            {{ modalConfig.closeButtonLabel }}
+          </button>
         </div>
 
       </form>
-  
+
     </div>
-    
-    
   </ng-template>
