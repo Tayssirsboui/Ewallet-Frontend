@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { MatInputModule } from '@angular/material/input';
    
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   entryComponents: [UtilisateurFormComponent,TableUtilisateursComponent],
   exports: [

@@ -12,7 +12,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
   export class PagesLoginComponent implements OnInit {
     form: any = {
-      nom: null,
+      email: null,
       motDePasse: null
     };
     isLoggedIn = false;
@@ -24,7 +24,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
     ngOnInit(): void {
       window.sessionStorage.removeItem("auth-token");
       window.sessionStorage.removeItem("auth-user");
-
+      localStorage.clear()
       if (this.tokenStorage.getToken()) {
         this.isLoggedIn = true;
       }
@@ -32,14 +32,15 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
   
     onSubmit(): void {
-      const { nom, motDePasse } = this.form;
+      const { email, motDePasse } = this.form;
       
   
-      this.authService.login(nom, motDePasse).subscribe(
+      this.authService.login(email, motDePasse).subscribe(
         
         data => {
-          this.tokenStorage.saveToken(data.accessToken);
-          localStorage.setItem('accessToken' ,data.accessToken)
+          console.log('res ' , data)
+          this.tokenStorage.saveToken(data.token);
+          localStorage.setItem('accessToken' ,data.token)
           this.tokenStorage.saveUser(data);
   
           this.isLoginFailed = false;
