@@ -34,7 +34,6 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 import { RequestsComponent } from './pages/requests/requests.component';
 import { TypesCategoriesComponent } from './pages/categories/types-categories/types-categories.component';
-import { FullCalendarComponent } from './pages/full-calendar/full-calendar.component';
 import { CategorieFormComponent } from './pages/categories/categorie-form/categorie-form.component';
 import { TableUtilisateursComponent } from './pages/utilisateurs/table-utilisateurs/table-utilisateurs.component';
 
@@ -79,7 +78,6 @@ const routes: Routes = [
   {path:'requests' ,component: RequestsComponent},
   {path:'types-categories' ,component: TypesCategoriesComponent},
   {path:'categorie-form' ,component: CategorieFormComponent},
-  {path:'full-calendar' ,component: FullCalendarComponent},
   {path:'table-utilisateurs' ,component: TableUtilisateursComponent},
   { path: 'path-string', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) },
   { path: 'path-string', loadChildren: () => import('./pages/utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule) }

@@ -49,9 +49,7 @@ import { PagesError404Component } from './pages/pages-error404/pages-error404.co
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { RequestsComponent } from './pages/requests/requests.component';
 import {HTTP_INTERCEPTORS, HttpClientModule,HttpHeaders} from '@angular/common/http'
-//import { FullCalendarModule } from '@fullcalendar/angular';
 import { CategoriesModule } from './pages/categories/categories.module';
-// import { FullCalendarComponent } from './pages/full-calendar/full-calendar.component';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
 import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
@@ -97,7 +95,6 @@ import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
     PagesBlankComponent,
     RequestsComponent,
     ListGroupComponent,
-    // FullCalendarComponent,
     ModalDialogComponent
   ],
   imports: [
