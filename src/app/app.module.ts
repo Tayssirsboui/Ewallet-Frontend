@@ -10,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -53,6 +54,22 @@ import { CategoriesModule } from './pages/categories/categories.module';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
 import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
+
+
+import { ChartsComponent } from './pages/depenses/charts/charts.component';
+import { DepensesModule } from './pages/depenses/depenses.module';
+import { RevenusModule } from './pages/revenus/revenus.module';
+import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
+import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+
+
+
+
+
+
 
 
 @NgModule({
@@ -110,8 +127,24 @@ import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    BrowserModule,
+    AppRoutingModule,
+    DepensesModule,
+    RevenusModule,
+    FullCalendarModule
+   
+    
+    
+
+    
+    
+
+    
+  
+    
   ],
+ 
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
 
   bootstrap: [AppComponent]

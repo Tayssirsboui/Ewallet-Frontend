@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AccordionComponent } from './components/accordion/accordion.component';
@@ -17,7 +18,6 @@ import { IconsBootstrapComponent } from './components/icons-bootstrap/icons-boot
 import { IconsBoxiconsComponent } from './components/icons-boxicons/icons-boxicons.component';
 import { IconsRemixComponent } from './components/icons-remix/icons-remix.component';
 import { ListGroupComponent } from './components/list-group/list-group.component';
-import { ModalComponent } from './components/modal/modal.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ProgressComponent } from './components/progress/progress.component';
 import { SpinnersComponent } from './components/spinners/spinners.component';
@@ -36,6 +36,13 @@ import { RequestsComponent } from './pages/requests/requests.component';
 import { TypesCategoriesComponent } from './pages/categories/types-categories/types-categories.component';
 import { CategorieFormComponent } from './pages/categories/categorie-form/categorie-form.component';
 import { TableUtilisateursComponent } from './pages/utilisateurs/table-utilisateurs/table-utilisateurs.component';
+import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+import { ChartsComponent } from './pages/depenses/charts/charts.component';
+import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
+import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
+import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+
+
 
 
 
@@ -60,7 +67,7 @@ const routes: Routes = [
   { path: 'icons-boxicons', component: IconsBoxiconsComponent },
   { path: 'icons-remix', component: IconsRemixComponent },
   { path: 'list-group', component: ListGroupComponent },
-  { path: 'modal', component: ModalComponent },
+ 
   { path: 'pagination', component: PaginationComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'spinners', component: SpinnersComponent },
@@ -80,8 +87,18 @@ const routes: Routes = [
   {path:'categorie-form' ,component: CategorieFormComponent},
   {path:'table-utilisateurs' ,component: TableUtilisateursComponent},
   { path: 'path-string', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) },
-  { path: 'path-string', loadChildren: () => import('./pages/utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule) }
+  { path: 'path-string', loadChildren: () => import('./pages/utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule) },
  
+  { path: 'calendrier', component: CalendrierComponent },
+  { path: 'charts', component: ChartsComponent },
+  { path: 'calendrierrevenu', component: CalendrierrevenuComponent },
+  { path: 'chartsrevenu', component: ChartsrevenuComponent },
+  { path: 'paiementprevus', component:PaiementprevusComponent},
+ 
+  { path: 'path-string', loadChildren: () => import('./pages/depenses/depenses.module').then(m => m.DepensesModule) },
+  { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
+  
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
