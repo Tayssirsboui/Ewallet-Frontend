@@ -47,13 +47,10 @@ import { PagesError404Component } from './pages/pages-error404/pages-error404.co
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { RequestsComponent } from './pages/requests/requests.component';
 import {HTTP_INTERCEPTORS, HttpClientModule,HttpHeaders} from '@angular/common/http'
-//import { FullCalendarModule } from '@fullcalendar/angular';
 import { CategoriesModule } from './pages/categories/categories.module';
-// import { FullCalendarComponent } from './pages/full-calendar/full-calendar.component';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
 import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
-
 
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { DepensesModule } from './pages/depenses/depenses.module';
@@ -63,7 +60,10 @@ import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
-
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DateAsAgoPipe } from './date-as-ago.pipe';
 
 
 
@@ -74,6 +74,7 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
 
 @NgModule({
   declarations: [
+    DateAsAgoPipe,
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -112,8 +113,8 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     PagesBlankComponent,
     RequestsComponent,
     ListGroupComponent,
-    // FullCalendarComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,11 +134,16 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     AppRoutingModule,
     DepensesModule,
     RevenusModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
- 
+
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  exports: [
+  ]
 })
 export class AppModule { }
