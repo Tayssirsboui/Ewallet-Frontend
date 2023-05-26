@@ -4,8 +4,8 @@
        <nav>
           <ol class="breadcrumb">
              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-             <li class="breadcrumb-item">Tables</li>
-             <li class="breadcrumb-item active">Data</li>
+             <li class="breadcrumb-item">Catégories</li>
+             <li class="breadcrumb-item active">Liste Catégories</li>
           </ol>
        </nav>
     </div>
@@ -18,7 +18,7 @@
                    
                    
                    <div class="col-md-12 " > 
-                    <button class="btn btn-success w-30  right " (click)="ajouterCategorie()"> <i class=""></i>Ajouter catégorie</button>
+                    <button class="btn btn-success w-30  right " (click)="openModal()"> <i class=""></i>Ajouter catégorie</button>
              
                 </div>
                 <div *ngIf="afficherFormulaire">

@@ -1,0 +1,82 @@
+/* Set the font and background color for the modal */
+.mat-dialog-container {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  /* Style the modal header */
+  .mat-dialog-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the modal content */
+  .mat-dialog-content {
+    padding: 0;
+  }
+  
+  /* Style the modal footer */
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+  }
+  
+  /* Style the modal form */
+  .mat-dialog-content form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  /* Style the form fields */
+  .mat-form-field {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  /* Style the form labels */
+  .mat-form-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Style the form inputs */
+  .mat-form-field input, 
+  .mat-form-field textarea, 
+  .mat-form-field select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  /* Style the form inputs on focus */
+  .mat-form-field input:focus, 
+  .mat-form-field textarea:focus, 
+  .mat-form-field select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* Style the form submit button */
+  .mat-dialog-actions button {
+    margin-left: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Style the form submit button on hover */
+  .mat-dialog-actions button:hover {
+    background-color: #0069d9;
+  }
