@@ -5,8 +5,13 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './categories.component';
 import { TypesCategoriesComponent } from './types-categories/types-categories.component';
 import { CategorieFormComponent } from './categorie-form/categorie-form.component';
-import { FormsModule } from '@angular/forms';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,15 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule, 
     CategoriesRoutingModule,
-    
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
+  entryComponents: [CategorieFormComponent,TypesCategoriesComponent],
+  exports: [
+    TypesCategoriesComponent
   ]
 })
 export class CategoriesModule { }

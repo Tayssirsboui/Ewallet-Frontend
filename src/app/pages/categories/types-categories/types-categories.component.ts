@@ -1,6 +1,8 @@
 import { Component, OnInit ,ElementRef} from '@angular/core';
 import { CategorieService } from 'src/app/_services/categorie.service';
 import { Categorie } from 'src/app/categorie';
+import { MatDialog } from '@angular/material/dialog';
+import { CategorieFormComponent } from '../categorie-form/categorie-form.component';
 
 declare var $: any;
 @Component({
@@ -17,7 +19,7 @@ export class TypesCategoriesComponent implements OnInit {
   };
   afficherFormulaire: boolean=false;
 
-  constructor(private elementRef: ElementRef,private categorieService:CategorieService) { }
+  constructor(private elementRef: ElementRef,private categorieService:CategorieService,private dialog: MatDialog) { }
   
     
   categories: Categorie[];
@@ -36,7 +38,14 @@ export class TypesCategoriesComponent implements OnInit {
       console.error(error)
     });
   }
-  ajouterCategorie() {
-    this.afficherFormulaire = true;
+
+  openModal(): void {
+    const dialogRef = this.dialog.open(CategorieFormComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
