@@ -20,7 +20,24 @@
             <input class="form-control" type="text" formControlName="montant">
           </div>
         </div><br>
+        <div class="form-group row">
+          <label class="col-lg-3 col-form-label form-control-label">Date</label>
+          <div class="col-lg-9">
+            <input type="date" formControlName="date" class="form-control" >
 
+          </div>
+        </div><br>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" value="Sauvegarder" (click)="Newevent()">Enregistrer</button><br><br>
+          <button type="button"
+               class="btn btn-outline-primary"
+               (click)="close()"
+               *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
+               [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
+            {{ modalConfig.closeButtonLabel }}
+          </button>
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" value="Sauvegarder" (click)="Newevent()">Enregistrer</button><br><br>
           <button type="button"

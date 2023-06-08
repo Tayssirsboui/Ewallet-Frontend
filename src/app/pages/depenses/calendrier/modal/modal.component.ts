@@ -21,15 +21,19 @@ export class ModalComponent implements OnInit {
   neweventForm: FormGroup;
   submitted = false;
   Data:any;
+  userdata:any;
 
   // selectedEvent
-
+  
   constructor(private modalService: NgbModal,private fb: FormBuilder,private backendService: BackendService) {
     this.neweventForm = this.fb.group({
       description: ['', Validators.required],
       montant: ['', Validators.required],
+      // user_id:['', Validators.required],
+      date:['',Validators.required],
 
     })
+    this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
   }
   get f() { return this.neweventForm.controls; }
 
@@ -70,23 +74,33 @@ export class ModalComponent implements OnInit {
     }
   }
 
-
+ 
   Newevent() {
     this.Data = {
 
         description: this.neweventForm?.get("description")?.value,
         montant: this.neweventForm?.get("montant")?.value,
+        userId:this.userdata.idUtilisateur,
+        date: this.neweventForm?.get("date")?.value,
+        categorieId:1
+
 
       },
 
     // debugger
     this.submitted = true;
-    debugger
+    // debugger
+    console.log(this.Data)
+       
     if (this.neweventForm.invalid) {
+      // debugger 
       return;
     } else {
       this.backendService.createEvent(this.Data).subscribe(
+       
         (response:any) => {
+          // debugger
+          
           console.log('Success:', response);
 
         },
@@ -97,5 +111,42 @@ export class ModalComponent implements OnInit {
     }
     this.submitted = false;
   }
+  // EditEvent() {
+  //   this.Data = {
 
+  //       description: this.neweventForm?.get("description")?.value,
+  //       montant: this.neweventForm?.get("montant")?.value,
+  //       user_id:this.userdata.idUtilisateur,
+  //       date: this.neweventForm?.get("date")?.value,
+  //       categorie_id:1
+       
+
+
+  //     };
+
+  //   // debugger
+  //   this.submitted = true;
+  //   // debugger
+  //   console.log(this.Data)
+       
+  //   if (this.neweventForm.invalid) {
+  //     // debugger 
+  //     return;
+  //   } else {
+  //     this.backendService.updateData(this.id, this.Data).subscribe(
+       
+  //       (response:any) => {
+  //         // debugger
+          
+  //         console.log('Success:', response);
+
+  //       },
+  //       ( error: any) => {
+  //         console.error('Error:', error);
+  //       }
+  //     );
+  //   }
+  //   this.submitted = false;
+  // }
+  
 }
