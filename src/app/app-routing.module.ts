@@ -49,6 +49,8 @@ import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu
 
 
 const routes: Routes = [
+  { path: 'login', component: PagesLoginComponent },
+  { path: 'register', component: PagesRegisterComponent },
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
@@ -79,8 +81,7 @@ const routes: Routes = [
   { path: 'pages-contact', component: PagesContactComponent },
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faq', component: PagesFaqComponent },
-  { path: 'pages-login', component: PagesLoginComponent },
-  { path: 'pages-register', component: PagesRegisterComponent },
+ 
   { path: 'user-profile', component: UsersProfileComponent },
   {path:'requests' ,component: RequestsComponent},
   {path:'types-categories' ,component: TypesCategoriesComponent},

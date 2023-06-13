@@ -57,4 +57,20 @@ export class TableUtilisateursComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  modifierUtilisateur(utilisateur: Utilisateur): void {
+    console.log('Modification de l\'utilisateur :', utilisateur);
+    this.utilisateurService.modifierUtilisateur(utilisateur).subscribe(res => {
+    }, error => {
+      console.error(error);
+    });
+  }
+
+  supprimerUtilisateur(utilisateur: Utilisateur): void {
+    console.log('Suppression de l\'utilisateur :', utilisateur);
+    this.utilisateurService.supprimerUtilisateur(utilisateur).subscribe(res => {
+    }, error => {
+      console.error(error);
+    });
+  }
 }
+  

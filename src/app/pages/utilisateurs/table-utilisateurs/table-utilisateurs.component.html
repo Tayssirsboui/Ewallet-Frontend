@@ -1,9 +1,9 @@
 <main id="main" class="main">
     <div class="pagetitle">
-       <h1>Data Tables</h1>
+       <h1>Utilisateurs</h1>
        <nav>
           <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+             <li class="breadcrumb-item"><a routerLink="/">Acceuil</a></li>
              <li class="breadcrumb-item">Utilisateurs</li>
              <li class="breadcrumb-item active">Liste Utilisateurs</li>
           </ol>
@@ -17,10 +17,10 @@
                    <h5 class="card-title">Utilisateurs</h5>
                    
                    
-                   <div class="col-md-12 " > 
-                    <button class="btn btn-success w-30  right " (click)="openModal()"> <i class=""></i>Ajouter Utilisateur</button>
-             
-                </div>
+                   <div class="button-container " > 
+                     <button class="btn btn-pastel"(click)="openModal()">  <i class="fas fa-plus"></i> AJOUTER UTILISATEUR</button>
+              
+                 </div>
                 <div *ngIf="afficherFormulaire">
                     <app-utilisateur-form></app-utilisateur-form>
                   </div>
@@ -36,6 +36,20 @@
                       </thead>
                       <tbody>
                          <tr>
+                           <tr>
+                              <th scope="row">1</th>
+                              <td>Bridie Kessler</td>
+                              <td>Developer</td>
+                              <td>35</td>
+                              <!-- <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
+                                 <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
+                            </td> -->
+                            <!-- <td>
+                              <button type="button" class="btn btn-link btn-edit" (click)="modifierUtilisateur(utilisateur)"><i class="fas fa-edit"></i></button>
+                              <button type="button" class="btn btn-link btn-delete" (click)="supprimerUtilisateur(utilisateur)"><i class="fas fa-trash"></i></button>
+                            </td> -->
+                             
+                           </tr>
                             <tr *ngFor="let utilisateur of utilisateurs">
                                 <td>{{ utilisateur.idUtilisateur }}</td>
                                 <td>{{ utilisateur.nom }}</td>
@@ -43,9 +57,10 @@
                                 <td>{{ utilisateur.email}}</td>
                               
                            
-                                <td> <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button> &nbsp;
-                                     <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
-                                </td>
+                                <td>
+                                 <button type="button" class="btn btn-link btn-edit" (click)="modifierUtilisateur(utilisateur)"><i class="fas fa-edit"></i></button>
+                                 <button type="button" class="btn btn-link btn-delete" (click)="supprimerUtilisateur(utilisateur)"><i class="fas fa-trash"></i></button>
+                               </td>
                          </tr>
                         
                       </tbody>

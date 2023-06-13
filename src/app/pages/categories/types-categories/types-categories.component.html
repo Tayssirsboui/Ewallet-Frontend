@@ -1,6 +1,6 @@
 <main id="main" class="main">
     <div class="pagetitle">
-       <h1>Data Tables</h1>
+       <h1>Catégories</h1>
        <nav>
           <ol class="breadcrumb">
              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -14,11 +14,11 @@
           <div class="col-lg-12">
              <div class="card">
                 <div class="card-body">
-                   <h5 class="card-title">Catégories</h5>
+                   <h2 class="card-title" >Catégories</h2>
                    
                    
-                   <div class="col-md-12 " > 
-                    <button class="btn btn-success w-30  right " (click)="openModal()"> <i class=""></i>Ajouter catégorie</button>
+                   <div class="button-container " > 
+                    <button class="btn btn-pastel"(click)="openModal()">  <i class="fas fa-plus"></i> AJOUTER CATÉGORIE</button>
              
                 </div>
                 <div *ngIf="afficherFormulaire">
@@ -31,11 +31,26 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
                             <th scope="col">Date de création</th>
+                            <th scope="col">Actions</th>
                            
                          </tr>
                       </thead>
                       <tbody>
                          <tr>
+                           <tr>
+                              <th scope="row">1</th>
+                              <td>Bridie Kessler</td>
+                              <td>Developer</td>
+                              <td>35</td>
+                              <!-- <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
+                                 <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
+                            </td> -->
+                            <td>
+                              <button type="button" class="btn btn-link btn-edit" ><i class="fas fa-edit"></i></button>
+                              <button type="button" class="btn btn-link btn-delete" ><i class="fas fa-trash"></i></button>
+                            </td>
+                             
+                           </tr>
                             <tr *ngFor="let categorie of categories">
                                 <td>{{ categorie.idCategorie }}</td>
                                 <td>{{ categorie.typeCategorie }}</td>
