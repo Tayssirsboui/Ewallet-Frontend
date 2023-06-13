@@ -4,32 +4,38 @@
       <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
     </div>
     <div class="modal-body">
+      <button type="button" class="btn btn-danger pull-right" style="float:right">
+        <i class="fas fa-trash"></i>
+      </button><br><br><br>
 
-      <form class="form" role="form" [formGroup]="neweventForm">
+      <form class="form" role="form" [formGroup]="nouvelledepenseForm">
 
         <div class="form-group row">
-          <label class="col-lg-3 col-form-label form-control-label">Description</label>
+          <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
           <div class="col-lg-9">
             <textarea rows="1" class="form-control"
               formControlName="description"></textarea>
           </div>
         </div><br>
         <div class="form-group row">
-          <label class="col-lg-3 col-form-label form-control-label">montant</label>
+          <label class="col-lg-3 col-form-label form-control-label"><strong>montant</strong></label>
           <div class="col-lg-9">
             <input class="form-control" type="text" formControlName="montant">
           </div>
         </div><br>
         <div class="form-group row">
-          <label class="col-lg-3 col-form-label form-control-label">Date</label>
+          <label class="col-lg-3 col-form-label form-control-label"><strong>Date</strong></label>
           <div class="col-lg-9">
             <input type="date" formControlName="date" class="form-control" >
 
           </div>
         </div><br>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" value="Sauvegarder" (click)="Newevent()">Enregistrer</button><br><br>
+        
+      <div class="modal-footer">
+       
+        
+        <button type="button" class="btn btn-success">Modifier</button>
+          <button type="button" class="btn btn-primary" value="Sauvegarder" (click)="dismiss()">Enregistrer</button><br><br>
           <button type="button"
                class="btn btn-outline-primary"
                (click)="close()"
@@ -37,18 +43,13 @@
                [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
             {{ modalConfig.closeButtonLabel }}
           </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" value="Sauvegarder" (click)="Newevent()">Enregistrer</button><br><br>
-          <button type="button"
-               class="btn btn-outline-primary"
-               (click)="close()"
-               *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
-               [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
-            {{ modalConfig.closeButtonLabel }}
-          </button>
-        </div>
+          
+          
 
+        </div>
+      
+        
+        
       </form>
 
     </div>

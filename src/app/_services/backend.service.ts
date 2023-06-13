@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Depense } from '../models/depense.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class BackendService {
     return this.http.post(`${this.baseUrl}`, formData);
   }
 
-  getData(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/data/${id}`);
+  getDepense(): Observable<Depense[]> {
+    return this.http.get<Depense[]>("http://localhost:8080/getDepenses")
   }
 
   updateData(id: number, formData: any): Observable<any> {

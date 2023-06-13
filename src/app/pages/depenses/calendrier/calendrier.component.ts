@@ -8,6 +8,10 @@ import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
 
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import { Depense } from 'src/app/models/depense.model';
+import { BackendService } from 'src/app/_services/backend.service';
+
 
 @Component({
   selector: 'app-calendrier',
@@ -15,10 +19,13 @@ import { ModalComponent } from './modal/modal.component';
   styleUrls: ['./calendrier.component.css']
 })
 export class CalendrierComponent {
+  @ViewChild('fullCalendar') fullCalendar: FullCalendarComponent;
+
   @ViewChild('modal')
   private modalComponent!: ModalComponent;
   @ViewChild('modalNew')
   private modalComponentNew!: ModalComponent;
+  depense: Array<Depense> = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
@@ -47,6 +54,8 @@ export class CalendrierComponent {
     eventChange:
     eventRemove:
     */
+    
+
   };
 
   modalConfig = {
@@ -63,9 +72,20 @@ export class CalendrierComponent {
 
 
   currentEvents: EventApi[] = [];
+  calendarEvents: any[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal) {
+  constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal, private backendService: BackendService) {
+    this.backendService.getDepense().subscribe(
+      response => {
+        this.depense = response
+        debugger
+      },
+      error => console.log('error in load depenses')
+    )
+    
   }
+  
+
 
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;
@@ -110,4 +130,23 @@ export class CalendrierComponent {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
+  addEventToCalendar(event: any) {
+    const calendarApi = this.fullCalendar.getApi();
+
+    const newEvent = {
+      title: event.title,
+      start: event.start,
+      description: event.description,
+      montant: event.montant
+    };
+
+    calendarApi.addEvent(newEvent);
+  }
+  handleEventCreated(event: any) {
+    console.log('Nouvel événement créé :', event);
+    this.calendarEvents.push(event);
+    this.addEventToCalendar(event);
+  }
+  
+
 }
