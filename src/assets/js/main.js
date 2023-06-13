@@ -484,14 +484,11 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
   }, 1);
   new ApexCharts(document.querySelector("#reportsChart"), {
     series: [{
-      name: 'Sales',
+      name: 'Dépenses',
       data: [31, 40, 28, 51, 42, 82, 56],
     }, {
-      name: 'Revenue',
+      name: 'Revenus',
       data: [11, 32, 45, 32, 34, 52, 41]
-    }, {
-      name: 'Customers',
-      data: [15, 11, 32, 18, 9, 24, 11]
     }],
     chart: {
       height: 350,
