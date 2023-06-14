@@ -36,31 +36,20 @@
                          </tr>
                       </thead>
                       <tbody>
-                         <tr>
-                           <tr>
-                              <th scope="row">1</th>
-                              <td>Bridie Kessler</td>
-                              <td>Developer</td>
-                              <td>35</td>
-                              <!-- <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
-                                 <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
-                            </td> -->
-                            <td>
-                              <button type="button" class="btn btn-link btn-edit" ><i class="fas fa-edit"></i></button>
-                              <button type="button" class="btn btn-link btn-delete" ><i class="fas fa-trash"></i></button>
-                            </td>
-                             
-                           </tr>
+                       
+                         
                             <tr *ngFor="let categorie of categories">
                                 <td>{{ categorie.idCategorie }}</td>
                                 <td>{{ categorie.typeCategorie }}</td>
                                 <td>{{ categorie.description }}</td>
-                                <td>{{ categorie.date}}</td>
+                                <td>{{ categorie.date | date:'yyyy-MM-dd'}}</td>
                               
-                           
-                                <td> <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button> &nbsp;
+                           <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
+                                 <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
+                            </td>
+                                <!-- <td> <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button> &nbsp;
                                      <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
-                                </td>
+                                </td> -->
                          </tr>
                         
                       </tbody>

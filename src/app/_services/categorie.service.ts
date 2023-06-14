@@ -12,17 +12,17 @@ export class CategorieService{
 
 
   constructor(private http: HttpClient) {
-    this.categoriesUrl = 'http://localhost:8080/categories/getAll';
+    this.categoriesUrl = 'http://localhost:8080/categories';
   }
   public findAll(): Observable<Categorie[]> {
    
-    return this.http.get(this.categoriesUrl, ).pipe(
+    return this.http.get(this.categoriesUrl +"/getAll" ).pipe(
       map((response:any) => response as Categorie[])
     );
   }
 
   public save(categorie:Categorie) {
-    return this.http.post<Categorie>(this.categoriesUrl, categorie);
+    return this.http.post<Categorie>(this.categoriesUrl + "/saveCategorie", categorie);
   }
  
 }
