@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
 import { BackendService } from 'src/app/_services/backend.service';
 import { ModalConfig } from './modal.config'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'custom-modal',
@@ -26,7 +27,7 @@ export class ModalComponent implements OnInit {
 
   // selectedEvent
   
-  constructor(private modalService: NgbModal,private fb: FormBuilder,private backendService: BackendService) {
+  constructor(private router: Router,private modalService: NgbModal,private fb: FormBuilder,private backendService: BackendService) {
     this.nouvelledepenseForm = this.fb.group({
       description: ['', Validators.required],
       montant: ['', Validators.required],
@@ -92,8 +93,8 @@ export class ModalComponent implements OnInit {
     this.backendService.createEvent(this.Data).subscribe(
      
       (response:any) => {
-        // debugger
-        
+       debugger
+        window.location.reload()
         console.log('Success:', response);
 
       },

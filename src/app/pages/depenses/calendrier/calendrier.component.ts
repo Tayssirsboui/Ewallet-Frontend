@@ -25,7 +25,8 @@ export class CalendrierComponent {
   private modalComponent!: ModalComponent;
   @ViewChild('modalNew')
   private modalComponentNew!: ModalComponent;
-  depense: Array<Depense> = [];
+  // depenses= [];
+  depenses: any[] = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
@@ -75,15 +76,32 @@ export class CalendrierComponent {
   calendarEvents: any[] = [];
 
   constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal, private backendService: BackendService) {
-    this.backendService.getDepense().subscribe(
-      response => {
-        this.depense = response
-        debugger
-      },
-      error => console.log('error in load depenses')
-    )
     
-  }
+    this.backendService.getDepense().subscribe(
+      (response) => {
+        this.depenses = response;
+        const events: any = [];
+      
+        // debugger
+        this.depenses.forEach((item: any) => {
+        // debugger  
+        const event = {
+          id:item.idDepense,
+          title: item.description + '-' +item.montant,
+
+          start: item.date,
+          
+          allDay:true
+        };
+        events.push(event);
+        
+      });
+      this.depenses = events;
+}) 
+      
+}
+    
+ 
   
 
 
