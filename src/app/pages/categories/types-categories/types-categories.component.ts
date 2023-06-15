@@ -48,4 +48,19 @@ export class TypesCategoriesComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  updateCategories(categorie: Categorie): void {
+    console.log('Modification de l\'utilisateur :', categorie);
+    this.categorieService.updateCategories(categorie).subscribe(res => {
+    }, error => {
+      console.error(error);
+    });
+  }
+
+  deleteCategories(categorie: Categorie): void {
+    console.log('Suppression de l\'utilisateur :', categorie);
+    this.categorieService.deleteCategories(categorie).subscribe(res => {
+    }, error => {
+      console.error(error);
+    });
+  }
 }

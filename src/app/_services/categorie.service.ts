@@ -24,5 +24,12 @@ export class CategorieService{
   public save(categorie:Categorie) {
     return this.http.post<Categorie>(this.categoriesUrl + "/saveCategorie", categorie);
   }
+  public updateCategories(categorie: Categorie): Observable<any> {
+    return this.http.put(`${this.categoriesUrl}/${categorie.idCategorie}`, categorie);
+  }
+
+  public deleteCategories(utilisateur: Categorie): Observable<any> {
+    return this.http.delete(`${this.categoriesUrl}/${utilisateur.idCategorie}`);
+  }
  
 }
