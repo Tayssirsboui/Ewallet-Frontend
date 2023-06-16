@@ -47,7 +47,7 @@
  
    <div class='demo-app-main'>
      <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'
-     #fullCalendar  [events]="calendarEvents">
+     #fullCalendar  [events]="depenses">
 
        <ng-template #eventContent let-arg>
          <b>{{ arg.timeText }}</b>

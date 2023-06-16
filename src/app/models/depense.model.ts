@@ -5,7 +5,7 @@ import { Inject } from '@angular/core';
 
 export class Depense {
   constructor(
-    public id: number,
+    public idDepense: number,
     public description: string,
     public montant: number ,
     public date:Date,
