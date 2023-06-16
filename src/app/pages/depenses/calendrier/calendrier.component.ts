@@ -27,6 +27,7 @@ export class CalendrierComponent {
   private modalComponentNew!: ModalComponent;
   // depenses= [];
   depenses: any[] = [];
+  selectedDepense: any;
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
@@ -74,6 +75,11 @@ export class CalendrierComponent {
 
   currentEvents: EventApi[] = [];
   calendarEvents: any[] = [];
+  nouvelledepenseForm: any={
+    montant:null,
+    description:null,
+    budget:null
+  };
 
   constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal, private backendService: BackendService) {
     
@@ -98,8 +104,10 @@ export class CalendrierComponent {
       });
       this.depenses = events;
 }) 
-      
+
+  // this.selectedDepense = event;
 }
+
     
  
   
@@ -139,7 +147,8 @@ export class CalendrierComponent {
 
 
   //  edit function
-  handleEventClick(args: any) {
+  handleEventClick(args: any,depense:Depense) :void{
+    this.nouvelledepenseForm.description=depense.description;
      this.modalComponent.edit(args.event)
     // this.modalService.open(modal);
   }
@@ -148,6 +157,7 @@ export class CalendrierComponent {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
+  
   addEventToCalendar(event: any) {
     const calendarApi = this.fullCalendar.getApi();
 
@@ -160,6 +170,7 @@ export class CalendrierComponent {
 
     calendarApi.addEvent(newEvent);
   }
+
   handleEventCreated(event: any) {
     console.log('Nouvel événement créé :', event);
     this.calendarEvents.push(event);

@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Injectable, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core'
+import { Component, EventEmitter, Injectable, Input, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
 import { BackendService } from 'src/app/_services/backend.service';
 import { ModalConfig } from './modal.config'
 import { Router } from '@angular/router';
+import { Depense } from 'src/app/models/depense.model';
 
 @Component({
   selector: 'custom-modal',
@@ -14,6 +15,9 @@ export class ModalComponent implements OnInit {
   @Output() eventCreated: EventEmitter<any> = new EventEmitter<any>();
   @Input()
   public modalConfig!: ModalConfig
+  @Input() selectedEvent: any;
+  // titlemodla: string;
+  // startmodal: string;
   @ViewChild('modal')
   private modalContent!: TemplateRef<ModalComponent>
   private modalRef!: NgbModalRef
@@ -24,6 +28,7 @@ export class ModalComponent implements OnInit {
   submitted = false;
   Data:any;
   userdata:any;
+  depense:Depense ={ idDepense:'', description:'',montant:0,date:new Date() };
 
   // selectedEvent
   
@@ -40,19 +45,30 @@ export class ModalComponent implements OnInit {
   get f() { return this.nouvelledepenseForm.controls; }
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void { this.depense.idDepense=this.Data.nouvelledepenseForm.idDepense;
+    this.depense.description=this.Data.nouvelledepenseForm.description;
+    this.depense.montant=this.Data.nouvelledepenseForm.montant;
+    this.depense.date=this.Data.nouvelledepenseForm.date;
+  }
 
   // Event /model/event
   edit(event: {id: string, title: string, start: string }): Promise<boolean> {
+    console.log("id evenement " + event.id)
     this.id = event.id
     this.title = event.title
     this.start = event.start
+    Data:{nouvelledepenseForm:this.nouvelledepenseForm}
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent)
       this.modalRef.result.then(resolve, resolve)
     })
   }
-
+  // ngOnChanges(changes: SimpleChanges) {
+  //   if (changes['selectedEvent']) {
+  //     this.title = this.selectedEvent.title;
+  //     this.start = this.selectedEvent.start;
+  //   }
+  // }
   new(): Promise<boolean> {
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent)
@@ -104,6 +120,30 @@ export class ModalComponent implements OnInit {
     );
   }
   this.submitted = false;
+    
+ 
+  // this.submitted = true;
+  
+  // console.log(this.Data)
+     
+  // if (this.nouvelledepenseForm.invalid) {
+    
+  //   return;
+  // } else {
+  //   this.backendService.updateDepense().subscribe(
+     
+  //     (response:any) => {
+  //      debugger
+  //       window.location.reload()
+  //       console.log('Success:', response);
+
+  //     },
+  //     ( error: any) => {
+  //       console.error('Error:', error);
+  //     }
+  //   );
+  // }
+  // this.submitted = false;
     
     
     if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {
