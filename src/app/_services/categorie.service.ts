@@ -25,11 +25,11 @@ export class CategorieService{
     return this.http.post<Categorie>(this.categoriesUrl + "/saveCategorie", categorie);
   }
   public updateCategories(categorie: Categorie): Observable<any> {
-    return this.http.put(`${this.categoriesUrl}/${categorie.idCategorie}`, categorie);
+    return this.http.put(`${this.categoriesUrl}/${categorie.idCategorie}/updateCategories`, categorie);
   }
 
-  public deleteCategories(utilisateur: Categorie): Observable<any> {
-    return this.http.delete(`${this.categoriesUrl}/${utilisateur.idCategorie}`);
+  public deleteCategories(categorie: Categorie): Observable<any> {
+    return this.http.delete(`${this.categoriesUrl}/deleteCategories/${categorie.idCategorie}`);
   }
  
 }

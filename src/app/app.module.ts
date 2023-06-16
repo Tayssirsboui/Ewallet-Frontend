@@ -54,6 +54,7 @@ import { CategoriesModule } from './pages/categories/categories.module';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
 import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
@@ -64,6 +65,7 @@ import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 
 
@@ -112,7 +114,8 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     PagesBlankComponent,
     RequestsComponent,
     ListGroupComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -132,7 +135,8 @@ import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.comp
     AppRoutingModule,
     DepensesModule,
     RevenusModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NgxDatatableModule
    
     
     

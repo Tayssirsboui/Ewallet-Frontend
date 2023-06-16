@@ -41,6 +41,7 @@ import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 
 
@@ -81,7 +82,7 @@ const routes: Routes = [
   { path: 'pages-contact', component: PagesContactComponent },
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faq', component: PagesFaqComponent },
- 
+  { path: 'home-page', component: HomePageComponent },
   { path: 'user-profile', component: UsersProfileComponent },
   {path:'requests' ,component: RequestsComponent},
   {path:'types-categories' ,component: TypesCategoriesComponent},

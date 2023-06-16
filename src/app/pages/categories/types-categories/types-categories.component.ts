@@ -13,9 +13,9 @@ declare var $: any;
 
 export class TypesCategoriesComponent implements OnInit {
   form: any = {
-    typeCategorie: null,
+    nom: null,
     description: null,
-    date: null
+    budget: null
   };
   afficherFormulaire: boolean=false;
 
@@ -41,15 +41,20 @@ export class TypesCategoriesComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.dialog.open(CategorieFormComponent, {
-      width: '250px'
+      width: '250px',
+      data: { form:this.form }
     });
-
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
   }
   updateCategories(categorie: Categorie): void {
-    console.log('Modification de l\'utilisateur :', categorie);
+    this.form.nom=categorie.nom; 
+    this.form.description=categorie.description; 
+    this.form.budget=categorie.budget; 
+    this.openModal();
+    console.log('Modification de la catégorie :', categorie);
     this.categorieService.updateCategories(categorie).subscribe(res => {
     }, error => {
       console.error(error);
@@ -57,7 +62,7 @@ export class TypesCategoriesComponent implements OnInit {
   }
 
   deleteCategories(categorie: Categorie): void {
-    console.log('Suppression de l\'utilisateur :', categorie);
+    console.log('Suppression de la categorie :', categorie);
     this.categorieService.deleteCategories(categorie).subscribe(res => {
     }, error => {
       console.error(error);

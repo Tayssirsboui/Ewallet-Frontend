@@ -2,19 +2,15 @@
 <div mat-dialog-content>
   <form>
     <mat-form-field>
+      <input matInput placeholder="Nom" [(ngModel)]="categorie.nom" name="nom">
+    </mat-form-field>
+    <mat-form-field>
       <input matInput placeholder="Description" [(ngModel)]="categorie.description" name="description">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Type Categorie" [(ngModel)]="categorie.typeCategorie" name="typeCategorie">
+      <input matInput placeholder="Budget" [(ngModel)]="categorie.budget" name="budget">
     </mat-form-field>
-    <!-- <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Date" [formControl]="dateControl" (dateChange)="onDateChange($event)">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field> -->
-    <!-- <mat-form-field>
-      <input matInput placeholder="Date" [(ngModel)]="categorie.date" name="date">
-    </mat-form-field> -->
+   
   </form>
 </div>
 <div mat-dialog-actions>

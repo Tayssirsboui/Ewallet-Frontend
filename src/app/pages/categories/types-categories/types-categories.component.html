@@ -24,39 +24,31 @@
                 <div *ngIf="afficherFormulaire">
                     <app-categorie-form></app-categorie-form>
                   </div>
-                   <table class="table datatable">
-                      <thead>
-                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">Actions</th>
-                           
-                         </tr>
-                      </thead>
-                      <tbody>
-                       
-                         
-                            <tr *ngFor="let categorie of categories">
-                                <td>{{ categorie.idCategorie }}</td>
-                                <td>{{ categorie.typeCategorie }}</td>
-                                <td>{{ categorie.description }}</td>
-                                <td>{{ categorie.date | date:'yyyy-MM-dd'}}</td>
-                              
-                           <!-- <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
-                                 <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
-                            </td> -->
-                                <!-- <td> <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button> &nbsp;
-                                     <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
-                                </td> -->
-                                <td>
-                                 <button type="button" class="btn btn-link btn-edit" (click)="updateCategories(categorie)"><i class="fas fa-edit"></i></button>
-                                 <button type="button" class="btn btn-link btn-delete" (click)="deleteCategories(categorie)"><i class="fas fa-trash"></i></button>
-                               </td>
-                         </tr>
-                        
-                      </tbody>
+                   
+                   <table class="table table-striped ">
+                     <thead>
+                       <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Budget</th>
+                        <th scope="col">Actions</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let categorie of categories">
+                           <td>{{ categorie.idCategorie }}</td>
+                           <td>{{ categorie.nom }}</td>
+                           <td>{{ categorie.description }}</td>
+                           <td>{{ categorie.budget }}</td>
+
+                          
+                           <td>
+                            <button type="button" class="btn btn-link btn-edit" (click)="updateCategories(categorie)"><i class="fas fa-edit"></i></button>
+                            <button type="button" class="btn btn-link btn-delete" (click)="deleteCategories(categorie)"><i class="fas fa-trash"></i></button>
+                          </td>
+                    </tr>
+                     </tbody>
                    </table>
                 </div>
              </div>
@@ -64,3 +56,35 @@
        </div>
     </section>
  </main> 
+
+
+
+ <!-- <table class="table datatable">
+                      <thead>
+                         <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Budget</th>
+                            <th scope="col">Actions</th>
+                           
+                         </tr>
+                      </thead>
+                      <tbody>
+                       
+                            <tr *ngFor="let categorie of categories">
+                                <td>{{ categorie.idCategorie }}</td>
+                                <td>{{ categorie.nom }}</td>
+                                <td>{{ categorie.description }}</td>
+                                <td>{{ categorie.budget }}</td>
+
+                               
+                                <td>
+                                 <button type="button" class="btn btn-link btn-edit" (click)="updateCategories(categorie)"><i class="fas fa-edit"></i></button>
+                                 <button type="button" class="btn btn-link btn-delete" (click)="deleteCategories(categorie)"><i class="fas fa-trash"></i></button>
+                               </td>
+                         </tr>
+                        
+                      </tbody>
+                   </table> -->
+                   
