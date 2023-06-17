@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Ajouter une catégorie</h1>
-<div >
+<!-- <div >
   <form>
     <mat-form-field appearance="outline">
       <input matInput placeholder="Nom" [(ngModel)]="categorie.nom" name="nom">
@@ -7,18 +7,40 @@
     <mat-form-field appearance="outline">
       <input matInput placeholder="Description" [(ngModel)]="categorie.description" name="description">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field >
       <input matInput placeholder="Budget" [(ngModel)]="categorie.budget" name="budget">
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Fill form field</mat-label>
-      <input matInput placeholder="Placeholder">
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
+    <mat-form-field >
+      <input matInput >
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onAnnuler()">Annuler</button>
   <button mat-button color="primary" (click)="onAjouter()">Ajouter</button>
+</div> -->
+
+<form>
+  <div class="row mb-3">
+     <div class="col-md-8 col-lg-12"> 
+      <input placeholder="Nom" [(ngModel)]="categorie.nom" name="nom" class="form-control">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-8 col-lg-12"> 
+     <input  placeholder="Description" [(ngModel)]="categorie.description" name="description"class="form-control" id="currentPassword">
+   </div>
+ </div>
+ <div class="row mb-3">
+  <div class="col-md-8 col-lg-12"> 
+   <input  placeholder="Budget" [(ngModel)]="categorie.budget" name="budget"class="form-control" id="currentPassword">
+ </div>
 </div>
+<div class="text-center"> 
+  <button type="submit" class="btn btn-info" (click)="onAjouter()">Ajouter</button> 
+  <button type="reset" class="btn btn-secondary" (click)="onAnnuler()">Annuler</button>
+</div>
+
+
+ 
+</form>
