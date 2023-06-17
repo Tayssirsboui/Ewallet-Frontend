@@ -60,13 +60,13 @@ export class CalendrierComponent {
   };
 
   modalConfig = {
-    modalTitle: "SHOW event",
+    modalTitle: "Modifier Dépense",
     dismissButtonLabel: "save",
     closeButtonLabel: "close",
   }
 
   modalConfigNew = {
-    modalTitle: "New event",
+    modalTitle: "Ajouter Dépense",
     dismissButtonLabel: "save",
     closeButtonLabel: "close",
   }

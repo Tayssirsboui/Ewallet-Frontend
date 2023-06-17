@@ -2,12 +2,13 @@ import { Component, EventEmitter, Injectable, Input, OnInit, Output, TemplateRef
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
 import { BackendService } from 'src/app/_services/backend.service';
-import { ModalConfig } from './modal.config'
+import { ModalConfig } from './modal.config';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'custom-modal',
-  templateUrl: './modal.component.html'
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.css']
 })
 @Injectable()
 export class ModalComponent implements OnInit {
