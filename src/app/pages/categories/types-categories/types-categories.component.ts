@@ -27,6 +27,45 @@ export class TypesCategoriesComponent implements OnInit {
   searchKeyword: string = '';
 
   ngOnInit(): void {
+    this.categories = [
+      {
+        idCategorie: '1',
+        nom: 'Alimentation',
+        description: 'Épicerie, magasin, marché',
+        budget: 500
+      },
+      {
+        idCategorie: '2',
+        nom: 'Logement',
+        description: 'Loyer, électricité, internet,  syndic, etc.',
+        budget: 800
+      },
+      {
+        idCategorie: '3',
+        nom: 'Transport',
+        description: 'Transports en commun, stationnement, essence, assurance automobile, entretien de la voiture, taxi',
+        budget: 400
+      },
+      {
+        idCategorie: '4',
+        nom: 'Education',
+        description: 'Frais de scolarité,études, fourniture, ordinateur, etc.',
+        budget: 700
+      }, 
+      {
+        idCategorie: '5',
+        nom: 'Santé et soins personnels',
+        description: 'Coiffure, produits de beauté, dentiste,médecin, médicaments, etc.',
+        budget: 200
+      },
+
+      {
+        idCategorie: '6',
+        nom: 'Loisirs',
+        description: 'Sports, cinéma, anniversaire etc.',
+        budget: 200
+      }
+    ];
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";

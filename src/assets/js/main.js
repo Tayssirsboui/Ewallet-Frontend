@@ -322,7 +322,7 @@
         },
         {
           name: 'Loisirs',
-          max: 500
+          max: 200
         },
         {
           name: 'Transport',
@@ -330,7 +330,7 @@
         },
         {
           name: 'Alimentation',
-          max: 200
+          max: 500
         },
         {
           name: 'Education',
@@ -346,11 +346,11 @@
       name: 'Budget vs spending',
       type: 'radar',
       data: [{
-          value: [700, 400, 300, 200, 550, 200],
+          value: [200, 200, 400, 500, 700, 800],
           name: 'Budget Alloué'
         },
         {
-          value: [500, 120, 100, 50, 100, 50],
+          value: [0, 70, 50, 120, 100, 500],
           name: 'Dépense Actuelle'
         }
       ]
@@ -384,7 +384,7 @@
         show: false
       },
       data: [{
-          value: 150,
+          value: 120,
           name: 'Alimentation'
         },
         {
@@ -392,11 +392,11 @@
           name: 'Education'
         },
         {
-          value: 50,
+          value: 0,
           name: 'Santé et soins personnels'
         },
         {
-          value: 80,
+          value: 50,
           name: 'Transport'
         },
         {
@@ -404,7 +404,7 @@
           name: 'Logement'
         },
         {
-          value: 20,
+          value: 70,
           name: 'Loisirs'
         }
       ]
@@ -489,10 +489,10 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
   new ApexCharts(document.querySelector("#reportsChart"), {
     series: [{
       name: 'Dépenses',
-      data: [31, 40, 28, 51, 42, 82, 56],
+      data: [20, 100, 70],
     }, {
       name: 'Revenus',
-      data: [11, 32, 45, 32, 34, 52, 41]
+      data: [3000]
     }],
     chart: {
       height: 350,
@@ -523,7 +523,7 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
     },
     xaxis: {
       type: 'datetime',
-      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+      categories: ["2023-06-01T10:00:00.000Z", "2023-06-02T12:00:00.000Z", "2023-06-03T16:00:00.000Z"]
     },
     tooltip: {
       x: {
