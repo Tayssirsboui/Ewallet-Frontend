@@ -24,7 +24,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
     ngOnInit(): void {
       window.sessionStorage.removeItem("auth-token");
       window.sessionStorage.removeItem("auth-user");
-
+      localStorage.clear()
       if (this.tokenStorage.getToken()) {
         this.isLoggedIn = true;
       }
@@ -39,8 +39,8 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
         
         data => {
           console.log('res ' , data)
-          this.tokenStorage.saveToken(data.accessToken);
-          localStorage.setItem('accessToken' ,data.accessToken)
+          this.tokenStorage.saveToken(data.token);
+          localStorage.setItem('accessToken' ,data.token)
           this.tokenStorage.saveUser(data);
   
           this.isLoginFailed = false;

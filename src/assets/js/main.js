@@ -312,33 +312,33 @@
   /*Charts*/
   var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
     legend: {
-      data: ['Allocated Budget', 'Actual Spending']
+      data: ['Budget Alloué', 'Dépense Actuelle']
     },
     radar: {
       // shape: 'circle',
       indicator: [{
-          name: 'Sales',
-          max: 6500
+          name: 'Santé et Soins personnels',
+          max: 200
         },
         {
-          name: 'Administration',
-          max: 16000
+          name: 'Loisirs',
+          max: 200
         },
         {
-          name: 'Information Technology',
-          max: 30000
+          name: 'Transport',
+          max: 400
         },
         {
-          name: 'Customer Support',
-          max: 38000
+          name: 'Alimentation',
+          max: 500
         },
         {
-          name: 'Development',
-          max: 52000
+          name: 'Education',
+          max: 700
         },
         {
-          name: 'Marketing',
-          max: 25000
+          name: 'Logement',
+          max: 800
         }
       ]
     },
@@ -346,12 +346,12 @@
       name: 'Budget vs spending',
       type: 'radar',
       data: [{
-          value: [4200, 3000, 20000, 35000, 50000, 18000],
-          name: 'Allocated Budget'
+          value: [200, 200, 400, 500, 700, 800],
+          name: 'Budget Alloué'
         },
         {
-          value: [5000, 14000, 28000, 26000, 42000, 21000],
-          name: 'Actual Spending'
+          value: [0, 70, 50, 120, 100, 500],
+          name: 'Dépense Actuelle'
         }
       ]
     }]
@@ -384,24 +384,28 @@
         show: false
       },
       data: [{
-          value: 1048,
-          name: 'Search Engine'
+          value: 120,
+          name: 'Alimentation'
         },
         {
-          value: 735,
-          name: 'Direct'
+          value: 100,
+          name: 'Education'
         },
         {
-          value: 580,
-          name: 'Email'
+          value: 0,
+          name: 'Santé et soins personnels'
         },
         {
-          value: 484,
-          name: 'Union Ads'
+          value: 50,
+          name: 'Transport'
         },
         {
-          value: 300,
-          name: 'Video Ads'
+          value: 500,
+          name: 'Logement'
+        },
+        {
+          value: 70,
+          name: 'Loisirs'
         }
       ]
     }]
@@ -485,10 +489,10 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
   new ApexCharts(document.querySelector("#reportsChart"), {
     series: [{
       name: 'Dépenses',
-      data: [31, 40, 28, 51, 42, 82, 56],
+      data: [20, 100, 70],
     }, {
       name: 'Revenus',
-      data: [11, 32, 45, 32, 34, 52, 41]
+      data: [3000]
     }],
     chart: {
       height: 350,
@@ -519,7 +523,7 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
     },
     xaxis: {
       type: 'datetime',
-      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+      categories: ["2023-06-01T10:00:00.000Z", "2023-06-02T12:00:00.000Z", "2023-06-03T16:00:00.000Z"]
     },
     tooltip: {
       x: {

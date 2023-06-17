@@ -3,7 +3,7 @@
        <h1>Catégories</h1>
        <nav>
           <ol class="breadcrumb">
-             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+             <li class="breadcrumb-item"><a routerLink="/">Acceuil</a></li>
              <li class="breadcrumb-item">Catégories</li>
              <li class="breadcrumb-item active">Liste Catégories</li>
           </ol>
@@ -15,52 +15,37 @@
              <div class="card">
                 <div class="card-body">
                    <h2 class="card-title" >Catégories</h2>
-                   
-                   
                    <div class="button-container " > 
-                    <button class="btn btn-pastel"(click)="openModal()">  <i class="fas fa-plus"></i> AJOUTER CATÉGORIE</button>
-             
-                </div>
-                <div *ngIf="afficherFormulaire">
-                    <app-categorie-form></app-categorie-form>
-                  </div>
+                     <button class="btn btn-pastel"(click)="openModal()">  <i class="fas fa-plus"></i> AJOUTER CATÉGORIE</button>
+              
+                 </div>
+                 <div *ngIf="afficherFormulaire">
+                     <app-categorie-form></app-categorie-form>
+                   </div>
                    <table class="table datatable">
                       <thead>
                          <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Date de création</th>
+                            <th scope="col">Budget</th>
                             <th scope="col">Actions</th>
                            
                          </tr>
                       </thead>
                       <tbody>
-                         <tr>
-                           <tr>
-                              <th scope="row">1</th>
-                              <td>Bridie Kessler</td>
-                              <td>Developer</td>
-                              <td>35</td>
-                              <!-- <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
-                                 <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
-                            </td> -->
-                            <td>
-                              <button type="button" class="btn btn-link btn-edit" ><i class="fas fa-edit"></i></button>
-                              <button type="button" class="btn btn-link btn-delete" ><i class="fas fa-trash"></i></button>
-                            </td>
-                             
-                           </tr>
+                       
                             <tr *ngFor="let categorie of categories">
                                 <td>{{ categorie.idCategorie }}</td>
-                                <td>{{ categorie.typeCategorie }}</td>
+                                <td>{{ categorie.nom }}</td>
                                 <td>{{ categorie.description }}</td>
-                                <td>{{ categorie.date}}</td>
-                              
-                           
-                                <td> <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button> &nbsp;
-                                     <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
-                                </td>
+                                <td>{{  categorie.budget }}</td>
+
+                               
+                                <td>
+                                 <button type="button" class="btn btn-link btn-edit" (click)="updateCategories(categorie)"><i class="fas fa-edit"></i></button>
+                                 <button type="button" class="btn btn-link btn-delete" (click)="deleteCategories(categorie)"><i class="fas fa-trash"></i></button>
+                               </td>
                          </tr>
                         
                       </tbody>
@@ -71,3 +56,36 @@
        </div>
     </section>
  </main> 
+
+
+
+
+
+ <!-- <table class="table dashboard">
+   <thead>
+     <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Description</th>
+      <th scope="col">Budget</th>
+      <th scope="col">Actions</th>
+     </tr>
+   </thead>
+   <tbody>
+      <tr *ngFor="let categorie of categories">
+         <td>{{ categorie.idCategorie }}</td>
+         <td>{{ categorie.nom }}</td>
+         <td>{{ categorie.description }}</td>
+         <td>{{ categorie.budget }}</td>
+
+        
+         <td>
+          <button type="button" class="btn btn-link btn-edit" (click)="updateCategories(categorie)"><i class="fas fa-edit"></i></button>
+          <button type="button" class="btn btn-link btn-delete" (click)="deleteCategories(categorie)"><i class="fas fa-trash"></i></button>
+        </td>
+  </tr>
+   </tbody>
+ </table> -->
+
+ 
+                   

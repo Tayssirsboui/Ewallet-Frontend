@@ -15,13 +15,13 @@
     
   }
   
-
   .btn-pastel {
     background-color: #f37f8c;
     color: #ffffff;
     border-color: #e7c3e7;
+    font-size: 12px; 
+
   }
-  
   .btn-pastel:hover {
     background-color: #d1a2d1;
     border-color: #d1a2d1;
@@ -34,4 +34,3 @@
   .btn-delete {
     color: #dd2d27; 
   }
- 
