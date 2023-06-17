@@ -41,6 +41,10 @@
                               <td>Bridie Kessler</td>
                               <td>Developer</td>
                               <td>35</td>
+                              <td>
+                                 <button type="button" (click)="test()" ><i class="fas fa-edit" (click)="test()"></i></button>
+                                 <button type="button"(click)="test() " ><i class="fas fa-trash" (click)="test()"></i></button>
+                               </td>
                               <!-- <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
                                  <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
                             </td> -->
@@ -48,7 +52,14 @@
                               <button type="button" class="btn btn-link btn-edit" (click)="modifierUtilisateur(utilisateur)"><i class="fas fa-edit"></i></button>
                               <button type="button" class="btn btn-link btn-delete" (click)="supprimerUtilisateur(utilisateur)"><i class="fas fa-trash"></i></button>
                             </td> -->
-                             
+                              <!-- <td>{{ categorie.date | date:'yyyy-MM-dd'}}</td> -->
+                              
+                           <!-- <td> <button type="button" class="btn btn-pastel-blue "><i class="fas fa-pencil-alt"></i></button> &nbsp;
+                                 <button type="button" class="btn btn-pastel-green "><i class="far fa-trash-alt"></i></button>
+                            </td> -->
+                                <!-- <td> <button type="button" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button> &nbsp;
+                                     <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
+                                </td> -->
                            </tr>
                             <tr *ngFor="let utilisateur of utilisateurs">
                                 <td>{{ utilisateur.idUtilisateur }}</td>

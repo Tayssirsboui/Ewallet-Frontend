@@ -312,33 +312,33 @@
   /*Charts*/
   var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
     legend: {
-      data: ['Allocated Budget', 'Actual Spending']
+      data: ['Budget Alloué', 'Dépense Actuelle']
     },
     radar: {
       // shape: 'circle',
       indicator: [{
-          name: 'Sales',
-          max: 6500
+          name: 'Santé et Soins personnels',
+          max: 200
         },
         {
-          name: 'Administration',
-          max: 16000
+          name: 'Loisirs',
+          max: 500
         },
         {
-          name: 'Information Technology',
-          max: 30000
+          name: 'Transport',
+          max: 400
         },
         {
-          name: 'Customer Support',
-          max: 38000
+          name: 'Alimentation',
+          max: 200
         },
         {
-          name: 'Development',
-          max: 52000
+          name: 'Education',
+          max: 700
         },
         {
-          name: 'Marketing',
-          max: 25000
+          name: 'Logement',
+          max: 800
         }
       ]
     },
@@ -346,12 +346,12 @@
       name: 'Budget vs spending',
       type: 'radar',
       data: [{
-          value: [4200, 3000, 20000, 35000, 50000, 18000],
-          name: 'Allocated Budget'
+          value: [700, 400, 300, 200, 550, 200],
+          name: 'Budget Alloué'
         },
         {
-          value: [5000, 14000, 28000, 26000, 42000, 21000],
-          name: 'Actual Spending'
+          value: [500, 120, 100, 50, 100, 50],
+          name: 'Dépense Actuelle'
         }
       ]
     }]
@@ -384,24 +384,28 @@
         show: false
       },
       data: [{
-          value: 1048,
-          name: 'Search Engine'
+          value: 150,
+          name: 'Alimentation'
         },
         {
-          value: 735,
-          name: 'Direct'
+          value: 100,
+          name: 'Education'
         },
         {
-          value: 580,
-          name: 'Email'
+          value: 50,
+          name: 'Santé et soins personnels'
         },
         {
-          value: 484,
-          name: 'Union Ads'
+          value: 80,
+          name: 'Transport'
         },
         {
-          value: 300,
-          name: 'Video Ads'
+          value: 500,
+          name: 'Logement'
+        },
+        {
+          value: 20,
+          name: 'Loisirs'
         }
       ]
     }]

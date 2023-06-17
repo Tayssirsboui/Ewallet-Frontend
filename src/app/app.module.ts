@@ -138,15 +138,6 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     FullCalendarModule,
     NgxDatatableModule
    
-    
-    
-
-    
-    
-
-    
-  
-    
   ],
  
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],

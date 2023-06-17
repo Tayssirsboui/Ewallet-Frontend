@@ -65,6 +65,10 @@ export class TableUtilisateursComponent implements OnInit {
     });
   }
 
+  test(): void {
+    console.log('Modification de l\'utilisateur :');
+  }
+
   supprimerUtilisateur(utilisateur: Utilisateur): void {
     console.log('Suppression de l\'utilisateur :', utilisateur);
     this.utilisateurService.supprimerUtilisateur(utilisateur).subscribe(res => {

@@ -23,6 +23,8 @@ export class TypesCategoriesComponent implements OnInit {
   
     
   categories: Categorie[];
+  filteredCategories: Categorie[];
+  searchKeyword: string = '';
 
   ngOnInit(): void {
     var s = document.createElement("script");
@@ -41,7 +43,7 @@ export class TypesCategoriesComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.dialog.open(CategorieFormComponent, {
-      width: '250px',
+      width: '500px',
       data: { form:this.form }
     });
     
