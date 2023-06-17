@@ -38,7 +38,6 @@ import { CategorieFormComponent } from './pages/categories/categorie-form/catego
 import { TableUtilisateursComponent } from './pages/utilisateurs/table-utilisateurs/table-utilisateurs.component';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
-import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
 
@@ -69,7 +68,6 @@ const routes: Routes = [
   { path: 'icons-boxicons', component: IconsBoxiconsComponent },
   { path: 'icons-remix', component: IconsRemixComponent },
   { path: 'list-group', component: ListGroupComponent },
- 
   { path: 'pagination', component: PaginationComponent },
   { path: 'progress', component: ProgressComponent },
   { path: 'spinners', component: SpinnersComponent },
@@ -81,7 +79,6 @@ const routes: Routes = [
   { path: 'pages-contact', component: PagesContactComponent },
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faq', component: PagesFaqComponent },
- 
   { path: 'user-profile', component: UsersProfileComponent },
   {path:'requests' ,component: RequestsComponent},
   {path:'types-categories' ,component: TypesCategoriesComponent},
@@ -94,8 +91,6 @@ const routes: Routes = [
   { path: 'charts', component: ChartsComponent },
   { path: 'calendrierrevenu', component: CalendrierrevenuComponent },
   { path: 'chartsrevenu', component: ChartsrevenuComponent },
-  { path: 'paiementprevus', component:PaiementprevusComponent},
- 
   { path: 'path-string', loadChildren: () => import('./pages/depenses/depenses.module').then(m => m.DepensesModule) },
   { path: 'path-string', loadChildren: () => import('./pages/revenus/revenus.module').then(m => m.RevenusModule) },
   

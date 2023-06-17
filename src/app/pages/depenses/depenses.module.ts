@@ -5,7 +5,7 @@ import { DepensesRoutingModule } from './depenses-routing.module';
 import { DepensesComponent } from './depenses.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { ChartsComponent } from './charts/charts.component';
-import { PaiementprevusComponent } from './paiementprevus/paiementprevus.component';
+
 import { FullCalendarComponent } from '@fullcalendar/angular';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -25,7 +25,7 @@ import {  HttpClientModule } from '@angular/common/http';
     DepensesComponent,
     CalendrierComponent,
     ChartsComponent,
-    PaiementprevusComponent,
+  
     MyDialogComponentComponent,
     ModalComponent
   ],
