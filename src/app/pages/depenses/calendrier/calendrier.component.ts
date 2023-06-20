@@ -49,7 +49,8 @@ export class CalendrierComponent {
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    eventsSet: this.handleEvents.bind(this),
+   
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:
@@ -79,6 +80,7 @@ export class CalendrierComponent {
     
     this.backendService.getDepense().subscribe(
       (response) => {
+        
         this.depenses = response;
         const events: any = [];
       
@@ -118,6 +120,7 @@ export class CalendrierComponent {
   handleDateSelect(selectInfo: DateSelectArg) {
     // model Event
     // new Event()
+    debugger
     this.modalComponentNew.new()
 
 
@@ -140,6 +143,7 @@ export class CalendrierComponent {
 
   //  edit function
   handleEventClick(args: any) {
+    debugger
      this.modalComponent.edit(args.event)
     // this.modalService.open(modal);
   }
@@ -161,6 +165,7 @@ export class CalendrierComponent {
     calendarApi.addEvent(newEvent);
   }
   handleEventCreated(event: any) {
+    debugger
     console.log('Nouvel événement créé :', event);
     this.calendarEvents.push(event);
     this.addEventToCalendar(event);
