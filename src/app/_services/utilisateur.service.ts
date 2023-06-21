@@ -25,4 +25,12 @@ export class UtilisateurService {
     
     return this.http.post<Utilisateur>(this.utilisateursUrl , utilisateur);
   }
+  
+  modifierUtilisateur(utilisateur: Utilisateur): Observable<any> {
+    return this.http.put(`${this.utilisateursUrl}/${utilisateur.idUtilisateur}`, utilisateur);
+  }
+
+  supprimerUtilisateur(utilisateur: Utilisateur): Observable<any> {
+    return this.http.delete(`${this.utilisateursUrl}/${utilisateur.idUtilisateur}`);
+  }
 }

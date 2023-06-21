@@ -13,9 +13,9 @@ declare var $: any;
 
 export class TypesCategoriesComponent implements OnInit {
   form: any = {
-    typeCategorie: null,
+    nom: null,
     description: null,
-    date: null
+    budget: null
   };
   afficherFormulaire: boolean=false;
 
@@ -23,8 +23,49 @@ export class TypesCategoriesComponent implements OnInit {
   
     
   categories: Categorie[];
+  filteredCategories: Categorie[];
+  searchKeyword: string = '';
 
   ngOnInit(): void {
+    this.categories = [
+      {
+        idCategorie: '1',
+        nom: 'Alimentation',
+        description: 'Épicerie, magasin, marché',
+        budget: 500
+      },
+      {
+        idCategorie: '2',
+        nom: 'Logement',
+        description: 'Loyer, électricité, internet,  syndic, etc.',
+        budget: 800
+      },
+      {
+        idCategorie: '3',
+        nom: 'Transport',
+        description: 'Transports en commun, stationnement, essence, assurance automobile, entretien de la voiture, taxi',
+        budget: 400
+      },
+      {
+        idCategorie: '4',
+        nom: 'Education',
+        description: 'Frais de scolarité,études, fourniture, ordinateur, etc.',
+        budget: 700
+      }, 
+      {
+        idCategorie: '5',
+        nom: 'Santé et soins personnels',
+        description: 'Coiffure, produits de beauté, dentiste,médecin, médicaments, etc.',
+        budget: 200
+      },
+
+      {
+        idCategorie: '6',
+        nom: 'Loisirs',
+        description: 'Sports, cinéma, anniversaire etc.',
+        budget: 200
+      }
+    ];
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";
@@ -41,11 +82,31 @@ export class TypesCategoriesComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.dialog.open(CategorieFormComponent, {
-      width: '250px'
+      width: '500px',
+      data: { form:this.form }
     });
-
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+  updateCategories(categorie: Categorie): void {
+    this.form.nom=categorie.nom; 
+    this.form.description=categorie.description; 
+    this.form.budget=categorie.budget; 
+    this.openModal();
+    console.log('Modification de la catégorie :', categorie);
+    this.categorieService.updateCategories(categorie).subscribe(res => {
+    }, error => {
+      console.error(error);
+    });
+  }
+
+  deleteCategories(categorie: Categorie): void {
+    console.log('Suppression de la categorie :', categorie);
+    this.categorieService.deleteCategories(categorie).subscribe(res => {
+    }, error => {
+      console.error(error);
     });
   }
 }

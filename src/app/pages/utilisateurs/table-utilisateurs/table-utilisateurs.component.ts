@@ -21,6 +21,27 @@ export class TableUtilisateursComponent implements OnInit {
   utilisateurs: Utilisateur[];
 
   ngOnInit(): void {
+    this.utilisateurs = [
+      {
+        idUtilisateur: '1',
+        nom: 'Ahmed',
+        prenom:'ben slimane',
+        email: 'ahmed.slimene@gmail.com'
+      },
+      {
+        idUtilisateur: '2',
+        nom: 'mariem',
+        prenom:'njeh',
+        email: 'mariem.njah@gmail.com'
+      },
+      {
+        idUtilisateur: '3',
+        nom: 'firas',
+        prenom:'abid',
+        email: 'firas.abid@gmail.com'
+      }
+      
+    ];
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";
@@ -57,4 +78,24 @@ export class TableUtilisateursComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  modifierUtilisateur(utilisateur: Utilisateur): void {
+    console.log('Modification de l\'utilisateur :', utilisateur);
+    this.utilisateurService.modifierUtilisateur(utilisateur).subscribe(res => {
+    }, error => {
+      console.error(error);
+    });
+  }
+
+  test(): void {
+    console.log('Modification de l\'utilisateur :');
+  }
+
+  supprimerUtilisateur(utilisateur: Utilisateur): void {
+    console.log('Suppression de l\'utilisateur :', utilisateur);
+    this.utilisateurService.supprimerUtilisateur(utilisateur).subscribe(res => {
+    }, error => {
+      console.error(error);
+    });
+  }
 }
+  

@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    
+      font-size: 6px; /* Ajustez la taille de la police du bouton */
+      padding: 1px 5px; /* Ajustez le padding du bouton */
+    
+  }
+  
+
+  .btn-pastel {
+    background-color: #f37f8c;
+    color: #ffffff;
+    border-color: #e7c3e7;
+    font-size: 12px; 
+
+  }
+  
+  .btn-pastel:hover {
+    background-color: #d1a2d1;
+    border-color: #d1a2d1;
+    color: #ffffff;
+  }
+  .btn-edit {
+    color: #38b36f; 
+  }
+  
+  .btn-delete {
+    color: #dd2d27; 
+  }
+  table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  bottom: .5em;
+}
+ 
