@@ -1,6 +1,6 @@
-<custom-modal #modal [modalConfig]="modalConfig">
+<custom-modal #modal [item]="currentItem" (eventUpdated)="handleEventCreated($event)"  >
 </custom-modal>
-<custom-modal #modalNew [modalConfig]="modalConfigNew" (eventCreated)="handleEventCreated($event)">
+<custom-modal #modalNew (eventCreated)="handleEventCreated($event)">
 </custom-modal>
 <div class='demo-app'>
 

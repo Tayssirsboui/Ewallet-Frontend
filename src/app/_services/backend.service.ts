@@ -21,9 +21,15 @@ export class BackendService {
   getDepense(): Observable<Depense[]> {
     return this.http.get<Depense[]>("http://localhost:8080/getDepenses")
   }
-
+  // getAllRevenus() (): Observable<revenus[]> {
+  //   return this.http.get<Depense[]>("http://localhost:8080/getDepenses")
+  // }
   updateData(id: number, formData: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/data/${id}`, formData);
+  }
+
+  getDepenseById(id: number): Observable<Depense> {
+    return this.http.get<Depense>(`http://localhost:8080/getDepense/${id}`)
   }
 
   deleteData(id: number): Observable<any> {

@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
 @Injectable()
 export class ModalComponent implements OnInit {
   @Output() eventCreated: EventEmitter<any> = new EventEmitter<any>();
+  @Output() eventUpdated: EventEmitter<any> = new EventEmitter<any>();
+
   @Input()
+  @Input() item:any
   public modalConfig!: ModalConfig
   @ViewChild('modal')
   private modalContent!: TemplateRef<ModalComponent>
@@ -28,8 +31,9 @@ export class ModalComponent implements OnInit {
   // selectedEvent
   
   constructor(private router: Router,private modalService: NgbModal,private fb: FormBuilder,private backendService: BackendService) {
+    debugger
     this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
-    this.nouvelledepenseForm = this.fb.group({
+    /*this.nouvelledepenseForm = this.fb.group({
       description: ['', Validators.required],
       montant: ['', Validators.required],
       // user_id:['', Validators.required],
@@ -37,7 +41,7 @@ export class ModalComponent implements OnInit {
       categorieId:1,
       userId:this.userdata.idUtilisateur
 
-    })
+    })*/
     
   }
   get f() { return this.nouvelledepenseForm.controls; }
@@ -180,6 +184,14 @@ export class ModalComponent implements OnInit {
       description: this.Data.description,
       montant: this.Data.montant
     });
+
+    this.eventUpdated.emit({
+      title: 'Modifier événement',
+      start: this.Data.date,
+      description: this.Data.description,
+      montant: this.Data.montant
+    });
+
   }
 
  

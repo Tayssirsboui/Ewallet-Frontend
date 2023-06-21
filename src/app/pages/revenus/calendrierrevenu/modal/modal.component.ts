@@ -6,7 +6,7 @@ import { ModalConfig } from './modal.config'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'custom-modal',
+  selector: 'custom-modall',
   templateUrl: './modal.component.html'
 })
 @Injectable()

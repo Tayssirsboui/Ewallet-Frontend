@@ -1,22 +1,30 @@
-import { Component, ChangeDetectorRef, ViewChild} from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import { Component, ChangeDetectorRef, ViewChild, Input } from '@angular/core';
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventApi,
+} from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
 
-import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ModalDismissReasons,
+  NgbDatepickerModule,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Depense } from 'src/app/models/depense.model';
 import { BackendService } from 'src/app/_services/backend.service';
 
-
 @Component({
   selector: 'app-calendrier',
-  templateUrl:'./calendrier.component.html',
-  styleUrls: ['./calendrier.component.css']
+  templateUrl: './calendrier.component.html',
+  styleUrls: ['./calendrier.component.css'],
 })
 export class CalendrierComponent {
   @ViewChild('fullCalendar') fullCalendar: FullCalendarComponent;
@@ -26,19 +34,15 @@ export class CalendrierComponent {
   @ViewChild('modalNew')
   private modalComponentNew!: ModalComponent;
   // depenses= [];
+  currentItem: Depense
   depenses: any[] = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
-    plugins: [
-      interactionPlugin,
-      dayGridPlugin,
-      timeGridPlugin,
-      listPlugin,
-    ],
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
@@ -50,62 +54,52 @@ export class CalendrierComponent {
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
-   
+
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:
     eventRemove:
     */
-    
-
   };
 
   modalConfig = {
-    modalTitle: "Modifier Dépense",
-    dismissButtonLabel: "save",
-    closeButtonLabel: "Annuler",
-  }
+    modalTitle: 'Modifier Dépense',
+    dismissButtonLabel: 'save',
+    closeButtonLabel: 'Annuler',
+  };
 
   modalConfigNew = {
-    modalTitle: "Ajouter Dépense",
-    dismissButtonLabel: "save",
-    closeButtonLabel: "Annuler",
-  }
-
+    modalTitle: 'Ajouter Dépense',
+    dismissButtonLabel: 'save',
+    closeButtonLabel: 'Annuler',
+  };
 
   currentEvents: EventApi[] = [];
   calendarEvents: any[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef,private modalService: NgbModal, private backendService: BackendService) {
-    
-    this.backendService.getDepense().subscribe(
-      (response) => {
-        
-        this.depenses = response;
-        const events: any = [];
-      
-        // debugger
-        this.depenses.forEach((item: any) => {
-        // debugger  
-        const event = {
-          id:item.idDepense,
-          title: item.description + '-' +item.montant,
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private modalService: NgbModal,
+    private backendService: BackendService
+  ) {
+    this.backendService.getDepense().subscribe((response) => {
+      this.depenses = response;
+      const events: any = [];
 
+      // debugger
+      this.depenses.forEach((item: any) => {
+        // debugger
+        const event = {
+          id: item.idDepense,
+          title: item.description + '-' + item.idDepense + '-' + item.montant,
           start: item.date,
-          
-          allDay:true
+          allDay: true,
         };
         events.push(event);
-        
       });
       this.depenses = events;
-}) 
-      
-}
-    
- 
-  
-
+    });
+  }
 
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;
@@ -120,9 +114,8 @@ export class CalendrierComponent {
   handleDateSelect(selectInfo: DateSelectArg) {
     // model Event
     // new Event()
-    debugger
-    this.modalComponentNew.new()
-
+    debugger;
+    this.modalComponentNew.new();
 
     // const title = prompt('Please enter a new title for your event');
     // const calendarApi = selectInfo.view.calendar;
@@ -140,11 +133,16 @@ export class CalendrierComponent {
     // }
   }
 
-
   //  edit function
   handleEventClick(args: any) {
-    debugger
-     this.modalComponent.edit(args.event)
+    this.modalComponent.edit(args.event);
+
+    this.backendService
+      .getDepenseById(Number(args.event._def.title.split('-')[1]))
+      .subscribe((response) => {
+        debugger;
+        this.currentItem = response;
+      });
     // this.modalService.open(modal);
   }
 
@@ -159,17 +157,15 @@ export class CalendrierComponent {
       title: event.title,
       start: event.start,
       description: event.description,
-      montant: event.montant
+      montant: event.montant,
     };
 
     calendarApi.addEvent(newEvent);
   }
   handleEventCreated(event: any) {
-    debugger
+    debugger;
     console.log('Nouvel événement créé :', event);
     this.calendarEvents.push(event);
     this.addEventToCalendar(event);
   }
-  
-
 }

@@ -1,7 +1,7 @@
 
 <ng-template #modal>
     <div class="modal-header">
-      <h2 class="modal-title">{{ modalConfig.modalTitle }}</h2>
+      <h2 class="modal-title">{{title}}</h2>
       <button type="button" class="btn btn-danger pull-right" style="float:right">
         <i class="fas fa-trash"></i>
       </button>
@@ -15,7 +15,7 @@
           <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
           <div class="col-lg-9">
             <textarea rows="1" class="form-control"
-              formControlName="description"></textarea>
+             > {{item.description}}  </textarea>
           </div>
         </div>
         
@@ -23,13 +23,13 @@
         <div  class="row mb-3">
           <label class="col-lg-3 col-form-label form-control-label"><strong>montant</strong></label>
           <div class="col-lg-9">
-            <input class="form-control" type="text" formControlName="montant">
+            <input class="form-control" type="text" value="{{item.montant}}" >
           </div>
         </div>
         <div  class="row mb-3">
           <label class="col-lg-3 col-form-label form-control-label"><strong>Date</strong></label>
           <div class="col-lg-9">
-            <input type="date" formControlName="date" class="form-control" >
+            <input type="date"  class="form-control" >
 
           </div>
         </div>
