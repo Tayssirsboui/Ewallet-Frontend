@@ -54,7 +54,7 @@ import { CategoriesModule } from './pages/categories/categories.module';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
 import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
@@ -136,7 +136,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     DepensesModule,
     RevenusModule,
     FullCalendarModule,
-    NgxDatatableModule
+   
    
   ],
  
