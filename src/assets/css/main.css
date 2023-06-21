@@ -454,7 +454,10 @@ button:focus {
    Hero Area
    ========================================================================== */
 .hero-area {
-  position: relative; }
+  position: relative; 
+  background-color: #fafffe;
+
+}
   .hero-area .overlay {
     position: absolute;
     width: 100%;
@@ -488,15 +491,21 @@ button:focus {
       height: 155px;
       left: 3%; }
   .hero-area .contents {
-    padding: 220px 0; }
+    padding: 220px 0;
+    background-image: url(../img/home-page-image-removebg-preview.png);
+    background-repeat: no-repeat;
+    background-size: 250px 250px;
+    background-position: right 10px center;
+    padding-right: 30px; }
     .hero-area .contents h2 {
-      color: #fff;
+      color: #000000;
       font-size: 38px;
       font-weight: 600;
       line-height: 60px;
-      margin-bottom: 20px; }
+      margin-bottom: 20px;
+  }
     .hero-area .contents p {
-      color: #fff;
+      color: #000000;
       font-size: 18px;
       line-height: 26px; }
     .hero-area .contents .btn {
