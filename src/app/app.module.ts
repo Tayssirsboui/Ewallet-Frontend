@@ -8,9 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -55,7 +52,6 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
 import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
 
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { DepensesModule } from './pages/depenses/depenses.module';
@@ -114,7 +110,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     RequestsComponent,
     ListGroupComponent,
     ModalDialogComponent,
-    HomePageComponent
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,8 +131,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     DepensesModule,
     RevenusModule,
     FullCalendarModule,
-    NgxDatatableModule
-   
+    NgxDatatableModule   
   ],
  
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Categorie } from '../categorie';
+import { CategorieDepenseDto } from '../models/categorieDepenseDto.model';
+
 
 
 @Injectable({
@@ -31,5 +33,7 @@ export class CategorieService{
   public deleteCategories(categorie: Categorie): Observable<any> {
     return this.http.delete(`${this.categoriesUrl}/deleteCategories/${categorie.idCategorie}`);
   }
- 
+  listDepenseByCategory(): Observable<CategorieDepenseDto[]> {
+    return this.http.get<CategorieDepenseDto[]>(this.categoriesUrl +"/categorieDepense");
+  }
 }

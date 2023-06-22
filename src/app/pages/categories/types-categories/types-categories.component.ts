@@ -12,12 +12,14 @@ declare var $: any;
 })
 
 export class TypesCategoriesComponent implements OnInit {
+
   form: any = {
     nom: null,
     description: null,
     budget: null
   };
   afficherFormulaire: boolean=false;
+  p:number = 1 ;
 
   constructor(private elementRef: ElementRef,private categorieService:CategorieService,private dialog: MatDialog) { }
   
