@@ -1,40 +1,61 @@
-import { Component, EventEmitter, Injectable, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core'
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
+import {
+  Component,
+  EventEmitter,
+  Injectable,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BackendService } from 'src/app/_services/backend.service';
-import { ModalConfig } from './modal.config'
+import { ModalConfig } from './modal.config';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'custom-modal',
-  templateUrl: './modal.component.html'
+  templateUrl: './modal.component.html',
 })
 @Injectable()
 export class ModalComponent implements OnInit {
-  @Output() eventCreated: EventEmitter<any> = new EventEmitter<any>();
   @Output() eventUpdated: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
-  @Input() item:any
-  public modalConfig!: ModalConfig
+  @Input()
+  item: any;
+  public modalConfig!: ModalConfig;
   @ViewChild('modal')
-  private modalContent!: TemplateRef<ModalComponent>
-  private modalRef!: NgbModalRef
-  public title = ""
-  public start = ""
-  public id = ""
-  nouvelledepenseForm: FormGroup;
+  private modalContent!: TemplateRef<ModalComponent>;
+  private modalRef!: NgbModalRef;
+  public title = '';
+  public start = '';
+  public id = '';
+  updatedepenseForm: FormGroup;
   submitted = false;
-  Data:any;
-  userdata:any;
-  depenses:any;
-  
+  Data: any;
+  userdata: any;
+  depenses: any;
+  modalTitle: any;
+
   // selectedEvent
-  
-  constructor(private router: Router,private modalService: NgbModal,private fb: FormBuilder,private backendService: BackendService) {
+
+  constructor(
+    private router: Router,
+    private modalService: NgbModal,
+    private fb: FormBuilder,
+    private backendService: BackendService
+  ) {
     // debugger
-    this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
-    /*this.nouvelledepenseForm = this.fb.group({
+    this.userdata = JSON.parse(sessionStorage.getItem('auth-user')!);
+    /*this.updatedepenseForm = this.fb.group({
       description: ['', Validators.required],
       montant: ['', Validators.required],
       // user_id:['', Validators.required],
@@ -43,46 +64,44 @@ export class ModalComponent implements OnInit {
       userId:this.userdata.idUtilisateur
 
     })*/
-    
   }
-  get f() { return this.nouvelledepenseForm.controls; }
+  get f() {
+    return ''; /*this.updatedepenseForm.controls;*/
+  }
 
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   // Event /model/event
-  edit(event: {id: string, title: string, start: string }): Promise<boolean> {
-    this.id = event.id
-    this.title = event.title
-    this.start = event.start
-    return new Promise<boolean>(resolve => {
-      this.modalRef = this.modalService.open(this.modalContent)
-      this.modalRef.result.then(resolve, resolve)
-    })
-  }
-
-  new(): Promise<boolean> {
-    return new Promise<boolean>(resolve => {
-      this.modalRef = this.modalService.open(this.modalContent)
-      this.modalRef.result.then(resolve, resolve)
-    })
+  edit(event: { id: string; title: string; start: string }): Promise<boolean> {
+    this.id = event.id;
+    this.title = event.title;
+    this.start = event.start;
+    return new Promise<boolean>((resolve) => {
+      this.modalRef = this.modalService.open(this.modalContent);
+      this.modalRef.result.then(resolve, resolve);
+    });
   }
 
   async close(): Promise<void> {
-    if (this.modalConfig.shouldClose === undefined || (await this.modalConfig.shouldClose())) {
-      const result = this.modalConfig.onClose === undefined || (await this.modalConfig.onClose())
+    if (
+      this.modalConfig.shouldClose === undefined ||
+      (await this.modalConfig.shouldClose())
+    ) {
+      const result =
+        this.modalConfig.onClose === undefined ||
+        (await this.modalConfig.onClose());
 
-      this.modalRef.close(result)
+      this.modalRef.close(result);
     }
   }
 
- addDepense(){
-  if (this.nouvelledepenseForm.invalid) {
+  /*addDepense(){
+  if (this.updatedepenseForm.invalid) {
     // debugger 
     return;
   } else {
     
-    this.backendService.createEvent(this.nouvelledepenseForm.value).subscribe(
+    this.backendService.createEvent(this.updatedepenseForm.value).subscribe(
      
       (response:any) => {
         window.location.reload()
@@ -116,25 +135,21 @@ export class ModalComponent implements OnInit {
       }
     );
   }
- }
+ }*/
   async dismiss(): Promise<void> {
-    this.Data = {
+    (this.Data = {
+      description: this.updatedepenseForm?.get('description')?.value,
+      montant: this.updatedepenseForm?.get('montant')?.value,
+      userId: this.userdata.idUtilisateur,
+      date: this.updatedepenseForm?.get('date')?.value,
+      categorieId: 1,
+    }),
+      // debugger
+      (this.submitted = true);
+    // debugger
+    console.log(this.Data);
 
-      description: this.nouvelledepenseForm?.get("description")?.value,
-      montant: this.nouvelledepenseForm?.get("montant")?.value,
-      userId:this.userdata.idUtilisateur,
-      date: this.nouvelledepenseForm?.get("date")?.value,
-      categorieId:1
-
-
-    },
-
-  // debugger
-  this.submitted = true;
-  // debugger
-  console.log(this.Data)
-     
-  if (this.nouvelledepenseForm.invalid) {
+    /*if (this.updatedepenseForm.invalid) {
     // debugger 
     return;
   } else {
@@ -172,70 +187,59 @@ export class ModalComponent implements OnInit {
         console.error('Error:', error);
       }
     );
-  }
-  this.submitted = false;
-    
-    
-    if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {
-      const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss())
-      this.modalRef.dismiss(result)
-    }
-    this.eventCreated.emit({
-      
-      title: 'Nouvel événement',
-      start: this.Data.date,
-      description: this.Data.description,
-      montant: this.Data.montant
-    });
+  }*/
+    this.submitted = false;
 
+    if (
+      this.modalConfig.shouldDismiss === undefined ||
+      (await this.modalConfig.shouldDismiss())
+    ) {
+      const result =
+        this.modalConfig.onDismiss === undefined ||
+        (await this.modalConfig.onDismiss());
+      this.modalRef.dismiss(result);
+    }
     this.eventUpdated.emit({
-      
       title: 'Modifier événement',
       start: this.Data.date,
       description: this.Data.description,
-      montant: this.Data.montant
+      montant: this.Data.montant,
     });
-    
   }
- 
- 
- }
- 
-  // Nouvelledepense() {
-  //   this.Data = {
+}
 
-  //       description: this.nouvelledepenseForm?.get("description")?.value,
-  //       montant: this.nouvelledepenseForm?.get("montant")?.value,
-  //       userId:this.userdata.idUtilisateur,
-  //       date: this.nouvelledepenseForm?.get("date")?.value,
-  //       categorieId:1
+// Nouvelledepense() {
+//   this.Data = {
 
+//       description: this.nouvelledepenseForm?.get("description")?.value,
+//       montant: this.nouvelledepenseForm?.get("montant")?.value,
+//       userId:this.userdata.idUtilisateur,
+//       date: this.nouvelledepenseForm?.get("date")?.value,
+//       categorieId:1
 
-  //     },
+//     },
 
-  //   // debugger
-  //   this.submitted = true;
-  //   // debugger
-  //   console.log(this.Data)
-       
-  //   if (this.nouvelledepenseForm.invalid) {
-  //     // debugger 
-  //     return;
-  //   } else {
-  //     this.backendService.createEvent(this.Data).subscribe(
-       
-  //       (response:any) => {
-  //         // debugger
-          
-  //         console.log('Success:', response);
+//   // debugger
+//   this.submitted = true;
+//   // debugger
+//   console.log(this.Data)
 
-  //       },
-  //       ( error: any) => {
-  //         console.error('Error:', error);
-  //       }
-  //     );
-  //   }
-  //   this.submitted = false;
-  // }
-  
-  
+//   if (this.nouvelledepenseForm.invalid) {
+//     // debugger
+//     return;
+//   } else {
+//     this.backendService.createEvent(this.Data).subscribe(
+
+//       (response:any) => {
+//         // debugger
+
+//         console.log('Success:', response);
+
+//       },
+//       ( error: any) => {
+//         console.error('Error:', error);
+//       }
+//     );
+//   }
+//   this.submitted = false;
+// }

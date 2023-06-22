@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './calendrier/modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
+import { ModalNewComponent } from './calendrier/modal-new/modal-new.component';
 
 
 
@@ -27,7 +28,8 @@ import {  HttpClientModule } from '@angular/common/http';
     ChartsComponent,
     PaiementprevusComponent,
     MyDialogComponentComponent,
-    ModalComponent
+    ModalComponent,
+    ModalNewComponent
   ],
   imports: [
     CommonModule,

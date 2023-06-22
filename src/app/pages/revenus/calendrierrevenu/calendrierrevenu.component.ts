@@ -5,6 +5,7 @@ import {
   EventClickArg,
   EventApi,
 } from '@fullcalendar/core';
+
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -24,8 +25,6 @@ export class CalendrierrevenuComponent {
   @ViewChild('fullCalendar') fullcalendar: FullCalendarComponent;
   @ViewChild('modal')
   private modalComponent!: ModalComponent;
-  @ViewChild('modalNew')
-  private modalComponentNew!: ModalComponent;
   revenus: any[] = [];
 
   calendarVisible = true;
@@ -98,7 +97,6 @@ export class CalendrierrevenuComponent {
 
   handleDateSelect(selectInfo: DateSelectArg) {
     debugger;
-    this.modalComponentNew.new();
   }
 
   handleEventClick(args: any) {
@@ -127,7 +125,7 @@ export class CalendrierrevenuComponent {
   }
 
   handleEventCreated(event: any) {
-    debugger
+    // debugger
     this.calendarEvents.push(event);
     this.addEventToCalendar(event);
   }

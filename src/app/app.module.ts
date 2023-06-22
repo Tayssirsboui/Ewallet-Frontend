@@ -54,7 +54,6 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { AuthInterceptorService } from './_helpers/auth-interceptor.service';
 import { UtilisateursModule } from './pages/utilisateurs/utilisateurs.module';
 
-
 import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { DepensesModule } from './pages/depenses/depenses.module';
 import { RevenusModule } from './pages/revenus/revenus.module';

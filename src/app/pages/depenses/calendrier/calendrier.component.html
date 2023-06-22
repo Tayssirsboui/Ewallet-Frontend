@@ -1,7 +1,7 @@
 <custom-modal #modal [item]="currentItem" (eventUpdated)="handleEventCreated($event)"  >
 </custom-modal>
-<custom-modal #modalNew (eventCreated)="handleEventCreated($event)">
-</custom-modal>
+<modal-new #modalnew (eventCreated)="handleEventCreated($event)"  >
+</modal-new>
 <div class='demo-app'>
 
    <div class='demo-app-sidebar'>

@@ -5,6 +5,8 @@ import {
   EventClickArg,
   EventApi,
 } from '@fullcalendar/core';
+import { MatDialog } from '@angular/material/dialog';
+
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -17,6 +19,8 @@ import {
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
+import { ModalNewComponent } from './modal-new/modal-new.component';
+
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Depense } from 'src/app/models/depense.model';
 import { BackendService } from 'src/app/_services/backend.service';
@@ -31,8 +35,8 @@ export class CalendrierComponent {
 
   @ViewChild('modal')
   private modalComponent!: ModalComponent;
-  @ViewChild('modalNew')
-  private modalComponentNew!: ModalComponent;
+  @ViewChild('modalnew')
+  private modalNewComponent!: ModalNewComponent;
   // depenses= [];
   currentItem: Depense
   depenses: any[] = [];
@@ -68,7 +72,7 @@ export class CalendrierComponent {
     closeButtonLabel: 'Annuler',
   };
 
-  modalConfigNew = {
+  modalConfigg = {
     modalTitle: 'Ajouter Dépense',
     dismissButtonLabel: 'save',
     closeButtonLabel: 'Annuler',
@@ -80,6 +84,7 @@ export class CalendrierComponent {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
+    private dialog: MatDialog,
     private backendService: BackendService
   ) {
     this.backendService.getDepense().subscribe((response) => {
@@ -110,12 +115,22 @@ export class CalendrierComponent {
     calendarOptions.weekends = !calendarOptions.weekends;
   }
 
-  //  new function
+  
   handleDateSelect(selectInfo: DateSelectArg) {
+
+    this.modalNewComponent.new();
+
+  
+  }
+  
+  //  new function
+  /*handleDateSelect(selectInfo: DateSelectArg) {
     // model Event
     // new Event()
     // debugger;
-    this.modalComponentNew.new();
+    debugger
+    this.modalNewComponent.new();
+    
 
     // const title = prompt('Please enter a new title for your event');
     // const calendarApi = selectInfo.view.calendar;
@@ -131,7 +146,7 @@ export class CalendrierComponent {
     //     allDay: selectInfo.allDay
     //   });
     // }
-  }
+  }*/
 
   //  edit function
   handleEventClick(args: any) {
@@ -144,6 +159,7 @@ export class CalendrierComponent {
         this.currentItem = response;
       });
     // this.modalService.open(modal);
+    
   }
 
   handleEvents(events: EventApi[]) {
@@ -163,7 +179,7 @@ export class CalendrierComponent {
     calendarApi.addEvent(newEvent);
   }
   handleEventCreated(event: any) {
-    debugger;
+    // debugger;
     console.log('Nouvel événement créé :', event);
     this.calendarEvents.push(event);
     this.addEventToCalendar(event);

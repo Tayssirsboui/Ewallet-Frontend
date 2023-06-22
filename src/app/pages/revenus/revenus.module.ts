@@ -6,7 +6,6 @@ import { RevenusComponent } from './revenus.component';
 import { CalendrierrevenuComponent } from './calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './chartsrevenu/chartsrevenu.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { ModalComponent } from './calendrierrevenu/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -15,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RevenusComponent,
     CalendrierrevenuComponent,
     ChartsrevenuComponent,
-    ModalComponent,
   ],
   imports: [
     CommonModule,
