@@ -29,7 +29,11 @@
         <div  class="row mb-3">
           <label class="col-lg-3 col-form-label form-control-label"><strong>Date</strong></label>
           <div class="col-lg-9">
-            <input type="date"  class="form-control" >
+            
+             <input type="date" class="form-control" value="{{ item.date | date:'MM/dd/yyyy' }}">
+             
+            <!-- <textarea rows="1" class="form-control"
+             > {{item.date}}  </textarea> -->
 
           </div>
         </div>

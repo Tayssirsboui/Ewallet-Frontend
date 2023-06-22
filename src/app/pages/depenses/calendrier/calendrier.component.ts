@@ -114,7 +114,7 @@ export class CalendrierComponent {
   handleDateSelect(selectInfo: DateSelectArg) {
     // model Event
     // new Event()
-    debugger;
+    // debugger;
     this.modalComponentNew.new();
 
     // const title = prompt('Please enter a new title for your event');
@@ -140,7 +140,7 @@ export class CalendrierComponent {
     this.backendService
       .getDepenseById(Number(args.event._def.title.split('-')[1]))
       .subscribe((response) => {
-        debugger;
+        // debugger;
         this.currentItem = response;
       });
     // this.modalService.open(modal);

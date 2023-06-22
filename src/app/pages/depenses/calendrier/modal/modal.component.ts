@@ -28,10 +28,11 @@ export class ModalComponent implements OnInit {
   Data:any;
   userdata:any;
   depenses:any;
+  
   // selectedEvent
   
   constructor(private router: Router,private modalService: NgbModal,private fb: FormBuilder,private backendService: BackendService) {
-    debugger
+    // debugger
     this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
     /*this.nouvelledepenseForm = this.fb.group({
       description: ['', Validators.required],
@@ -162,6 +163,7 @@ export class ModalComponent implements OnInit {
           
         });
         this.depenses = events;
+        debugger
   }) 
         console.log('Success:', response);
 
@@ -179,6 +181,7 @@ export class ModalComponent implements OnInit {
       this.modalRef.dismiss(result)
     }
     this.eventCreated.emit({
+      
       title: 'Nouvel événement',
       start: this.Data.date,
       description: this.Data.description,
@@ -186,14 +189,17 @@ export class ModalComponent implements OnInit {
     });
 
     this.eventUpdated.emit({
+      
       title: 'Modifier événement',
       start: this.Data.date,
       description: this.Data.description,
       montant: this.Data.montant
     });
-
+    
   }
-
+ 
+ 
+ }
  
   // Nouvelledepense() {
   //   this.Data = {
@@ -233,4 +239,3 @@ export class ModalComponent implements OnInit {
   // }
   
   
-}
