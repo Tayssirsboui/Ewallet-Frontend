@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ViewChild, Input } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, Input ,ElementRef } from '@angular/core';
 import {
   CalendarOptions,
   DateSelectArg,
@@ -16,6 +16,8 @@ import {
   NgbDatepickerModule,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
+
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalComponent } from './modal/modal.component';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Depense } from 'src/app/models/depense.model';
@@ -29,10 +31,8 @@ import { BackendService } from 'src/app/_services/backend.service';
 export class CalendrierComponent {
   @ViewChild('fullCalendar') fullCalendar: FullCalendarComponent;
 
-  @ViewChild('modal')
-  private modalComponent!: ModalComponent;
-  @ViewChild('modalNew')
-  private modalComponentNew!: ModalComponent;
+  @ViewChild('modalNew') modalNew: ElementRef;
+ 
   // depenses= [];
   currentItem: Depense
   depenses: any[] = [];
@@ -76,12 +76,26 @@ export class CalendrierComponent {
 
   currentEvents: EventApi[] = [];
   calendarEvents: any[] = [];
-
+  nouvelledepenseForm: FormGroup;
+  userdata:any;
+  userId:number ; 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private fb: FormBuilder
   ) {
+    this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
+    this.userId = this.userdata.idUtilisateur ; 
+    console.log("userId " , this.userdata.idUtilisateur)
+    this.nouvelledepenseForm = this.fb.group({
+      description: ['', Validators.required],
+      montant: ['', Validators.required],
+      date:['',Validators.required],
+      categorieId:1,
+      userId:[]
+
+    })
     this.backendService.getDepense().subscribe((response) => {
       this.depenses = response;
       const events: any = [];
@@ -91,7 +105,7 @@ export class CalendrierComponent {
         // debugger
         const event = {
           id: item.idDepense,
-          title: item.description + '-' + item.idDepense + '-' + item.montant,
+          title: item.description + '-' + '-' + item.montant,
           start: item.date,
           allDay: true,
         };
@@ -112,37 +126,22 @@ export class CalendrierComponent {
 
   //  new function
   handleDateSelect(selectInfo: DateSelectArg) {
-    // model Event
-    // new Event()
-    // debugger;
-    this.modalComponentNew.new();
+    this.nouvelledepenseForm.reset()
+    this.modalService.open(this.modalNew)
 
-    // const title = prompt('Please enter a new title for your event');
-    // const calendarApi = selectInfo.view.calendar;
-
-    // calendarApi.unselect(); // clear date selection
-
-    // if (title) {
-    //   calendarApi.addEvent({
-    //     id: createEventId(),
-    //     title,
-    //     start: selectInfo.startStr,
-    //     end: selectInfo.endStr,
-    //     allDay: selectInfo.allDay
-    //   });
-    // }
+   
   }
 
   //  edit function
   handleEventClick(args: any) {
-    this.modalComponent.edit(args.event);
+    /*this.modalComponent.edit(args.event);
 
     this.backendService
       .getDepenseById(Number(args.event._def.title.split('-')[1]))
       .subscribe((response) => {
         // debugger;
         this.currentItem = response;
-      });
+      });*/
     // this.modalService.open(modal);
   }
 
@@ -168,4 +167,26 @@ export class CalendrierComponent {
     this.calendarEvents.push(event);
     this.addEventToCalendar(event);
   }
+
+  addDepense(){
+    if (this.nouvelledepenseForm.invalid) {
+      // debugger 
+      return;
+    } else {
+      this.nouvelledepenseForm.get("userId")?.setValue(this.userId);
+      this.nouvelledepenseForm.get("userId")?.updateValueAndValidity()
+      this.backendService.createEvent(this.nouvelledepenseForm.value).subscribe(
+       
+        (response:any) => {
+          window.location.reload()
+    
+          console.log('Success:', response);
+  
+        },
+        ( error: any) => {
+          console.error('Error:', error);
+        }
+      );
+    }
+   }
 }

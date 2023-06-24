@@ -1,7 +1,4 @@
-<custom-modal #modal [item]="currentItem" (eventUpdated)="handleEventCreated($event)"  >
-</custom-modal>
-<custom-modal #modalNew (eventCreated)="handleEventCreated($event)">
-</custom-modal>
+
 <div class='demo-app'>
 
    <div class='demo-app-sidebar'>
@@ -50,7 +47,7 @@
      #fullCalendar  [events]="depenses">
 
        <ng-template #eventContent let-arg>
-         <b>{{ arg.timeText }}</b>
+         
          <i>{{ arg.event.title }}</i>
        </ng-template>
      </full-calendar>
@@ -59,3 +56,91 @@
  
  </div>
  
+ <ng-template #modalNew let-modal>
+  <span class="fa-stack fa-1x" (click)="modal.dismiss('cancel click')"
+    style="position: absolute; top: -25px;right: -14px;padding: 10px;z-index: 1111; cursor: pointer;">
+    <i class="fa fa-circle fa-stack-2x" style=" -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+             background-color: #d1ef12; ">
+    </i>
+    <i class=" fa  fa-times fa-stack-1x " style="color: black;font-size: 19px;"></i>
+  </span>
+
+  <div class="modal-header">
+    <h2 class="modal-title">Nouvelle depense</h2>
+   
+  </div>
+  <div class="modal-body">
+    <form class="form" role="form" [formGroup]="nouvelledepenseForm">
+
+      <div  class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
+        <div class="col-lg-9">
+          <textarea rows="1" class="form-control" formControlName="description"
+           >   </textarea>
+        </div>
+      </div>
+      
+      
+      <div  class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>montant</strong></label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text"  formControlName="montant">
+        </div>
+      </div>
+      <div  class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>Date</strong></label>
+        <div class="col-lg-9">
+          
+           <input type="date" class="form-control" formControlName="date">
+           
+       
+
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>Catégories</strong></label>
+        <div class="col-lg-9">
+           <select class="form-select" aria-label="Default select example" formControlName="categorieId" >
+            <option  [value]="1">Transport</option>
+            <option value=2>Loisir</option>
+            <option value="categorie3">Education</option>
+            <option value="categorie3">Logement</option>
+            <option value="categorie3">Alimentation</option>
+            <option value="categorie3">Santé et soins personnels</option>
+           </select>
+        </div>
+     </div>
+    <div class="modal-footer">
+     
+      
+      
+        <button type="button" class="btn btn-info" value="Sauvegarder" (click)="addDepense()">Enregistrer</button><br><br>
+       
+        
+        
+
+      </div>
+    
+      
+      
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #modalUpdate let-modal>
+  <span class="fa-stack fa-1x" (click)="modal.dismiss('cancel click')"
+    style="position: absolute; top: -25px;right: -14px;padding: 10px;z-index: 1111; cursor: pointer;">
+    <i class="fa fa-circle fa-stack-2x" style=" -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+             background-color: #d1ef12; ">
+    </i>
+    <i class=" fa  fa-times fa-stack-1x " style="color: black;font-size: 19px;"></i>
+  </span>
+
+
+  <div class="modal-body">
+   
+  </div>
+</ng-template>
