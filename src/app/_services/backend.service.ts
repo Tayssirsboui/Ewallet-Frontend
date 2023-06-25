@@ -8,7 +8,7 @@ import { Depense } from '../models/depense.model';
 })
 export class BackendService {
 
-  private apiUrl = 'http://localhost:8080/api/getLastDepenses'; 
+  private apiUrl = 'http://localhost:8080/'; 
 
   constructor(private http:HttpClient ) {}
   
@@ -17,6 +17,11 @@ export class BackendService {
   }
 
   findLastDepenses(): Observable<Depense[]> {
-    return this.http.get<Depense[]>(`${this.apiUrl}/`);
+    return this.http.get<Depense[]>("http://localhost:8080/getLastDepenses");
+    
+  }
+  getTotalDepenseAmount(): Observable<number> {
+    return this.http.get<number>("http://localhost:8080/totalDepense");
+    
   }
 }

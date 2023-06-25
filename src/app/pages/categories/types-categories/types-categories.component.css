@@ -34,3 +34,12 @@
   .btn-delete {
     color: #dd2d27; 
   }
+  .search-container {
+    display: flex;
+    justify-content: flex-end;
+    
+ }
+ .search-input {
+  width: 220px;
+  height: 30px; /* Adjust the width as per your preference */
+}

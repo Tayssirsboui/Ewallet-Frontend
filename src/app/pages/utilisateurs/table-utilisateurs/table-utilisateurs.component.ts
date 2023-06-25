@@ -16,32 +16,15 @@ export class TableUtilisateursComponent implements OnInit {
     email: null
   };
   afficherFormulaire: boolean=false;
+  searchedKeyword!:string;
 
   constructor(private elementRef: ElementRef,private utilisateurService:UtilisateurService,private dialog: MatDialog) { }
   utilisateurs: Utilisateur[];
-
+  itemsPerPageOptions: number[] = [5, 10, 20]; // Options for items per page
+  selectedItemsPerPage: number = 5; // Default selected items per page
+  currentPage: number = 1; // Initial current page number
   ngOnInit(): void {
-    this.utilisateurs = [
-      {
-        idUtilisateur: '1',
-        nom: 'Ahmed',
-        prenom:'ben slimane',
-        email: 'ahmed.slimene@gmail.com'
-      },
-      {
-        idUtilisateur: '2',
-        nom: 'mariem',
-        prenom:'njeh',
-        email: 'mariem.njah@gmail.com'
-      },
-      {
-        idUtilisateur: '3',
-        nom: 'firas',
-        prenom:'abid',
-        email: 'firas.abid@gmail.com'
-      }
-      
-    ];
+    
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";
@@ -68,10 +51,11 @@ export class TableUtilisateursComponent implements OnInit {
   //   });
   // }
   
-
+ 
   openModal(): void {
     const dialogRef = this.dialog.open(UtilisateurFormComponent, {
-      width: '250px'
+      width: '500px',
+      data: { form:this.form }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -97,5 +81,23 @@ export class TableUtilisateursComponent implements OnInit {
       console.error(error);
     });
   }
+  onItemsPerPageChange(): void {
+    this.currentPage = 1; // Reset to the first page when items per page changes
+ }
+ 
+ onPageChange(page: number): void {
+    this.currentPage = page;
+ }
+ getDisplayingFrom(): number {
+  if (this.utilisateurs.length === 0) {
+    return 0;
+  }
+  return (this.currentPage - 1) * this.selectedItemsPerPage + 1;
+}
+
+getDisplayingTo(): number {
+  const lastItemIndex = this.currentPage * this.selectedItemsPerPage;
+  return Math.min(lastItemIndex, this.utilisateurs.length);
+}
 }
   

@@ -13,6 +13,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   entryComponents: [CategorieFormComponent,TypesCategoriesComponent],
   exports: [

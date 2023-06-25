@@ -62,6 +62,9 @@ import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiemen
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DateAsAgoPipe } from './date-as-ago.pipe';
 
 
 
@@ -71,6 +74,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
+    DateAsAgoPipe,
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -131,11 +135,16 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     DepensesModule,
     RevenusModule,
     FullCalendarModule,
-    NgxDatatableModule   
+    NgxDatatableModule ,
+    NgxPaginationModule,
+    Ng2SearchPipeModule 
   ],
  
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  exports: [
+  ]
 })
 export class AppModule { }

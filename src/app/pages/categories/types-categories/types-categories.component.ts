@@ -12,62 +12,26 @@ declare var $: any;
 })
 
 export class TypesCategoriesComponent implements OnInit {
-
+  p:number = 1 ;
   form: any = {
     nom: null,
     description: null,
     budget: null
   };
   afficherFormulaire: boolean=false;
-  p:number = 1 ;
+ 
 
   constructor(private elementRef: ElementRef,private categorieService:CategorieService,private dialog: MatDialog) { }
   
     
   categories: Categorie[];
   filteredCategories: Categorie[];
-  searchKeyword: string = '';
-
+  searchedKeyword!:string;
+  itemsPerPageOptions: number[] = [5, 10, 20]; // Options for items per page
+  selectedItemsPerPage: number = 5; // Default selected items per page
+  currentPage: number = 1; // Initial current page number
   ngOnInit(): void {
-    this.categories = [
-      {
-        idCategorie: '1',
-        nom: 'Alimentation',
-        description: 'Épicerie, magasin, marché',
-        budget: 500
-      },
-      {
-        idCategorie: '2',
-        nom: 'Logement',
-        description: 'Loyer, électricité, internet,  syndic, etc.',
-        budget: 800
-      },
-      {
-        idCategorie: '3',
-        nom: 'Transport',
-        description: 'Transports en commun, stationnement, essence, assurance automobile, entretien de la voiture, taxi',
-        budget: 400
-      },
-      {
-        idCategorie: '4',
-        nom: 'Education',
-        description: 'Frais de scolarité,études, fourniture, ordinateur, etc.',
-        budget: 700
-      }, 
-      {
-        idCategorie: '5',
-        nom: 'Santé et soins personnels',
-        description: 'Coiffure, produits de beauté, dentiste,médecin, médicaments, etc.',
-        budget: 200
-      },
-
-      {
-        idCategorie: '6',
-        nom: 'Loisirs',
-        description: 'Sports, cinéma, anniversaire etc.',
-        budget: 200
-      }
-    ];
+    
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";
@@ -111,4 +75,22 @@ export class TypesCategoriesComponent implements OnInit {
       console.error(error);
     });
   }
+  onItemsPerPageChange(): void {
+    this.currentPage = 1; // Reset to the first page when items per page changes
+ }
+ 
+ onPageChange(page: number): void {
+    this.currentPage = page;
+ }
+ getDisplayingFrom(): number {
+  if (this.categories.length === 0) {
+    return 0;
+  }
+  return (this.currentPage - 1) * this.selectedItemsPerPage + 1;
+}
+
+getDisplayingTo(): number {
+  const lastItemIndex = this.currentPage * this.selectedItemsPerPage;
+  return Math.min(lastItemIndex, this.categories.length);
+}
 }

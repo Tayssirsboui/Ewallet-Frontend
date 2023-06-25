@@ -18,14 +18,26 @@
                   <div class="button-container ">
                      <button class="btn btn-pastel" (click)="openModal()"> <i class="fas fa-plus"></i> AJOUTER
                         CATÉGORIE</button>
-
+                  </div>
+                  <div class="search-container">
+                     <input [(ngModel)]="searchedKeyword" type="text" placeholder="Recherche..." class="search-input">
                   </div>
                   <div *ngIf="afficherFormulaire">
                      <app-categorie-form></app-categorie-form>
                   </div>
+                  <div class="pagination-controls">
+                     <div class="items-per-page">
+
+                        <select [(ngModel)]="selectedItemsPerPage" id="itemsPerPage" (change)="onItemsPerPageChange()">
+                           <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                        </select>
+                        <label for="itemsPerPage">éléments par page</label>
+                     </div>
+                  </div>
                   <table class="table dashboard">
                      <thead>
                         <tr>
+
                            <th scope="col">#</th>
                            <th scope="col">Nom</th>
                            <th scope="col">Description</th>
@@ -34,7 +46,8 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr *ngFor="let categorie of categories">
+                        <tr
+                           *ngFor="let categorie of categories | filter: searchedKeyword">
                            <td>{{ categorie.idCategorie }}</td>
                            <td>{{ categorie.nom }}</td>
                            <td>{{ categorie.description }}</td>
@@ -50,6 +63,14 @@
                         </tr>
                      </tbody>
                   </table>
+                  <div class="pagination-controls">
+                     <div class="item-range">
+                        <span>Affichage {{ getDisplayingFrom() }} à {{ getDisplayingTo() }} sur {{ categories.length }} éléments</span>
+                     </div>
+                  </div>
+                  <!-- <div style="text-align:right;">
+                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  </div> -->
                </div>
             </div>
          </div>

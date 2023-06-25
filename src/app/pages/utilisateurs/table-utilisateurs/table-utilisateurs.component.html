@@ -14,15 +14,30 @@
          <div class="col-lg-12">
             <div class="card">
                <div class="card-body">
-                  <h2 class="card-title" >Utilisateurs</h2>
-                  <div class="button-container " > 
-                    <button class="btn btn-pastel"(click)="openModal()">  <i class="fas fa-plus"></i> AJOUTER UTILISATEUR</button>
-             
-                </div>
-                <div *ngIf="afficherFormulaire">
-                    <!-- <app-categorie-form></app-categorie-form> -->
+                  <h2 class="card-title">Utilisateurs</h2>
+                  <div class="button-container">
+                     <button class="btn btn-pastel" (click)="openModal()">
+                        <i class="fas fa-plus"></i> AJOUTER UTILISATEUR
+                     </button>
                   </div>
-                  <table class="table datatable">
+                  
+                  <div class="search-container">
+                     <input [(ngModel)]="searchedKeyword" type="text" placeholder="Recherche..." class="search-input">
+                  </div>                  
+                  <div *ngIf="afficherFormulaire">
+                     <!-- <utilisateur-form></utilisateur-form> -->
+                  </div>
+                  <div class="pagination-controls">
+                     <div class="items-per-page">
+                        
+                        <select [(ngModel)]="selectedItemsPerPage" id="itemsPerPage" (change)="onItemsPerPageChange()">
+                           
+                           <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                        </select>
+                        <label for="itemsPerPage">éléments par page</label>
+                     </div>
+                  </div>
+                  <table class="table dashboard">
                      <thead>
                         <tr>
                            <th scope="col">#</th>
@@ -30,27 +45,38 @@
                            <th scope="col">Prénom</th>
                            <th scope="col">Mail</th>
                            <th scope="col">Actions</th>
-                          
+
                         </tr>
                      </thead>
                      <tbody>
-                      
-                           <tr *ngFor="let utilisateur of utilisateurs">
-                               <td>{{ utilisateur.idUtilisateur }}</td>
-                               <td>{{ utilisateur.nom }}</td>
-                               <td>{{ utilisateur.prenom }}</td>
-                               <td>{{ utilisateur.email }}</td>
-                               <td>
-                                <button type="button" class="btn btn-link btn-edit"><i class="fas fa-edit"></i></button>
-                                <button type="button" class="btn btn-link btn-delete"><i class="fas fa-trash"></i></button>
-                              </td>
+
+                        <tr *ngFor="let utilisateur of utilisateurs | filter: searchedKeyword">
+                           <td>{{ utilisateur.idUtilisateur }}</td>
+                           <td>{{ utilisateur.nom }}</td>
+                           <td>{{ utilisateur.prenom }}</td>
+                           <td>{{ utilisateur.email }}</td>
+                           <td>
+                              <button type="button" class="btn btn-link btn-edit"><i class="fas fa-edit"></i></button>
+                              <button type="button" class="btn btn-link btn-delete"><i
+                                    class="fas fa-trash"></i></button>
+                           </td>
                         </tr>
-                       
+
                      </tbody>
                   </table>
+                 
+
+                     <div class="pagination-controls">
+                        <div class="item-range">
+                           <span>Affichage {{ getDisplayingFrom() }} à {{ getDisplayingTo() }} sur {{ utilisateurs.length }} éléments</span>
+                        </div>
+                     </div>
+                     <!-- <pagination-controls [(ngModel)]="currentPage" previousLabel="Previous" nextLabel="Next"
+                        (pageChange)="onPageChange($event)"></pagination-controls> -->
+
                </div>
             </div>
          </div>
       </div>
    </section>
-</main> 
+</main>

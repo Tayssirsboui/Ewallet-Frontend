@@ -16,7 +16,7 @@ export class UtilisateurService {
   }
   public findAll(): Observable<Utilisateur[]> {
     
-    return this.http.get(this.utilisateursUrl ).pipe(
+    return this.http.get(this.utilisateursUrl+'utilisateurs' ).pipe(
       map((response:any) => response as Utilisateur[])
     );
   }
@@ -31,6 +31,6 @@ export class UtilisateurService {
   }
 
   supprimerUtilisateur(utilisateur: Utilisateur): Observable<any> {
-    return this.http.delete(`${this.utilisateursUrl}/${utilisateur.idUtilisateur}`);
+    return this.http.delete(`${this.utilisateursUrl}/deleteUtilisateur/${utilisateur.idUtilisateur}`);
   }
 }
