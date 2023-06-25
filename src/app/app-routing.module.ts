@@ -34,7 +34,6 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 import { RequestsComponent } from './pages/requests/requests.component';
 import { TypesCategoriesComponent } from './pages/categories/types-categories/types-categories.component';
-import { FullCalendarComponent } from './pages/full-calendar/full-calendar.component';
 import { CategorieFormComponent } from './pages/categories/categorie-form/categorie-form.component';
 import { TableUtilisateursComponent } from './pages/utilisateurs/table-utilisateurs/table-utilisateurs.component';
 import { CalendrierComponent } from './pages/depenses/calendrier/calendrier.component';
@@ -42,6 +41,7 @@ import { ChartsComponent } from './pages/depenses/charts/charts.component';
 import { PaiementprevusComponent } from './pages/depenses/paiementprevus/paiementprevus.component';
 import { CalendrierrevenuComponent } from './pages/revenus/calendrierrevenu/calendrierrevenu.component';
 import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 
 
@@ -50,6 +50,8 @@ import { ChartsrevenuComponent } from './pages/revenus/chartsrevenu/chartsrevenu
 
 
 const routes: Routes = [
+  { path: 'login', component: PagesLoginComponent },
+  { path: 'register', component: PagesRegisterComponent },
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'alerts', component: AlertsComponent },
@@ -80,13 +82,11 @@ const routes: Routes = [
   { path: 'pages-contact', component: PagesContactComponent },
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faq', component: PagesFaqComponent },
-  { path: 'pages-login', component: PagesLoginComponent },
-  { path: 'pages-register', component: PagesRegisterComponent },
+  { path: 'home-page', component: HomePageComponent },
   { path: 'user-profile', component: UsersProfileComponent },
   {path:'requests' ,component: RequestsComponent},
   {path:'types-categories' ,component: TypesCategoriesComponent},
   {path:'categorie-form' ,component: CategorieFormComponent},
-  {path:'full-calendar' ,component: FullCalendarComponent},
   {path:'table-utilisateurs' ,component: TableUtilisateursComponent},
   { path: 'path-string', loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule) },
   { path: 'path-string', loadChildren: () => import('./pages/utilisateurs/utilisateurs.module').then(m => m.UtilisateursModule) },

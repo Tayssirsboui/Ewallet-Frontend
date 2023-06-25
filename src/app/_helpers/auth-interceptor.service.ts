@@ -15,7 +15,7 @@ export class AuthInterceptorService  implements HttpInterceptor{
   
     if (token != null) {
       token  = token.replace(/['"]+/g, '')
-      req = req.clone({ headers: new HttpHeaders({Authorization: 'Bearer ' + token}) , withCredentials:true }
+      req = req.clone({ headers: new HttpHeaders({Authorization: 'Bearer ' + token}) }
     );
 
       

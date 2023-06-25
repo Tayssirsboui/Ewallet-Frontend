@@ -13,9 +13,10 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class CategorieFormComponent implements OnInit {
   categorie :Categorie = {
-    description: '', typeCategorie: '',
+    nom: '', description: '',
     idCategorie: '',
-    date: new Date() 
+    budget:0
+
   };
   descriptionControl = new FormControl('');
  typeCategorieControl = new FormControl('');
@@ -32,6 +33,10 @@ export class CategorieFormComponent implements OnInit {
          {}
   
   ngOnInit(): void {
+    this.categorie.idCategorie=this.data.form.idCategorie;
+    this.categorie.description=this.data.form.description;
+    this.categorie.budget=this.data.form.budget;
+    this.categorie.nom=this.data.form.nom;
   }
 
   onAnnuler(): void {
