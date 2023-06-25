@@ -1,3 +1,9 @@
+<custom-modall #modal [modalConfig]="modalConfig" >
+</custom-modall>
+<custom-modall #modalNew [modalConfig]="modalConfigNew" (eventCreated)="handleEventCreated($event)">
+</custom-modall>
+
+
 <div class='demo-app'>
 
    <div class='demo-app-sidebar'>
@@ -42,6 +48,7 @@
  
    <div class='demo-app-main'>
      <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+      #fullCalendar [events]="revenus"
        <ng-template #eventContent let-arg>
          <b>{{ arg.timeText }}</b>
          <i>{{ arg.event.title }}</i>
