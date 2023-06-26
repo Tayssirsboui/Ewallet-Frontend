@@ -119,8 +119,7 @@ export class ModalComponent implements OnInit {
       montant: this.nouvelledepenseForm?.get("montant")?.value,
       userId:this.userdata.idUtilisateur,
       date: this.nouvelledepenseForm?.get("date")?.value,
-      categorieId:1
-
+     
 
     },
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PaiementprevusFormComponent } from './paiementprevus-form/paiementprevus-form.component';
 
 @Component({
   selector: 'app-depenses',
@@ -8,8 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepensesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
+  openModal() {
+    const dialogRef = this.dialog.open(PaiementprevusFormComponent);
 
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
+  }
   ngOnInit(): void {
   }
 

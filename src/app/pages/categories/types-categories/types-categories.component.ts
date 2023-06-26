@@ -3,6 +3,7 @@ import { CategorieService } from 'src/app/_services/categorie.service';
 import { Categorie } from 'src/app/categorie';
 import { MatDialog } from '@angular/material/dialog';
 import { CategorieFormComponent } from '../categorie-form/categorie-form.component';
+import Swal from 'sweetalert2';
 
 declare var $: any;
 @Component({
@@ -74,6 +75,23 @@ export class TypesCategoriesComponent implements OnInit {
     }, error => {
       console.error(error);
     });
+    Swal.fire({
+      title: 'Etes vous sûr ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, supprimez la!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Supprimée!',
+          'Catégorie supprimée.',
+          'success'
+        )
+      }
+    })
   }
   onItemsPerPageChange(): void {
     this.currentPage = 1; // Reset to the first page when items per page changes

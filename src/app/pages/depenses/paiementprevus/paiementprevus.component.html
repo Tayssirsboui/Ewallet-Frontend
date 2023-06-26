@@ -1,66 +1,83 @@
-<div class="col-8">
-   <div class="card top-selling overflow-auto">
-      <div class="filter">
-         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-            <li class="dropdown-header text-start">
-               <h6>Filtrer par</h6>
-            </li>
-            <li><a class="dropdown-item" href="#">Aujourd'hui</a></li>
-            <li><a class="dropdown-item" href="#">Ce mois</a></li>
-            <li><a class="dropdown-item" href="#">Cette année</a></li>
-         </ul>
-      </div>
-    <div class="card-body pb-0">
-         <h5 class="card-title">Top Selling <span>| Today</span></h5>
-         <table class="table table-borderless">
-            <thead>
-               <tr>
-                  <th scope="col">Preview</th>
-                  <th scope="col">Product</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Sold</th>
-                  <th scope="col">Revenue</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
-                  <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                  <td>$64</td>
-                  <td class="fw-bold">124</td>
-                  <td>$5,828</td>
-               </tr>
-               <tr>
-                  <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                  <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                  <td>$46</td>
-                  <td class="fw-bold">98</td>
-                  <td>$4,508</td>
-               </tr>
-               <tr>
-                  <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                  <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                  <td>$59</td>
-                  <td class="fw-bold">74</td>
-                  <td>$4,366</td>
-               </tr>
-               <tr>
-                  <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                  <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                  <td>$32</td>
-                  <td class="fw-bold">63</td>
-                  <td>$2,016</td>
-               </tr>
-               <tr>
-                  <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                  <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                  <td>$79</td>
-                  <td class="fw-bold">41</td>
-                  <td>$3,239</td>
-               </tr>
-            </tbody>
-         </table>
-      </div> 
+<main id="main" class="main">
+   <div class="pagetitle">
+      <h1>Paiements prévus</h1>
+      <nav>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Acceuil</a></li>
+            <li class="breadcrumb-item">Paiements prévus</li>
+            <li class="breadcrumb-item active">Liste paiements prévus</li>
+         </ol>
+      </nav>
    </div>
-</div>
+   <section class="section">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="card">
+               <div class="card-body">
+                  <h2 class="card-title">Paiements prévus</h2>
+                  <div class="button-container">
+                     <button class="btn btn-pastel" (click)="openModal()">
+                        <i class="fas fa-plus"></i> AJOUTER PAIEMENT PRÉVU
+                     </button>
+                  </div>
+                  
+                  <div class="search-container">
+                     <input [(ngModel)]="searchedKeyword" type="text" placeholder="Recherche..." class="search-input">
+                  </div>                  
+                  <div *ngIf="afficherFormulaire">
+                  </div>
+                  <div class="pagination-controls">
+                     <div class="items-per-page">
+                        
+                        <select [(ngModel)]="selectedItemsPerPage" id="itemsPerPage" (change)="onItemsPerPageChange()">
+                           
+                           <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                        </select>
+                        <label for="itemsPerPage">éléments par page</label>
+                     </div>
+                  </div>
+                  <table class="table dashboard">
+                     <thead>
+                        <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Paiement</th>
+                           <th scope="col">Date prévue</th>
+                           <th scope="col">Montant</th>
+                           <th scope="col">Statut</th>
+                           <th scope="col">Actions</th>
+
+                        </tr>
+                     </thead>
+                     <tbody>
+
+                        <tr *ngFor="let depense of depenses | filter: searchedKeyword">
+                           <td>{{ depense.idDepense }}</td>
+                           <td>{{ depense.description}}</td>
+                           <td>{{ depense.datePrevue |date:'MM/dd/yyyy'}}</td>
+                           <td>{{ depense.montant }}</td>
+                           <td *ngIf="depense.statut==='TODO'"><span class="badge bg-success">Effectué</span></td>
+                           <td *ngIf="depense.statut==='DONE'"><span class="badge bg-danger">A faire</span></td>
+                           <td>
+                              <button type="button" class="btn btn-link btn-edit" ><i class="fas fa-edit"></i></button>
+                              <button type="button" class="btn btn-link btn-delete" (click)="supprimerPaiementPrevu(depense)"><i class="fas fa-trash"></i></button>
+                           </td>
+                        </tr>
+
+                     </tbody>
+                  </table>
+                 
+
+                     <div class="pagination-controls">
+                        <div class="item-range">
+                           <span>Affichage {{ getDisplayingFrom() }} à {{ getDisplayingTo() }} sur {{ depenses.length }} éléments</span>
+                        </div>
+                     </div>
+                     <!-- <pagination-controls [(ngModel)]="currentPage" previousLabel="Previous" nextLabel="Next"
+                        (pageChange)="onPageChange($event)"></pagination-controls> -->
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</main>

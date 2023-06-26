@@ -18,12 +18,12 @@
                             <div class="col-12">
                                <label for="votreNom" class="form-label">Email</label>
                                <div class="input-group has-validation">
-                                   <input type="text" name="nom" class="form-control" id="votrenom" [(ngModel)]="form.email" required #email="ngModel"> 
+                                   <input type="email" name="email" class="form-control" id="votreemail" [(ngModel)]="form.email" required #email="ngModel"> 
                                   <div class="invalid-feedback">S'il vous plaît, entrez votre Email.</div>
                                </div>
                             </div>
                             <div class="col-12">
-                               <label for="yourMotDePasse" class="form-label">Mot de passe</label> <input type="motDePasse" name="motDePasse" class="form-control" id="yourmotDePasse"  [(ngModel)]="form.motDePasse" required minlength="6" #motDePasse="ngModel">
+                               <label for="yourMotDePasse" class="form-label">Mot de passe</label> <input type="password" name="motDePasse" class="form-control" id="yourmotDePasse"  [(ngModel)]="form.motDePasse" required minlength="6" #motDePasse="ngModel">
                                <div class="invalid-feedback">S'il vous plaît, entrez votre mot de passe!</div>
                             </div>
                         

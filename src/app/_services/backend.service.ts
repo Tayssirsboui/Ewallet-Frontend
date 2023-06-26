@@ -15,7 +15,7 @@ export class BackendService {
 
   constructor(private http: HttpClient) { }
 
-  createEvent(formData: any): Observable<any> {
+  createEvent(formData: Depense): Observable<any> {
     return this.http.post(`${this.baseUrl}`, formData);
   }
 
@@ -31,8 +31,8 @@ export class BackendService {
     return this.http.get<Depense>(`http://localhost:8080/getDepense/${id}`)
   }
 
-  deleteData(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/data/${id}`);
+  deleteData(depense:Depense): Observable<any> {
+    return this.http.delete(`http://localhost:8080/deleteDepenses/${depense.idDepense}`);
   }
 
   findLastDepenses(): Observable<Depense[]> {
@@ -41,6 +41,10 @@ export class BackendService {
 
   getTotalDepenseAmount(): Observable<number> {
     return this.http.get<number>("http://localhost:8080/totalDepense");
+  }
+  
+  getPaiementsPrevus(): Observable<Depense[]> {
+    return this.http.get<Depense[]>("http://localhost:8080/getPaiementsPrevus");
   }
 
 }

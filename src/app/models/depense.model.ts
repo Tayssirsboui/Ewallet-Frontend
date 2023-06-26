@@ -9,6 +9,10 @@ export class Depense {
     public description: string,
     public montant: number ,
     public date:Date,
+    public datePrevue:Date,
+    public statut:String,
+    public userId:Number,
+    public categorieId:Number
 
   ) { }
 

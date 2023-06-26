@@ -60,4 +60,14 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
     reloadPage(): void {
       window.location.reload();
     }
+    getConnectedUserId(): any{
+      console.log("enter the method")
+      let userData = window.sessionStorage.getItem('auth-user');
+
+      // Check if the user ID exists
+      if (userData) {
+        // Use the user ID as needed
+        console.log('User ID:', userData);
+      } 
+    }
 }

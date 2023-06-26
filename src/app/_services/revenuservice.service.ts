@@ -34,4 +34,7 @@ export class RevenusService {
     return this.http.get<Revenu[]>("http://localhost:8080/revenus")
   }
 
+  getTotalRevenuAmount(): Observable<number> {
+    return this.http.get<number>("http://localhost:8080/totalRevenu");
+  }
 }

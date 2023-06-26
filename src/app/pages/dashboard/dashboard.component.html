@@ -52,15 +52,15 @@
                         </ul>
                      </div>
                      <div class="card-body">
-                        <h5 class="card-title">Revenues <span>| Ce mois</span></h5>
+                        <h5 class="card-title">Revenus <span>| Ce mois</span></h5>
                         <div class="d-flex align-items-center">
-                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
-                                 class="bi bi-currency-dollar"></i></div>
-                           <div class="ps-3">
-                              <h6>3000 DT</h6>
-                              <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                             <i class="bi bi-cart"></i>
                            </div>
-                        </div>
+                           <div class="ps-3">
+                             <h6>{{ revenusTotal }} DT</h6>
+                           </div>
+                         </div>
                      </div>
                   </div>
                </div>
@@ -122,35 +122,28 @@
                         </ul>
                      </div>
                      <div class="card-body">
-                        <h5 class="card-title">Paiment prévu <span>| Ce mois</span></h5>
+                        <h5 class="card-title">Paiement prévu <span>| Ce mois</span></h5>
                         <table class="table table-borderless datatable">
                            <thead>
                               <tr>
                                  <th scope="col">Paiement</th>
-                                 <th scope="col">Date prévu</th>
+                                 <th scope="col">Date prévue</th>
                                  <th scope="col">Montant</th>
-                                 <th scope="col">Status</th>
+                                 <th scope="col">Statut</th>
+
+                                 
                               </tr>
                            </thead>
                            <tbody>
-                              <tr>
-                                 <td>Loyer</td>
-                                 <td><a href="#" class="text-primary">01/06/2023</a></td>
-                                 <td>500 DT</td>
-                                 <td><span class="badge bg-success">Efféctué</span></td>
-                              </tr>
-                              <tr>
-                                 <td>Abonnement salle de sport</td>
-                                 <td><a href="#" class="text-primar">03/06/2023</a></td>
-                                 <td>80 DT</td>
-                                 <td><span class="badge bg-danger">A faire</span></td>
-                              </tr>
-                              <tr>
-                                 <td>Frais d'étude mathématique pour ma fille</td>
-                                 <td><a href="#" class="text-primary">05/06/2023</a></td>
-                                 <td>100 DT</td>
-                                 <td><span class="badge bg-danger">A faire</span></td>
-                              </tr>
+                           <tr *ngFor="let depense of depenses ">
+                              
+                              <td>{{ depense.description}}</td>
+                              <td>{{ depense.datePrevue }}</td>
+                              <td>{{ depense.montant }}</td>
+                              <td *ngIf="depense.statut==='TODO'"><span class="badge bg-success">Effectué</span></td>
+                              <td *ngIf="depense.statut==='DONE'"><span class="badge bg-danger">A faire</span></td>
+                              
+                           </tr>
                            </tbody>
                         </table>
                      </div>

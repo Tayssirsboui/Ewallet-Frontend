@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Ajouter  un paiement prévu</h1>
+<form>
+  <div class="row mb-3">
+     <div class="col-md-8 col-lg-12"> 
+      <input placeholder="Nom" [(ngModel)]="depense.description" name="description" class="form-control">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-8 col-lg-12"> 
+     <input  type="date"  [(ngModel)]="depense.datePrevue" name="datePrevue"class="form-control" placeholder="choisir une date">
+   </div>
+ </div>
+ <div class="row mb-3">
+  <div class="col-md-8 col-lg-12"> 
+   <input  placeholder="Montant" [(ngModel)]="depense.montant" name="montant"class="form-control" >
+ </div>
+</div>
+<div class="row mb-3">
+  <div class="col-md-8 col-lg-12">
+     <select class="form-select" formControlName="categorieId" >
+      <option value="6" disabled selected>Choisi une catégorie</option>
+      <option *ngFor="let option of categories" [value]="option.categorieId">{{ option.nom }}</option>
+      <option value=2>Loisir</option>
+      <option value="categorie3">Education</option>
+
+     </select>
+  </div>
+</div>
+<div class="text-center"> 
+  <button type="submit" class="btn btn-info" (click)="onAjouter()">Ajouter</button> 
+  <button type="reset" class="btn btn-secondary" (click)="onAnnuler()">Annuler</button>
+</div>
+
+
+ 
+</form>

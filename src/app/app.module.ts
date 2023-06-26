@@ -64,6 +64,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DateAsAgoPipe } from './date-as-ago.pipe';
+import { PaiementprevusFormComponent } from './pages/depenses/paiementprevus-form/paiementprevus-form.component';
 
 
 
@@ -115,6 +116,7 @@ import { DateAsAgoPipe } from './date-as-ago.pipe';
     ListGroupComponent,
     ModalDialogComponent,
     HomePageComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -136,7 +138,8 @@ import { DateAsAgoPipe } from './date-as-ago.pipe';
     RevenusModule,
     FullCalendarModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatDatepickerModule
   ],
 
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],

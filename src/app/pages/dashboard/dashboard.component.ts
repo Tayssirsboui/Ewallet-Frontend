@@ -4,6 +4,7 @@ import { BackendService } from "src/app/_services/backend.service";
 
 import Chart from 'chart.js/auto';
 import { Depense } from "src/app/models/depense.model";
+import { RevenusService } from "src/app/_services/revenuservice.service";
 
 
 @Component({
@@ -15,10 +16,12 @@ import { Depense } from "src/app/models/depense.model";
 
 export class DashboardComponent implements OnInit {
   public chart: any;
+  depenses: any = []
   categories: any = []
   montants: any = []
   recentDepenses: any;
   totalAmount: number;
+  revenusTotal: number;
   data!: any
   options: any = {
     type: 'doughnut', //this denotes tha type of chart
@@ -46,7 +49,8 @@ export class DashboardComponent implements OnInit {
   }
   constructor(private elementRef: ElementRef,
     private categorieService: CategorieService,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private revenusService: RevenusService
   ) { }
 
 
@@ -58,6 +62,12 @@ export class DashboardComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(s);
     this.loadCategorieMontantData()
     this.getTotalDepenseAmount()
+    this.backendService.getPaiementsPrevus().subscribe(data => {
+      console.log('res ' , data)
+      this.depenses = data;
+    } , error => {
+      console.error(error)
+    });
     this.backendService.findLastDepenses().subscribe(depenses => {
       this.recentDepenses = depenses;
     
@@ -99,10 +109,25 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+  
   getTotalDepenseAmount() {
     this.backendService.getTotalDepenseAmount().subscribe(
       totalAmount => {
         this.totalAmount = totalAmount;
+  
+      },
+      
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  getTotalRevenuAmount() {
+    this.revenusService.getTotalRevenuAmount().subscribe(
+      revenusTotal => {
+        this.revenusTotal = revenusTotal;
   
       },
       

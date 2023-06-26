@@ -17,6 +17,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './calendrier/modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
+import { PaiementprevusFormComponent } from './paiementprevus-form/paiementprevus-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -27,7 +34,8 @@ import {  HttpClientModule } from '@angular/common/http';
     ChartsComponent,
     PaiementprevusComponent,
     MyDialogComponentComponent,
-    ModalComponent
+    ModalComponent,
+    PaiementprevusFormComponent
   ],
   imports: [
     CommonModule,
@@ -37,13 +45,18 @@ import {  HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    Ng2SearchPipeModule, 
+    NgxPaginationModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatDatepickerModule
 
 
   ],
-  exports: [MatDialogModule],
-  entryComponents: [CalendrierComponent]
+  exports: [MatDialogModule,PaiementprevusComponent],
+  entryComponents: [CalendrierComponent,PaiementprevusComponent,PaiementprevusFormComponent]
 
 
 })
