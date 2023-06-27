@@ -103,12 +103,15 @@
         <label class="col-lg-3 col-form-label form-control-label"><strong>Catégories</strong></label>
         <div class="col-lg-9">
            <select class="form-select" aria-label="Default select example" formControlName="categorieId" >
-            <option  [value]="1">Transport</option>
+            
+            <option *ngFor="let categorie of categorieList" [value]="categorie.idCategorie">{{categorie.nom}}</option>
+            
+              <!--<option  [value]="1">Transport</option>}}
             <option value=2>Loisir</option>
             <option value="categorie3">Education</option>
             <option value="categorie3">Logement</option>
             <option value="categorie3">Alimentation</option>
-            <option value="categorie3">Santé et soins personnels</option>
+            <option value="categorie3">Santé et soins personnels</option>-->
            </select>
         </div>
      </div>

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ViewChild, Input ,ElementRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, Input ,ElementRef, OnInit } from '@angular/core';
 import {
   CalendarOptions,
   DateSelectArg,
@@ -18,17 +18,18 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ModalComponent } from './modal/modal.component';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Depense } from 'src/app/models/depense.model';
 import { BackendService } from 'src/app/_services/backend.service';
+import { CategorieService } from 'src/app/_services/categorie.service';
+import { Categorie } from 'src/app/categorie';
 
 @Component({
   selector: 'app-calendrier',
   templateUrl: './calendrier.component.html',
   styleUrls: ['./calendrier.component.css'],
 })
-export class CalendrierComponent {
+export class CalendrierComponent implements OnInit{
   @ViewChild('fullCalendar') fullCalendar: FullCalendarComponent;
 
   @ViewChild('modalNew') modalNew: ElementRef;
@@ -79,15 +80,16 @@ export class CalendrierComponent {
   nouvelledepenseForm: FormGroup;
   userdata:any;
   userId:number ; 
+  categorieList:Categorie[] = [] ; 
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
     private backendService: BackendService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private categorieService:CategorieService
   ) {
     this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
     this.userId = this.userdata.idUtilisateur ; 
-    console.log("userId " , this.userdata.idUtilisateur)
     this.nouvelledepenseForm = this.fb.group({
       description: ['', Validators.required],
       montant: ['', Validators.required],
@@ -113,6 +115,9 @@ export class CalendrierComponent {
       });
       this.depenses = events;
     });
+  }
+  ngOnInit(): void {
+    this.getAllCategories()
   }
 
   handleCalendarToggle() {
@@ -188,5 +193,16 @@ export class CalendrierComponent {
         }
       );
     }
+   }
+
+   getAllCategories()
+   {
+    this.categorieService.findAll().subscribe(
+      res => {
+        this.categorieList = res 
+      } , error => {
+        console.error(error)
+      }
+    )
    }
 }
