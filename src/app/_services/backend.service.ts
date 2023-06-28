@@ -15,20 +15,18 @@ export class BackendService {
 
   constructor(private http: HttpClient) { }
 
-  createEvent(formData: Depense): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, formData);
+  saveDepense(formData: Depense): Observable<any> {
+    return this.http.post(`${this.baseUrl}/saveDepense`, formData);
   }
 
-  getDepense(): Observable<Depense[]> {
-    return this.http.get<Depense[]>("http://localhost:8080/getDepenses")
+  getAllDepenses(): Observable<Depense[]> {
+    return this.http.get<Depense[]>(`${this.baseUrl}/getDepenses`)
   }
 
-  updateData(id: number, formData: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/data/${id}`, formData);
-  }
+ 
 
   getDepenseById(id: number): Observable<Depense> {
-    return this.http.get<Depense>(`http://localhost:8080/getDepense/${id}`)
+    return this.http.get<Depense>(`${this.baseUrl}/getDepense/${id}`)
   }
 
   deleteData(depense:Depense): Observable<any> {

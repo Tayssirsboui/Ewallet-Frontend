@@ -8,12 +8,12 @@ export class Depense {
  
      idDepense: number;
      description: string;
-    public montant: number;
-    public date:Date;
-    public datePrevue:Date;
-    public statut:String;
-    public userId:Number;
-    public categorie:Categorie
+     montant: number;
+     date:Date;
+     datePrevue:Date;
+     statut:string;
+     userId:number;
+     categorieId:number
 
   constructor() { }
 

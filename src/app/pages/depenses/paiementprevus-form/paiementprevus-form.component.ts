@@ -18,7 +18,7 @@ export class PaiementprevusFormComponent implements OnInit {
   depenses: any = []
   depense :Depense = {
     description: '', datePrevue: new Date(), montant: 0,
-    idDepense: 0, date: new Date() , statut:'', userId: 1, categorie:{'idCategorie':1,"description":"","budget":5 , "nom":"fdsfsfs"}
+    idDepense: 0, date: new Date() , statut:'', userId: 1, categorieId:1
   };
   descriptionControl = new FormControl('');
   montantControl = new FormControl('');
@@ -68,15 +68,14 @@ export class PaiementprevusFormComponent implements OnInit {
   onAjouter(): void {
     this.depense.statut = "TODO"; 
     this.depense.userId=1;
-    let categorie:Categorie = new Categorie();
-    categorie.idCategorie = 1 ; 
-    this.depense.categorie=categorie;
+ 
+    this.depense.categorieId=1;
     this.depense.idDepense=null as any;
     console.log(this.depense)
-    this.backendService.createEvent(this.depense).subscribe(result => {
+    /*this.backendService.createEvent(this.depense).subscribe(result => {
       this.router.navigate(['/depenses']);
       this.dialogRef.close(this.depense);
-    });
+    });*/
   }
   
 

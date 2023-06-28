@@ -107,7 +107,7 @@ export class CalendrierComponent implements OnInit{
 
   getAllDepenses()
   {
-    this.backendService.getDepense().subscribe((response) => {
+    this.backendService.getAllDepenses().subscribe((response) => {
       this.depenses = response;
       const events: any = [];
 
@@ -157,7 +157,7 @@ export class CalendrierComponent implements OnInit{
           {
             "description":this.currentItem.description ,
             "montant":this.currentItem.montant ,
-            "categorieId":this.currentItem.categorie.idCategorie
+            "categorieId":this.currentItem.categorieId
           }
         )
     });
@@ -165,16 +165,7 @@ export class CalendrierComponent implements OnInit{
   //  edit function
   handleEventClick(args: any) {
     this.getDepense( args.event.id)
-    console.log("handle event click" , args.event.id)
-    /*this.modalComponent.edit(args.event);
-
-    this.backendService
-      .getDepenseById(Number(args.event._def.title.split('-')[1]))
-      .subscribe((response) => {
-        // debugger;
-        this.currentItem = response;
-      });*/
-    // this.modalService.open(modal);
+    
 
     this.modalService.open(this.modalUpdate)
 
@@ -197,7 +188,7 @@ export class CalendrierComponent implements OnInit{
       
       let data :any = this.nouvelledepenseForm.value ; 
       data.date = this.depenseDate ; 
-      this.backendService.createEvent(data).subscribe(
+      this.backendService.saveDepense(data).subscribe(
        
         (response:any) => {
           this.modalService.dismissAll();
@@ -222,5 +213,33 @@ export class CalendrierComponent implements OnInit{
         console.error(error)
       }
     )
+   }
+
+   updateDepense(){
+    if (this.nouvelledepenseForm.invalid) {
+      // debugger 
+      return;
+    } else {
+     
+      
+      let data :any = this.nouvelledepenseForm.value ; 
+     data.idDepense = this.currentItem.idDepense;
+     data.date = this.currentItem.date;
+     data.userId = this.currentItem.userId
+     console.log('data ' , data)
+      this.backendService.saveDepense(data).subscribe(
+       
+        (response:any) => {
+          this.modalService.dismissAll();
+          this.getAllDepenses()
+          this.depenseDate = new Date() ; 
+          console.log('Success:', response);
+  
+        },
+        ( error: any) => {
+          console.error('Error:', error);
+        }
+      );
+    }
    }
 }
