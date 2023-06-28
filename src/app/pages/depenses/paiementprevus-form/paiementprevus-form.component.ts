@@ -7,6 +7,7 @@ import { BackendService } from 'src/app/_services/backend.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { PagesLoginComponent } from '../../pages-login/pages-login.component';
 import { CategorieService } from 'src/app/_services/categorie.service';
+import { Categorie } from 'src/app/categorie';
 @Component({
   selector: 'app-paiementprevus-form',
   templateUrl: './paiementprevus-form.component.html',
@@ -17,7 +18,7 @@ export class PaiementprevusFormComponent implements OnInit {
   depenses: any = []
   depense :Depense = {
     description: '', datePrevue: new Date(), montant: 0,
-    idDepense: 0, date: new Date() , statut:'', userId: 1, categorieId:1
+    idDepense: 0, date: new Date() , statut:'', userId: 1, categorie:{'idCategorie':1,"description":"","budget":5 , "nom":"fdsfsfs"}
   };
   descriptionControl = new FormControl('');
   montantControl = new FormControl('');
@@ -67,7 +68,9 @@ export class PaiementprevusFormComponent implements OnInit {
   onAjouter(): void {
     this.depense.statut = "TODO"; 
     this.depense.userId=1;
-    this.depense.categorieId=1;
+    let categorie:Categorie = new Categorie();
+    categorie.idCategorie = 1 ; 
+    this.depense.categorie=categorie;
     this.depense.idDepense=null as any;
     console.log(this.depense)
     this.backendService.createEvent(this.depense).subscribe(result => {

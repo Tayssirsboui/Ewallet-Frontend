@@ -33,8 +33,7 @@ export class CalendrierComponent implements OnInit{
   @ViewChild('fullCalendar') fullCalendar: FullCalendarComponent;
 
   @ViewChild('modalNew') modalNew: ElementRef;
- 
-  // depenses= [];
+  @ViewChild('modalUpdate') modalUpdate: ElementRef;
   currentItem: Depense
   depenses: any[] = [];
   calendarVisible = true;
@@ -46,7 +45,7 @@ export class CalendrierComponent implements OnInit{
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+   events:this.depenses,
     weekends: true,
     editable: true,
     selectable: true,
@@ -80,7 +79,8 @@ export class CalendrierComponent implements OnInit{
   nouvelledepenseForm: FormGroup;
   userdata:any;
   userId:number ; 
-  categorieList:Categorie[] = [] ; 
+  categorieList:Categorie[] = [] ;
+  depenseDate:Date = new Date() ;
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
@@ -93,11 +93,20 @@ export class CalendrierComponent implements OnInit{
     this.nouvelledepenseForm = this.fb.group({
       description: ['', Validators.required],
       montant: ['', Validators.required],
-      date:['',Validators.required],
+   
       categorieId:1,
       userId:[]
 
     })
+  
+  }
+  ngOnInit(): void {
+    this.getAllCategories()
+    this.getAllDepenses()
+  }
+
+  getAllDepenses()
+  {
     this.backendService.getDepense().subscribe((response) => {
       this.depenses = response;
       const events: any = [];
@@ -116,10 +125,6 @@ export class CalendrierComponent implements OnInit{
       this.depenses = events;
     });
   }
-  ngOnInit(): void {
-    this.getAllCategories()
-  }
-
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;
   }
@@ -133,12 +138,34 @@ export class CalendrierComponent implements OnInit{
   handleDateSelect(selectInfo: DateSelectArg) {
     this.nouvelledepenseForm.reset()
     this.modalService.open(this.modalNew)
-
+    this.depenseDate =  selectInfo.start ; 
    
   }
 
+  getDepense(id:number)
+  {
+    this.backendService
+    .getDepenseById(id)
+    .subscribe((res) => {
+      console.log('res ' , res)
+      // debugger;
+      this.currentItem = res;
+    } , error => {
+      console.error(error)
+    } , () =>{
+        this.nouvelledepenseForm.patchValue(
+          {
+            "description":this.currentItem.description ,
+            "montant":this.currentItem.montant ,
+            "categorieId":this.currentItem.categorie.idCategorie
+          }
+        )
+    });
+  }
   //  edit function
   handleEventClick(args: any) {
+    this.getDepense( args.event.id)
+    console.log("handle event click" , args.event.id)
     /*this.modalComponent.edit(args.event);
 
     this.backendService
@@ -148,30 +175,17 @@ export class CalendrierComponent implements OnInit{
         this.currentItem = response;
       });*/
     // this.modalService.open(modal);
+
+    this.modalService.open(this.modalUpdate)
+
   }
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
-  addEventToCalendar(event: any) {
-    const calendarApi = this.fullCalendar.getApi();
-
-    const newEvent = {
-      title: event.title,
-      start: event.start,
-      description: event.description,
-      montant: event.montant,
-    };
-
-    calendarApi.addEvent(newEvent);
-  }
-  handleEventCreated(event: any) {
-    debugger;
-    console.log('Nouvel événement créé :', event);
-    this.calendarEvents.push(event);
-    this.addEventToCalendar(event);
-  }
+ 
+ 
 
   addDepense(){
     if (this.nouvelledepenseForm.invalid) {
@@ -180,11 +194,15 @@ export class CalendrierComponent implements OnInit{
     } else {
       this.nouvelledepenseForm.get("userId")?.setValue(this.userId);
       this.nouvelledepenseForm.get("userId")?.updateValueAndValidity()
-      this.backendService.createEvent(this.nouvelledepenseForm.value).subscribe(
+      
+      let data :any = this.nouvelledepenseForm.value ; 
+      data.date = this.depenseDate ; 
+      this.backendService.createEvent(data).subscribe(
        
         (response:any) => {
-          window.location.reload()
-    
+          this.modalService.dismissAll();
+          this.getAllDepenses()
+          this.depenseDate = new Date() ; 
           console.log('Success:', response);
   
         },
