@@ -1,60 +1,120 @@
-<custom-modall #modal [modalConfig]="modalConfig" >
-</custom-modall>
-<custom-modall #modalNew [modalConfig]="modalConfigNew" (eventCreated)="handleEventCreated($event)">
-</custom-modall>
-
-
 <div class='demo-app'>
 
-   <div class='demo-app-sidebar'>
-     <div class='demo-app-sidebar-section'>
-       <h2>Instructions</h2>
-       <ul>
-         <li>Select dates and you will be prompted to create a new event</li>
-         <li>Drag, drop, and resize events</li>
-         <li>Click an event to delete it</li>
-       </ul>
-     </div>
-     <div class='demo-app-sidebar-section'>
-       <label>
-         <input
-           type='checkbox'
-           [checked]='calendarVisible'
-           (change)='handleCalendarToggle()'
-         />
-         toggle whole calendar
-       </label>
-     </div>
-     <div class='demo-app-sidebar-section'>
-       <label>
-         <input
-           type='checkbox'
-           [checked]='calendarOptions.weekends'
-           (change)='handleWeekendsToggle()'
-         />
-         toggle weekends
-       </label>
-     </div>
-     <div class='demo-app-sidebar-section'>
-       <h2>All Events ({{currentEvents.length}})</h2>
-       <ul>
-         <li *ngFor='let event of currentEvents'>
-           <b>{{event.startStr}}</b>
-           <i>{{event.title}}</i>
-         </li>
-       </ul>
-     </div>
-   </div>
- 
-   <div class='demo-app-main'>
-     <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
-      #fullCalendar [events]="revenus"
-       <ng-template #eventContent let-arg>
-         <b>{{ arg.timeText }}</b>
-         <i>{{ arg.event.title }}</i>
-       </ng-template>
-     </full-calendar>
-   </div>
- 
- </div>
- 
+
+
+  <div class='demo-app-main'>
+    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions' #fullCalendar [events]="revenu">
+
+      <ng-template #eventContent let-arg>
+
+        <i>{{ arg.event.title }}</i>
+      </ng-template>
+    </full-calendar>
+
+  </div>
+
+</div>
+
+<ng-template #modalNew let-modal>
+  <span class="fa-stack fa-1x" (click)="modal.dismiss('cancel click')"
+    style="position: absolute; top: -25px;right: -14px;padding: 10px;z-index: 1111; cursor: pointer;">
+    <i class="fa fa-circle fa-stack-2x" style=" -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+            background-color: #d1ef12; ">
+    </i>
+    <i class=" fa  fa-times fa-stack-1x " style="color: black;font-size: 19px;"></i>
+  </span>
+
+  <div class="modal-header">
+    <h2 class="modal-title">Nouveau Revenu</h2>
+
+  </div>
+  <div class="modal-body">
+    <form class="form" role="form" [formGroup]="nouvellerevenuForm">
+
+      <div class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
+        <div class="col-lg-9">
+          <textarea rows="1" class="form-control" formControlName="description">   </textarea>
+        </div>
+      </div>
+
+
+      <div class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>montant</strong></label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" formControlName="montant">
+        </div>
+      </div>
+
+
+      
+      <div class="modal-footer">
+
+
+
+        <button type="button" class="btn btn-info" value="Sauvegarder"
+          (click)="addRevenu()">Enregistrer</button><br><br>
+
+
+
+
+      </div>
+
+
+
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #modalUpdate let-modal>
+  <span class="fa-stack fa-1x" (click)="modal.dismiss('cancel click')"
+    style="position: absolute; top: -25px;right: -14px;padding: 10px;z-index: 1111; cursor: pointer;">
+    <i class="fa fa-circle fa-stack-2x" style=" -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+            background-color: #d1ef12; ">
+    </i>
+    <i class=" fa  fa-times fa-stack-1x " style="color: black;font-size: 19px;"></i>
+  </span>
+
+  <div class="modal-header">
+    <h2 class="modal-title">Modifier depense</h2>
+
+  </div>
+  <div class="modal-body">
+    <form class="form" role="form" [formGroup]="nouvellerevenuForm">
+
+      <div class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
+        <div class="col-lg-9">
+          <textarea rows="1" class="form-control" formControlName="description">   </textarea>
+        </div>
+      </div>
+
+
+      <div class="row mb-3">
+        <label class="col-lg-3 col-form-label form-control-label"><strong>montant</strong></label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" formControlName="montant">
+        </div>
+      </div>
+
+
+      
+      <div class="modal-footer">
+
+
+
+        <button type="button" class="btn btn-info" value="Sauvegarder"
+          (click)="updateRevenu()">Enregistrer</button><br><br>
+
+
+
+
+      </div>
+
+
+
+    </form>
+  </div>
+</ng-template>

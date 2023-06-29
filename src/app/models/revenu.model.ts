@@ -4,11 +4,14 @@ import { Inject } from '@angular/core';
 })
 
 export class Revenu{
+  
   constructor(
     public idRevenu: number,
-    public source: string,
+    public description: string,
     public montant: number ,
     public date:Date,
+    public userId:number
+
 
   ) { }
 

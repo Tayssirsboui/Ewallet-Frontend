@@ -19,7 +19,7 @@ export class RevenusService {
 
  
 
-  saveRevenu(): Observable<Revenu[]> {
+  saveRevenu(formData: Revenu): Observable<Revenu[]> {
     return this.http.get<Revenu[]>("http://localhost:8080/saveRevenu")
   }
 
@@ -37,4 +37,14 @@ export class RevenusService {
   getTotalRevenuAmount(): Observable<number> {
     return this.http.get<number>("http://localhost:8080/totalRevenu");
   }
+
+  getRevenusById(): Observable<Revenu[]> {
+    return this.http.get<Revenu[]>("http://localhost:8080/revenus")
+  }
+  
+  getRevenuById(id: number): Observable<Revenu> {
+    return this.http.get<Revenu>(`${this.baseUrl}/getRevenus/${id}`)
+  }
+
+  
 }
