@@ -24,6 +24,7 @@ import { BackendService } from 'src/app/_services/backend.service';
 import { CategorieService } from 'src/app/_services/categorie.service';
 import { Categorie } from 'src/app/categorie';
 import { RevenusService } from 'src/app/_services/revenuservice.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-calendrierrevenu',
   templateUrl: './calendrierrevenu.component.html',
@@ -103,12 +104,13 @@ export class CalendrierrevenuComponent {
   }
   ngOnInit(): void {
     // this.getAllCategories()
-    this. getAllRevenus()
+    this. getOwnRevenus()
   }
 
-  getAllRevenus()
+  
+  getOwnRevenus()
   {
-    this.revenuService. getAllRevenus().subscribe((response) => {
+    this.revenuService. getOwnRevenus().subscribe((response) => {
       this.revenu = response;
       const events: any = [];
 
@@ -193,7 +195,7 @@ export class CalendrierrevenuComponent {
        
         (response:any) => {
           this.modalService.dismissAll();
-          this.getAllRevenus()
+          this.getOwnRevenus()
           this.revenuDate = new Date() ; 
           console.log('Success:', response);
   
@@ -232,7 +234,7 @@ export class CalendrierrevenuComponent {
        
         (response:any) => {
           this.modalService.dismissAll();
-          this.getAllRevenus()
+          this.getOwnRevenus()
           this.revenuDate = new Date() ; 
           console.log('Success:', response);
   
@@ -243,4 +245,35 @@ export class CalendrierrevenuComponent {
       );
     }
    }
+   deleteRevenu() {
+    if (this.currentItem) {
+      this.revenuService.deleteRevenu(this.currentItem).subscribe(
+        () => {
+          this.modalService.dismissAll();
+          this.getOwnRevenus();
+          console.log('Dépense supprimée avec succès');
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression de la dépense', error);
+        }
+      );
+    }
+    Swal.fire({
+      title: 'Êtes vous sûr ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, supprimez la!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Supprimée!',
+          'Dépense supprimée.',
+          'success'
+        )
+      }
+    })
+  }
 }

@@ -45,6 +45,10 @@ export class RevenusService {
   getRevenuById(id: number): Observable<Revenu> {
     return this.http.get<Revenu>(`${this.baseUrl}/getRevenus/${id}`)
   }
-
-  
+  getOwnRevenus(): Observable<Revenu[]> {
+    return this.http.get<Revenu[]>(`${this.baseUrl}/getOwnDepenses`)
+  }
+  deleteRevenu(revenu:Revenu): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/deleteRevenu/${revenu.idRevenu}`);
+  }
 }

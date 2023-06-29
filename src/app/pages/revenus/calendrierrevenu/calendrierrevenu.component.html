@@ -33,7 +33,7 @@
     <form class="form" role="form" [formGroup]="nouvellerevenuForm">
 
       <div class="row mb-3">
-        <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
+        <label class="col-lg-3 col-form-label form-control-label"><strong>Source</strong></label>
         <div class="col-lg-9">
           <textarea rows="1" class="form-control" formControlName="description">   </textarea>
         </div>
@@ -85,7 +85,7 @@
     <form class="form" role="form" [formGroup]="nouvellerevenuForm">
 
       <div class="row mb-3">
-        <label class="col-lg-3 col-form-label form-control-label"><strong>Description</strong></label>
+        <label class="col-lg-3 col-form-label form-control-label"><strong>Source</strong></label>
         <div class="col-lg-9">
           <textarea rows="1" class="form-control" formControlName="description">   </textarea>
         </div>
@@ -104,6 +104,7 @@
       <div class="modal-footer">
 
 
+        <button type="button" class="btn btn-warning" value="Sauvegarder" (click)="deleteRevenu()">Supprimer</button><br><br>
 
         <button type="button" class="btn btn-info" value="Sauvegarder"
           (click)="updateRevenu()">Enregistrer</button><br><br>
