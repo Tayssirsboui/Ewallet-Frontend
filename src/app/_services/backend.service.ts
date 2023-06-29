@@ -19,8 +19,8 @@ export class BackendService {
     return this.http.post(`${this.baseUrl}/saveDepense`, formData);
   }
 
-  getAllDepenses(): Observable<Depense[]> {
-    return this.http.get<Depense[]>(`${this.baseUrl}/getDepenses`)
+  getOwnDepenses(): Observable<Depense[]> {
+    return this.http.get<Depense[]>(`${this.baseUrl}/getOwnDepenses`)
   }
 
  
@@ -29,20 +29,20 @@ export class BackendService {
     return this.http.get<Depense>(`${this.baseUrl}/getDepense/${id}`)
   }
 
-  deleteData(depense:Depense): Observable<any> {
-    return this.http.delete(`http://localhost:8080/deleteDepenses/${depense.idDepense}`);
+  deleteDepense(depense:Depense): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/deleteDepenses/${depense.idDepense}`);
   }
 
   findLastDepenses(): Observable<Depense[]> {
-    return this.http.get<Depense[]>("http://localhost:8080/getLastDepenses");
+    return this.http.get<Depense[]>(`${this.baseUrl}/getLastDepenses`);
   }
 
   getTotalDepenseAmount(): Observable<number> {
-    return this.http.get<number>("http://localhost:8080/totalDepense");
+    return this.http.get<number>(`${this.baseUrl}/totalDepense`);
   }
   
   getPaiementsPrevus(): Observable<Depense[]> {
-    return this.http.get<Depense[]>("http://localhost:8080/getPaiementsPrevus");
+    return this.http.get<Depense[]>(`${this.baseUrl}/getPaiementsPrevus`);
   }
 
 }
