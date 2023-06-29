@@ -23,6 +23,7 @@ import { Depense } from 'src/app/models/depense.model';
 import { BackendService } from 'src/app/_services/backend.service';
 import { CategorieService } from 'src/app/_services/categorie.service';
 import { Categorie } from 'src/app/categorie';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-calendrier',
@@ -34,7 +35,7 @@ export class CalendrierComponent implements OnInit{
 
   @ViewChild('modalNew') modalNew: ElementRef;
   @ViewChild('modalUpdate') modalUpdate: ElementRef;
-  currentItem: Depense
+  currentItem: Depense 
   depenses: any[] = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
@@ -102,12 +103,12 @@ export class CalendrierComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getAllCategories()
-    this.getAllDepenses()
+    this.getOwnDepenses()
   }
 
-  getAllDepenses()
+  getOwnDepenses()
   {
-    this.backendService.getAllDepenses().subscribe((response) => {
+    this.backendService.getOwnDepenses().subscribe((response) => {
       this.depenses = response;
       const events: any = [];
 
@@ -178,7 +179,7 @@ export class CalendrierComponent implements OnInit{
  
  
 
-  addDepense(){
+    addDepense(){
     if (this.nouvelledepenseForm.invalid) {
       // debugger 
       return;
@@ -192,7 +193,7 @@ export class CalendrierComponent implements OnInit{
        
         (response:any) => {
           this.modalService.dismissAll();
-          this.getAllDepenses()
+          this.getOwnDepenses()
           this.depenseDate = new Date() ; 
           console.log('Success:', response);
   
@@ -231,7 +232,7 @@ export class CalendrierComponent implements OnInit{
        
         (response:any) => {
           this.modalService.dismissAll();
-          this.getAllDepenses()
+          this.getOwnDepenses()
           this.depenseDate = new Date() ; 
           console.log('Success:', response);
   
@@ -242,4 +243,36 @@ export class CalendrierComponent implements OnInit{
       );
     }
    }
+
+   deleteDepense() {
+    if (this.currentItem) {
+      this.backendService.deleteDepense(this.currentItem).subscribe(
+        () => {
+          this.modalService.dismissAll();
+          this.getOwnDepenses();
+          console.log('Dépense supprimée avec succès');
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression de la dépense', error);
+        }
+      );
+    }
+    Swal.fire({
+      title: 'Êtes vous sûr ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, supprimez la!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Supprimée!',
+          'Dépense supprimée.',
+          'success'
+        )
+      }
+    })
+  }
 }
