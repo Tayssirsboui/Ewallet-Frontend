@@ -13,7 +13,7 @@ export class RevenusService {
   postFormData(formData: any) {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'http://localhost:8080/revenus';
+  private baseUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
@@ -46,7 +46,7 @@ export class RevenusService {
     return this.http.get<Revenu>(`${this.baseUrl}/getRevenus/${id}`)
   }
   getOwnRevenus(): Observable<Revenu[]> {
-    return this.http.get<Revenu[]>(`${this.baseUrl}/getOwnDepenses`)
+    return this.http.get<Revenu[]>(`${this.baseUrl}/getOwnRevenus`)
   }
   deleteRevenu(revenu:Revenu): Observable<any> {
     return this.http.delete(`${this.baseUrl}/deleteRevenu/${revenu.idRevenu}`);
