@@ -60,7 +60,7 @@ import { UtilisateurService } from 'src/app/_services/utilisateur.service';
 export class UtilisateurFormComponent implements OnInit {
   utilisateur :Utilisateur = {
     nom: '', prenom: '', email: '',
-    idUtilisateur: ''
+    idUtilisateur: '',soldeDeCompte:0
   };
   nomControl = new FormControl('');
   prenomControl = new FormControl('');

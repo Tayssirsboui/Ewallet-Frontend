@@ -33,4 +33,8 @@ export class UtilisateurService {
   supprimerUtilisateur(utilisateur: Utilisateur): Observable<any> {
     return this.http.delete(`${this.utilisateursUrl}/deleteUtilisateur/${utilisateur.idUtilisateur}`);
   }
+  
+  getSoldeDeCompte(): Observable<number> {
+    return this.http.get<number>(`${this.utilisateursUrl}/soldeDeCompte`);
+  }
 }

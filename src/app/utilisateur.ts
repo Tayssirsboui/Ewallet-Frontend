@@ -3,4 +3,5 @@ export class Utilisateur {
       nom: string;
       prenom: string;
       email:String;
+      soldeDeCompte:Number;
 }

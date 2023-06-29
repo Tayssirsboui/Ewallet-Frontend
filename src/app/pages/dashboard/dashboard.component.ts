@@ -5,6 +5,7 @@ import { BackendService } from "src/app/_services/backend.service";
 import Chart from 'chart.js/auto';
 import { Depense } from "src/app/models/depense.model";
 import { RevenusService } from "src/app/_services/revenuservice.service";
+import { UtilisateurService } from "src/app/_services/utilisateur.service";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
   recentDepenses: any;
   totalAmount: number;
   revenusTotal: number;
+  SoldeDeCompte : number;
   data!: any
   options: any = {
     type: 'doughnut', //this denotes tha type of chart
@@ -50,7 +52,8 @@ export class DashboardComponent implements OnInit {
   constructor(private elementRef: ElementRef,
     private categorieService: CategorieService,
     private backendService: BackendService,
-    private revenusService: RevenusService
+    private revenusService: RevenusService,
+    private utilisateurService: UtilisateurService
   ) { }
 
 
@@ -128,6 +131,18 @@ export class DashboardComponent implements OnInit {
     this.revenusService.getTotalRevenuAmount().subscribe(
       revenusTotal => {
         this.revenusTotal = revenusTotal;
+  
+      },
+      
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  getSoldeDeCompte(){
+    this.utilisateurService.getSoldeDeCompte().subscribe(
+      SoldeDeCompte => {
+        this.revenusTotal = SoldeDeCompte;
   
       },
       
