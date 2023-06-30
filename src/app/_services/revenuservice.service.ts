@@ -13,20 +13,19 @@ export class RevenusService {
   postFormData(formData: any) {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'http://localhost:8080/';
+  private baseUrl = 'http://localhost:8080/revenus';
 
   constructor(private http: HttpClient) { }
 
  
 
-  saveRevenu(formData: Revenu): Observable<Revenu[]> {
-    return this.http.get<Revenu[]>("http://localhost:8080/saveRevenu")
+  saveRevenu(formData: Revenu): Observable<Revenu> {
+    return this.http.post<Revenu>(this.baseUrl + "/saveRevenu",formData)
   }
 
 
-  updateRevenu(): Observable<Revenu[]> {
-    return this.http.get<Revenu[]>("http://localhost:8080/updateRevenu")
-  }
+  
+  
   deleteRevenuById(): Observable<Revenu[]> {
     return this.http.get<Revenu[]>("http://localhost:8080/deleteRevenu/{id}")
   }
@@ -43,12 +42,12 @@ export class RevenusService {
   }
   
   getRevenuById(id: number): Observable<Revenu> {
-    return this.http.get<Revenu>(`${this.baseUrl}/getRevenus/${id}`)
+    return this.http.get<Revenu>(`${this.baseUrl}/getRevenu/${id}`)
   }
   getOwnRevenus(): Observable<Revenu[]> {
     return this.http.get<Revenu[]>(`${this.baseUrl}/getOwnRevenus`)
   }
-  deleteRevenu(revenu:Revenu): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/deleteRevenu/${revenu.idRevenu}`);
+  deleteRevenu(idRevenu:number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/deleteRevenu/${idRevenu}` , {responseType:'text'});
   }
 }

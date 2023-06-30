@@ -37,7 +37,7 @@ export class CalendrierrevenuComponent {
   @ViewChild('modalUpdate') modalUpdate: ElementRef;
   currentItem: Revenu
   
-  revenu: any[] = [];
+  revenu: any = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
@@ -93,7 +93,7 @@ export class CalendrierrevenuComponent {
     this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
     this.userId = this.userdata.idUtilisateur ; 
     this.nouvellerevenuForm = this.fb.group({
-      description: ['', Validators.required],
+      source: ['', Validators.required],
       montant: ['', Validators.required],
    
       // categorieId:1,
@@ -104,7 +104,7 @@ export class CalendrierrevenuComponent {
   }
   ngOnInit(): void {
     // this.getAllCategories()
-    this. getOwnRevenus()
+    this.getOwnRevenus()
   }
 
   
@@ -112,19 +112,21 @@ export class CalendrierrevenuComponent {
   {
     this.revenuService. getOwnRevenus().subscribe((response) => {
       this.revenu = response;
-      const events: any = [];
+      let events: any = [];
 
       // debugger
       this.revenu.forEach((item: any) => {
         // debugger
         const event = {
-          id: item.idDepense,
-          title: item.description + '-' + '-' + item.montant,
+          id: item.idRevenu,
+          title: item.source + '-' + '-' + item.montant,
           start: item.date,
           allDay: true,
         };
         events.push(event);
       });
+
+      console.log('events ' , events)
       this.revenu = events;
     });
   }
@@ -158,7 +160,7 @@ export class CalendrierrevenuComponent {
     } , () =>{
         this.nouvellerevenuForm.patchValue(
           {
-            "description":this.currentItem.description ,
+            "source":this.currentItem.source ,
             "montant":this.currentItem.montant ,
             // "categorieId":this.currentItem.categorieId
           }
@@ -207,16 +209,7 @@ export class CalendrierrevenuComponent {
     }
    }
 
-  //  getAllCategories()
-  //  {
-  //   this.categorieService.findAll().subscribe(
-  //     res => {
-  //       this.categorieList = res 
-  //     } , error => {
-  //       console.error(error)
-  //     }
-  //   )
-  //  }
+ 
 
   updateRevenu(){
     if (this.nouvellerevenuForm.invalid) {
@@ -226,7 +219,7 @@ export class CalendrierrevenuComponent {
      
       
       let data :any = this.nouvellerevenuForm.value ; 
-     data.idDepense = this.currentItem.idRevenu;
+     data.idRevenu = this.currentItem.idRevenu;
      data.date = this.currentItem.date;
      data.userId = this.currentItem.userId
      console.log('data ' , data)
@@ -247,16 +240,7 @@ export class CalendrierrevenuComponent {
    }
    deleteRevenu() {
     if (this.currentItem) {
-      this.revenuService.deleteRevenu(this.currentItem).subscribe(
-        () => {
-          this.modalService.dismissAll();
-          this.getOwnRevenus();
-          console.log('Dépense supprimée avec succès');
-        },
-        (error) => {
-          console.error('Erreur lors de la suppression de la dépense', error);
-        }
-      );
+     
     }
     Swal.fire({
       title: 'Êtes vous sûr ?',
@@ -268,12 +252,33 @@ export class CalendrierrevenuComponent {
       confirmButtonText: 'Oui, supprimez la!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Supprimée!',
-          'Dépense supprimée.',
-          'success'
-        )
+        this.revenuService.deleteRevenu(this.currentItem.idRevenu).subscribe(
+          (res) => {
+          
+            console.log('Dépense supprimée avec succès');
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression de la revenu', error);
+          } , () => {
+            Swal.fire(
+              'Supprimée!',
+              'Revenu supprimé.',
+              'success'
+            )
+            this.modalService.dismissAll();
+            this.getOwnRevenus();
+          }
+        );
+
+      
       }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Annulé',
+          'Opération annulée ',
+          'error'
+        )
+        }
     })
   }
 }
