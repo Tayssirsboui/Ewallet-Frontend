@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild, Input ,ElementRef, OnInit } from '@angular/core';
 import {
   CalendarOptions,
   DateSelectArg,
@@ -10,24 +10,34 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
+
+import {
+  ModalDismissReasons,
+  NgbDatepickerModule,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
+
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { ModalComponent } from '../../depenses/calendrier/modal/modal.component';
+import { Revenu } from 'src/app/models/revenu.model';
 import { BackendService } from 'src/app/_services/backend.service';
+import { CategorieService } from 'src/app/_services/categorie.service';
+import { Categorie } from 'src/app/categorie';
 import { RevenusService } from 'src/app/_services/revenuservice.service';
-import { co } from '@fullcalendar/core/internal-common';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-calendrierrevenu',
   templateUrl: './calendrierrevenu.component.html',
   styleUrls: ['./calendrierrevenu.component.css'],
 })
 export class CalendrierrevenuComponent {
-  @ViewChild('fullCalendar') fullcalendar: FullCalendarComponent;
-  @ViewChild('modal')
-  private modalComponent!: ModalComponent;
-  @ViewChild('modalNew')
-  private modalComponentNew!: ModalComponent;
-  revenus: any[] = [];
+  @ViewChild('fullCalendar') fullCalendar: FullCalendarComponent;
 
+  @ViewChild('modalNew') modalNew: ElementRef;
+  @ViewChild('modalUpdate') modalUpdate: ElementRef;
+  currentItem: Revenu
+  
+  revenu: any = [];
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
@@ -37,7 +47,7 @@ export class CalendrierrevenuComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+   events:this.revenu,
     weekends: true,
     editable: true,
     selectable: true,
@@ -46,47 +56,80 @@ export class CalendrierrevenuComponent {
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
+
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:
     eventRemove:
     */
   };
+
   modalConfig = {
-    modalTitle: 'Modifier Revenu',
+    modalTitle: 'Modifier Dépense',
     dismissButtonLabel: 'save',
     closeButtonLabel: 'Annuler',
   };
+
   modalConfigNew = {
-    modalTitle: 'Ajouter Revenu',
+    modalTitle: 'Ajouter Dépense',
     dismissButtonLabel: 'save',
     closeButtonLabel: 'Annuler',
   };
 
   currentEvents: EventApi[] = [];
   calendarEvents: any[] = [];
-
+  nouvellerevenuForm: FormGroup;
+  userdata:any;
+  userId:number ; 
+  // categorieList:Categorie[] = [] ;
+  revenuDate:Date = new Date() ;
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private revenuservice: RevenusService
+    private modalService: NgbModal,
+    private revenuService: RevenusService,
+    private fb: FormBuilder,
+    private categorieService:CategorieService
   ) {
-    this.revenuservice.getAllRevenus().subscribe((response) => {
-      this.revenus = response;
-      const events: any = [];
-      this.revenus.forEach((item: any) => {
+    this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
+    this.userId = this.userdata.idUtilisateur ; 
+    this.nouvellerevenuForm = this.fb.group({
+      source: ['', Validators.required],
+      montant: ['', Validators.required],
+   
+      // categorieId:1,
+      userId:[]
+
+    })
+  
+  }
+  ngOnInit(): void {
+    // this.getAllCategories()
+    this.getOwnRevenus()
+  }
+
+  
+  getOwnRevenus()
+  {
+    this.revenuService. getOwnRevenus().subscribe((response) => {
+      this.revenu = response;
+      let events: any = [];
+
+      // debugger
+      this.revenu.forEach((item: any) => {
+        // debugger
         const event = {
           id: item.idRevenu,
-          title: item.source + '-' + item.montant,
+          title: item.source + '-' + '-' + item.montant,
           start: item.date,
           allDay: true,
         };
         events.push(event);
       });
-      debugger
-      this.revenus = events;
+
+      console.log('events ' , events)
+      this.revenu = events;
     });
   }
-
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;
   }
@@ -96,39 +139,146 @@ export class CalendrierrevenuComponent {
     calendarOptions.weekends = !calendarOptions.weekends;
   }
 
+  //  new function
   handleDateSelect(selectInfo: DateSelectArg) {
-    debugger;
-    this.modalComponentNew.new();
+    this.nouvellerevenuForm.reset()
+    this.modalService.open(this.modalNew)
+    this.revenuDate =  selectInfo.start ; 
+   
   }
 
+  getRevenu(id:number)
+  {
+    this.revenuService
+    .getRevenuById(id)
+    .subscribe((res) => {
+      console.log('res ' , res)
+      // debugger;
+      this.currentItem = res;
+    } , error => {
+      console.error(error)
+    } , () =>{
+        this.nouvellerevenuForm.patchValue(
+          {
+            "source":this.currentItem.source ,
+            "montant":this.currentItem.montant ,
+            // "categorieId":this.currentItem.categorieId
+          }
+        )
+    });
+  }
+  //  edit function
   handleEventClick(args: any) {
-    // if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-    //   clickInfo.event.remove();
-    // }
-    debugger
-    this.modalComponent.edit(args.event);
+    this.getRevenu( args.event.id)
+    
+
+    this.modalService.open(this.modalUpdate)
+
   }
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
     this.changeDetector.detectChanges();
   }
+ 
+ 
 
-  addEventToCalendar(event: any) {
-    const calendarApi = this.fullcalendar.getApi();
+  addRevenu(){
+    if (this.nouvellerevenuForm.invalid) {
+      // debugger 
+      return;
+    } else {
+      this.nouvellerevenuForm.get("userId")?.setValue(this.userId);
+      this.nouvellerevenuForm.get("userId")?.updateValueAndValidity()
+      
+      let data :any = this.nouvellerevenuForm.value ; 
+      data.date = this.revenuDate ; 
+      this.revenuService.saveRevenu(data).subscribe(
+       
+        (response:any) => {
+          this.modalService.dismissAll();
+          this.getOwnRevenus()
+          this.revenuDate = new Date() ; 
+          console.log('Success:', response);
+  
+        },
+        ( error: any) => {
+          console.error('Error:', error);
+        }
+      );
+    }
+   }
 
-    const newEvent = {
-      title: event.title,
-      start: event.start,
-      source: event.source,
-      montant: event.montant,
-    };
-    calendarApi.addEvent(newEvent);
-  }
+ 
 
-  handleEventCreated(event: any) {
-    debugger
-    this.calendarEvents.push(event);
-    this.addEventToCalendar(event);
+  updateRevenu(){
+    if (this.nouvellerevenuForm.invalid) {
+      // debugger 
+      return;
+    } else {
+     
+      
+      let data :any = this.nouvellerevenuForm.value ; 
+     data.idRevenu = this.currentItem.idRevenu;
+     data.date = this.currentItem.date;
+     data.userId = this.currentItem.userId
+     console.log('data ' , data)
+      this.revenuService.saveRevenu(data).subscribe(
+       
+        (response:any) => {
+          this.modalService.dismissAll();
+          this.getOwnRevenus()
+          this.revenuDate = new Date() ; 
+          console.log('Success:', response);
+  
+        },
+        ( error: any) => {
+          console.error('Error:', error);
+        }
+      );
+    }
+   }
+   deleteRevenu() {
+    if (this.currentItem) {
+     
+    }
+    Swal.fire({
+      title: 'Êtes vous sûr ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, supprimez la!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.revenuService.deleteRevenu(this.currentItem.idRevenu).subscribe(
+          (res) => {
+          
+            console.log('Dépense supprimée avec succès');
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression de la revenu', error);
+          } , () => {
+            Swal.fire(
+              'Supprimée!',
+              'Revenu supprimé.',
+              'success'
+            )
+            this.modalService.dismissAll();
+            this.getOwnRevenus();
+          }
+        );
+
+      
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Annulé',
+          'Opération annulée ',
+          'error'
+        )
+        }
+    })
   }
 }
