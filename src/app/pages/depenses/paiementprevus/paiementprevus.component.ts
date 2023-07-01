@@ -68,7 +68,7 @@ export class PaiementprevusComponent implements OnInit {
 
   supprimerPaiementPrevu(depense: Depense): void {
     console.log('Suppression de l\'depense :', depense);
-    this.backendService. deleteDepense(depense).subscribe(res => {
+    this.backendService. deleteDepense(this.idDepense).subscribe(res => {
     }, error => {
       console.error(error);
     });

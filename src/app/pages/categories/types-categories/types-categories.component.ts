@@ -38,7 +38,10 @@ export class TypesCategoriesComponent implements OnInit {
     s.src = "../assets/js/main.js";
     this.elementRef.nativeElement.appendChild(s);
 
-
+    this.getAllCategories();
+   
+  }
+  getAllCategories(): void {
     this.categorieService.findAll().subscribe(data => {
       console.log('res ' , data)
       this.categories = data;
@@ -46,7 +49,6 @@ export class TypesCategoriesComponent implements OnInit {
       console.error(error)
     });
   }
-
   openModal(): void {
     const dialogRef = this.dialog.open(CategorieFormComponent, {
       width: '500px',
@@ -55,6 +57,8 @@ export class TypesCategoriesComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.getAllCategories();
+
     });
   }
   updateCategories(categorie: Categorie): void {
@@ -69,6 +73,7 @@ export class TypesCategoriesComponent implements OnInit {
     });
   }
 
+  
   deleteCategories(categorie: Categorie): void {
     console.log('Suppression de la categorie :', categorie);
     this.categorieService.deleteCategories(categorie).subscribe(res => {
@@ -92,6 +97,7 @@ export class TypesCategoriesComponent implements OnInit {
         )
       }
     })
+    this.getAllCategories();
   }
   onItemsPerPageChange(): void {
     this.currentPage = 1; // Reset to the first page when items per page changes

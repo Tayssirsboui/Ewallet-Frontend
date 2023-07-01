@@ -48,12 +48,13 @@ export class CategorieFormComponent implements OnInit {
       // if (this.form.valid) {
       //    this.dialogRef.close(this.form.value);
       //   }
-          this.categorieService.save(this.categorie).subscribe(result => this.gotoCategoriesList());
+          this.categorieService.save(this.categorie).subscribe(
+            result =>     this.dialogRef.close()
+
+            );
     // this.dialogRef.close(this.categorie);
   }
-  gotoCategoriesList() {
-    this.router.navigate(['/categories']);
-  }
+
 
   // onDateChange(event: MatDatepickerInputEvent<Date>): void {
   //   this.categorie.date = event.value || null;

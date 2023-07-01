@@ -12,7 +12,7 @@ export class UtilisateurService {
   private utilisateursUrl: string;
 
   constructor(private http: HttpClient) {
-    this.utilisateursUrl = 'http://localhost:8080/';
+    this.utilisateursUrl = 'http://localhost:8080';
   }
   public findAll(): Observable<Utilisateur[]> {
     
@@ -34,7 +34,7 @@ export class UtilisateurService {
     return this.http.delete(`${this.utilisateursUrl}/deleteUtilisateur/${utilisateur.idUtilisateur}`);
   }
   
-  getSoldeDeCompte(): Observable<number> {
-    return this.http.get<number>(`${this.utilisateursUrl}/soldeDeCompte`);
+  getSoldeDeCompte(idUtilisateur:number): Observable<number> {
+    return this.http.get<number>(`${this.utilisateursUrl}/soldeDeCompte/${idUtilisateur}`);
   }
 }

@@ -245,34 +245,47 @@ export class CalendrierComponent implements OnInit{
    }
 
    deleteDepense() {
-    if (this.currentItem) {
-      this.backendService.deleteDepense(this.currentItem).subscribe(
-        () => {
-          this.modalService.dismissAll();
-          this.getOwnDepenses();
-          console.log('Dépense supprimée avec succès');
-        },
-        (error) => {
-          console.error('Erreur lors de la suppression de la dépense', error);
-        }
-      );
-    }
-    Swal.fire({
-      title: 'Êtes vous sûr ?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Annuler',
-      confirmButtonText: 'Oui, supprimez la!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Supprimée!',
-          'Dépense supprimée.',
-          'success'
-        )
+    
+      if (this.currentItem) {
+       
       }
-    })
-  }
+      Swal.fire({
+        title: 'Êtes vous sûr ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Annuler',
+        confirmButtonText: 'Oui, supprimez la!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.backendService.deleteDepense(this.currentItem.idDepense).subscribe(
+            (res) => {
+            
+              console.log('Dépense supprimée avec succès');
+            },
+            (error) => {
+              console.error('Erreur lors de la suppression de la dépense', error);
+            } , () => {
+              Swal.fire(
+                'Supprimée!',
+                'Revenu supprimée.',
+                'success'
+              )
+              this.modalService.dismissAll();
+              this.getOwnDepenses();
+            }
+          );
+  
+        
+        }
+        else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Annulé',
+            'Opération annulée ',
+            'error'
+          )
+          }
+      })
+    }
 }

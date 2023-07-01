@@ -29,20 +29,23 @@ export class BackendService {
     return this.http.get<Depense>(`${this.baseUrl}/getDepense/${id}`)
   }
 
-  deleteDepense(depense:Depense): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/deleteDepenses/${depense.idDepense}`);
+  deleteDepense(idDepense:Number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/deleteDepenses/${idDepense}`);
   }
 
   findLastDepenses(): Observable<Depense[]> {
     return this.http.get<Depense[]>(`${this.baseUrl}/getLastDepenses`);
   }
 
-  getTotalDepenseAmount(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/totalDepense`);
+  getTotalDepenseAmount(idUtilisateur:number): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/totalDepense/${idUtilisateur}`);
   }
   
   getPaiementsPrevus(): Observable<Depense[]> {
     return this.http.get<Depense[]>(`${this.baseUrl}/getPaiementsPrevus`);
   }
 
+  chartDepenseRevenuData(): Observable<[]> {
+    return this.http.get<[]>(this.baseUrl +"/chartDepRevData");
+  }
 }

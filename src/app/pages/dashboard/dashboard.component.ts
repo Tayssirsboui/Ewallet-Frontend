@@ -17,13 +17,16 @@ import { UtilisateurService } from "src/app/_services/utilisateur.service";
 
 export class DashboardComponent implements OnInit {
   public chart: any;
+  public lineChart: any;
   depenses: any = []
   categories: any = []
   montants: any = []
+  lineChartData: any = []
   recentDepenses: any;
   totalAmount: number;
   revenusTotal: number;
   SoldeDeCompte : number;
+  userdata:any;
   data!: any
   options: any = {
     type: 'doughnut', //this denotes tha type of chart
@@ -54,7 +57,9 @@ export class DashboardComponent implements OnInit {
     private backendService: BackendService,
     private revenusService: RevenusService,
     private utilisateurService: UtilisateurService
-  ) { }
+  ) { 
+    this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
+  }
 
 
   ngOnInit(): void {
@@ -64,7 +69,10 @@ export class DashboardComponent implements OnInit {
     s.src = "../assets/js/main.js";
     this.elementRef.nativeElement.appendChild(s);
     this.loadCategorieMontantData()
+    this.loadLineChartData()
     this.getTotalDepenseAmount()
+    this.getSoldeDeCompte()
+    this.getTotalRevenuAmount()
     this.backendService.getPaiementsPrevus().subscribe(data => {
       console.log('res ' , data)
       this.depenses = data;
@@ -85,11 +93,42 @@ export class DashboardComponent implements OnInit {
   );
     
   }
+  
+
+
+  createLineChart(){
+   console.log("dates",this.lineChartData[0])
+    this.lineChart = new Chart("MyLineChart", {
+      type: 'line', //this denotes tha type of chart
+      data: {// values on X-Axis
+        labels: this.lineChartData[0], 
+	       datasets: [
+          {
+            label: "Dépenses",
+            data: this.lineChartData[1],
+            backgroundColor: 'blue'
+          },
+          {
+            label: "Revenus",
+            data: this.lineChartData[2],
+            backgroundColor: 'limegreen'
+          }  
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
+  }
   createChart() {
     this.chart = new Chart("MyChart", this.options);
   }
  
-
+  // createLineChart(){
+  // debugger
+  //   this.lineChart = new Chart("MyLineChart", this.options1);
+  // }
 
   loadCategorieMontantData() {
     this.categorieService.listDepenseByCategory().subscribe(
@@ -112,9 +151,25 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  
+  loadLineChartData() {
+    this.backendService.chartDepenseRevenuData().subscribe(
+      chartData => 
+      {
+       this.lineChartData=chartData
+        this.createLineChart();
+        
+      },
+      error => {
+        // Gérez les erreurs de requête ici
+        console.log(error);
+      }
+    );
+  }
   
   getTotalDepenseAmount() {
-    this.backendService.getTotalDepenseAmount().subscribe(
+    this.backendService.getTotalDepenseAmount(this.userdata.idUtilisateur).subscribe(
       totalAmount => {
         this.totalAmount = totalAmount;
   
@@ -128,7 +183,7 @@ export class DashboardComponent implements OnInit {
 
 
   getTotalRevenuAmount() {
-    this.revenusService.getTotalRevenuAmount().subscribe(
+    this.revenusService.getTotalRevenuAmount(this.userdata.idUtilisateur).subscribe(
       revenusTotal => {
         this.revenusTotal = revenusTotal;
   
@@ -140,9 +195,9 @@ export class DashboardComponent implements OnInit {
     );
   }
   getSoldeDeCompte(){
-    this.utilisateurService.getSoldeDeCompte().subscribe(
-      SoldeDeCompte => {
-        this.revenusTotal = SoldeDeCompte;
+    this.utilisateurService.getSoldeDeCompte(this.userdata.idUtilisateur).subscribe(
+      soldeDeCompte => {
+        this.SoldeDeCompte = soldeDeCompte;
   
       },
       
