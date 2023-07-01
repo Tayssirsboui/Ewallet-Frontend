@@ -1,4 +1,6 @@
-<h1 mat-dialog-title>Ajouter une catégorie</h1>
+<h1 *ngIf="isModif===true" mat-dialog-title> Modifier une catégorie</h1>
+<h1 *ngIf="isModif===false" mat-dialog-title>Ajouter une catégorie</h1>
+
 <form>
   <div class="row mb-3">
      <div class="col-md-8 col-lg-12"> 
@@ -16,7 +18,9 @@
  </div>
 </div>
 <div class="text-center"> 
-  <button type="submit" class="btn btn-info" (click)="onAjouter()">Ajouter</button> 
+  <button type="submit" *ngIf="isModif===true" class="btn btn-info" (click)="onAjouter()">Modifier</button> 
+  <button type="submit" *ngIf="isModif===false"class="btn btn-info" (click)="onAjouter()">Ajouter</button> 
+
   <button type="reset" class="btn btn-secondary" (click)="onAnnuler()">Annuler</button>
 </div>
 

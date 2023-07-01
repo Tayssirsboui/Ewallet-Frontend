@@ -18,6 +18,7 @@ export class CategorieFormComponent implements OnInit {
     budget:0
 
   };
+  isModif:any;
   descriptionControl = new FormControl('');
  typeCategorieControl = new FormControl('');
   dateControl = new FormControl('');
@@ -37,6 +38,7 @@ export class CategorieFormComponent implements OnInit {
     this.categorie.description=this.data.form.description;
     this.categorie.budget=this.data.form.budget;
     this.categorie.nom=this.data.form.nom;
+    this.isModif=this.data.isModif;
   }
 
   onAnnuler(): void {
@@ -48,6 +50,7 @@ export class CategorieFormComponent implements OnInit {
       // if (this.form.valid) {
       //    this.dialogRef.close(this.form.value);
       //   }
+      console.log("cattt", this.data.modif)
           this.categorieService.save(this.categorie).subscribe(
             result =>     this.dialogRef.close()
 

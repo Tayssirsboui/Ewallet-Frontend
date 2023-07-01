@@ -49,10 +49,11 @@ export class TypesCategoriesComponent implements OnInit {
       console.error(error)
     });
   }
-  openModal(): void {
+  openModal(isModif: boolean): void {
     const dialogRef = this.dialog.open(CategorieFormComponent, {
       width: '500px',
-      data: { form:this.form }
+      data: { form:this.form,isModif:isModif},
+      
     });
     
     dialogRef.afterClosed().subscribe(result => {
@@ -65,12 +66,9 @@ export class TypesCategoriesComponent implements OnInit {
     this.form.nom=categorie.nom; 
     this.form.description=categorie.description; 
     this.form.budget=categorie.budget; 
-    this.openModal();
+    this.form.idCategorie=categorie.idCategorie; 
+    this.openModal(true);
     console.log('Modification de la catégorie :', categorie);
-    this.categorieService.updateCategories(categorie).subscribe(res => {
-    }, error => {
-      console.error(error);
-    });
   }
 
   
