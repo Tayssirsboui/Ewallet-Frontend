@@ -32,6 +32,10 @@
    
   </div>
   <div class="modal-body">
+    <div *ngIf="budgetAtteint.length>0 && alertbudget" class="alert alert-warning" role="alert">
+      Fait attention ! le budget des categories suivantes est atteints :
+      <span *ngFor="let category of budgetAtteint">{{category}}</span>
+    </div>
     <form class="form" role="form" [formGroup]="nouvelledepenseForm">
 
       <div  class="row mb-3">
@@ -54,7 +58,7 @@
       <div class="row mb-3">
         <label class="col-lg-3 col-form-label form-control-label"><strong>Catégories</strong></label>
         <div class="col-lg-9">
-           <select class="form-select" aria-label="Default select example" formControlName="categorieId" >
+           <select class="form-select" aria-label="Default select example" formControlName="categorieId"  (click)="onAlertbudget()" >
             
             <option *ngFor="let categorie of categorieList" [value]="categorie.idCategorie">{{categorie.nom}}</option>
             

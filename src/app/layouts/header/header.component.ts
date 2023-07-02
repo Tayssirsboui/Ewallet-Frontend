@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common'
+import { BackendService } from 'src/app/_services/backend.service';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,21 @@ import { DOCUMENT } from '@angular/common'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+   notifs :[];
+  constructor(@Inject(DOCUMENT) private document: Document,private backendService:BackendService) { }
 
   ngOnInit(): void {
+    this.getAllNotifs();
   }
+
+  getAllNotifs():void {
+    this.backendService.notifPaiementPrevu().subscribe(data => {
+   console.log('notifs ' , data)
+   this.notifs = data;
+ } , error => {
+   console.error(error)
+ });
+}
   sidebarToggle()
   {
     //toggle sidebar function

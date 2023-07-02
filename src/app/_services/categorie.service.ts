@@ -36,4 +36,7 @@ export class CategorieService{
   listDepenseByCategory(): Observable<CategorieDepenseDto[]> {
     return this.http.get<CategorieDepenseDto[]>(this.categoriesUrl +"/categorieDepense");
   }
+  listBudgetAtteint(): Observable<any> {
+    return this.http.get<CategorieDepenseDto[]>(this.categoriesUrl +"/listBudgetAtteint");
+  }
 }

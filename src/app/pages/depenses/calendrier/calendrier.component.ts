@@ -82,6 +82,8 @@ export class CalendrierComponent implements OnInit{
   userId:number ; 
   categorieList:Categorie[] = [] ;
   depenseDate:Date = new Date() ;
+  budgetAtteint: any[]=[];
+  alertbudget: boolean=false;
   constructor(
     private changeDetector: ChangeDetectorRef,
     private modalService: NgbModal,
@@ -104,6 +106,7 @@ export class CalendrierComponent implements OnInit{
   ngOnInit(): void {
     this.getAllCategories()
     this.getOwnDepenses()
+    this.listBudgetAtteint()
   }
 
   getOwnDepenses()
@@ -215,6 +218,16 @@ export class CalendrierComponent implements OnInit{
       }
     )
    }
+   listBudgetAtteint()
+   {
+    this.categorieService.listBudgetAtteint().subscribe(
+      res => {
+        this.budgetAtteint = res 
+      } , error => {
+        console.error(error)
+      }
+    )
+   }
 
    updateDepense(){
     if (this.nouvelledepenseForm.invalid) {
@@ -286,5 +299,9 @@ export class CalendrierComponent implements OnInit{
           )
           }
       })
+    }
+
+    onAlertbudget(){
+      this.alertbudget=true;
     }
 }
