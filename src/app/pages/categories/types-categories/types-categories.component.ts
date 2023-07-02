@@ -74,10 +74,6 @@ export class TypesCategoriesComponent implements OnInit {
   
   deleteCategories(categorie: Categorie): void {
     console.log('Suppression de la categorie :', categorie);
-    this.categorieService.deleteCategories(categorie).subscribe(res => {
-    }, error => {
-      console.error(error);
-    });
     Swal.fire({
       title: 'Etes vous sûr ?',
       icon: 'warning',
@@ -88,14 +84,34 @@ export class TypesCategoriesComponent implements OnInit {
       confirmButtonText: 'Oui, supprimez la!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Supprimée!',
-          'Catégorie supprimée.',
-          'success'
-        )
+        this.categorieService.deleteCategories(categorie).subscribe(
+          (res) => {
+          
+            console.log('Dépense supprimée avec succès');
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression de la dépense', error);
+          } , () => {
+            Swal.fire(
+              'Supprimée!',
+              'Catégorie supprimée.',
+              'success'
+            )
+            this.getAllCategories();
+
+          }
+        );
+
+      
       }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Annulé',
+          'Opération annulée ',
+          'error'
+        )
+        }
     })
-    this.getAllCategories();
   }
   onItemsPerPageChange(): void {
     this.currentPage = 1; // Reset to the first page when items per page changes

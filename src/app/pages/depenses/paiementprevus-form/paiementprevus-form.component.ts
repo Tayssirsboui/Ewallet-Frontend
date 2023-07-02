@@ -14,7 +14,7 @@ import { Categorie } from 'src/app/categorie';
   styleUrls: ['./paiementprevus-form.component.css']
 })
 export class PaiementprevusFormComponent implements OnInit {
-  categories: any[]
+  categorieList:Categorie[] = [] ;
   depenses: any = []
   depense :Depense = {
     description: '', datePrevue: new Date(), montant: 0,
@@ -26,37 +26,29 @@ export class PaiementprevusFormComponent implements OnInit {
   private login:PagesLoginComponent;
 
   form: FormGroup;
+  userdata:any;
+
 
   constructor(private route: ActivatedRoute, 
      private router: Router, 
          private backendService: BackendService,
     public dialogRef: MatDialogRef<PaiementprevusFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private categorieService: CategorieService,
+    private categorieService:CategorieService
 
   ) {
+    this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
   }
   ngOnInit(): void {
-    this.backendService.getPaiementsPrevus().subscribe(depenses => {
-      this.depenses = depenses;
-    
-      console.log("hhhhh",this.depenses) 
-    
-    },
-    error => {
-      // Gérez les erreurs de requête ici
-      console.log(error);
-    }
-  );
+    this.getAllCategories();
+    this.getAllPaiementPrevu()
+
   }
 
-  onAnnuler(): void {
-    // this.dialogRef.close();
+  getAllPaiementPrevu(){
     this.backendService.getPaiementsPrevus().subscribe(depenses => {
       this.depenses = depenses;
-    
       console.log("hhhhh",this.depenses) 
-    
     },
     error => {
       // Gérez les erreurs de requête ici
@@ -64,18 +56,27 @@ export class PaiementprevusFormComponent implements OnInit {
     }
   );
   }
+  getAllCategories()
+   {
+    this.categorieService.findAll().subscribe(
+      res => {
+        this.categorieList = res 
+      } , error => {
+        console.error(error)
+      }
+    )
+   }
+  onAnnuler(): void {
+    this.dialogRef.close();
+   }
 
   onAjouter(): void {
     this.depense.statut = "TODO"; 
-    this.depense.userId=1;
- 
-    this.depense.categorieId=1;
-    this.depense.idDepense=null as any;
+    this.depense.userId=this.userdata.idUtilisateur; 
     console.log(this.depense)
-    /*this.backendService.createEvent(this.depense).subscribe(result => {
-      this.router.navigate(['/depenses']);
+    this.backendService.saveDepense(this.depense).subscribe(result => {
       this.dialogRef.close(this.depense);
-    });*/
+    });
   }
   
 

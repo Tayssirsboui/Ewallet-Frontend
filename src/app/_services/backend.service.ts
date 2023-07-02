@@ -48,4 +48,10 @@ export class BackendService {
   chartDepenseRevenuData(): Observable<[]> {
     return this.http.get<[]>(this.baseUrl +"/chartDepRevData");
   }
+  notifPaiementPrevu(): Observable<[]> {
+    return this.http.get<[]>(`${this.baseUrl}/notifPaiementPrevu`);
+  }
+  doPaiementPrevu(idDepense:Number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/doPaiementPrevu/${idDepense}`,null);
+  }
 }

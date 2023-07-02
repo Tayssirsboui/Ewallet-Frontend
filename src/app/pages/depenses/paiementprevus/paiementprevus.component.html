@@ -55,11 +55,13 @@
                            <td>{{ depense.description}}</td>
                            <td>{{ depense.datePrevue |date:'MM/dd/yyyy'}}</td>
                            <td>{{ depense.montant }}</td>
-                           <td *ngIf="depense.statut==='TODO'"><span class="badge bg-success">Effectué</span></td>
-                           <td *ngIf="depense.statut==='DONE'"><span class="badge bg-danger">A faire</span></td>
+                           <td *ngIf="depense.statut==='DONE'"><span class="badge bg-success">Effectué</span></td>
+                           <td *ngIf="depense.statut==='TODO'"><span class="badge bg-danger">A faire</span></td>
                            <td>
                               <button type="button" class="btn btn-link btn-edit" ><i class="fas fa-edit"></i></button>
                               <button type="button" class="btn btn-link btn-delete" (click)="supprimerPaiementPrevu(depense)"><i class="fas fa-trash"></i></button>
+                              <button type="button" class="btn btn-link btn-edit" (click)="doPaiementPrevu(depense)"><i class="fas fa-check"></i></button>
+
                            </td>
                         </tr>
 

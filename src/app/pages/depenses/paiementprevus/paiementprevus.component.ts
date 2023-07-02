@@ -19,12 +19,19 @@ export class PaiementprevusComponent implements OnInit {
   afficherFormulaire: boolean=false;
   searchedKeyword!:string;
   idDepense:number;
-
-  constructor(private elementRef: ElementRef,private backendService:BackendService,private dialog: MatDialog) { }
   depenses: Depense[];
   itemsPerPageOptions: number[] = [5, 10, 20]; // Options for items per page
   selectedItemsPerPage: number = 5; // Default selected items per page
   currentPage: number = 1; // Initial current page number
+  userdata:any;
+
+  constructor(private elementRef: ElementRef,private backendService:BackendService,
+              private dialog: MatDialog) {
+    
+    this.userdata=JSON.parse(sessionStorage.getItem('auth-user')!)
+
+  }
+
   ngOnInit(): void {
     
     var s = document.createElement("script");
@@ -34,7 +41,8 @@ export class PaiementprevusComponent implements OnInit {
     this.getAllPaiements()
    
   }
-  getAllPaiements():void { this.backendService.getPaiementsPrevus().subscribe(data => {
+  getAllPaiements():void {
+     this.backendService.getPaiementsPrevus().subscribe(data => {
     console.log('res ' , data)
     this.depenses = data;
   } , error => {
@@ -49,9 +57,9 @@ export class PaiementprevusComponent implements OnInit {
       data: { form:this.form }
       
     });
-    debugger;  
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.getAllPaiements();
     });
   }
   // modifierDepense(depense: Depense): void {
@@ -67,11 +75,6 @@ export class PaiementprevusComponent implements OnInit {
   }
 
   supprimerPaiementPrevu(depense: Depense): void {
-    console.log('Suppression de l\'depense :', depense);
-    this.backendService. deleteDepense(this.idDepense).subscribe(res => {
-    }, error => {
-      console.error(error);
-    });
     Swal.fire({
       title: 'Etes vous sûr ?',
       icon: 'warning',
@@ -82,12 +85,74 @@ export class PaiementprevusComponent implements OnInit {
       confirmButtonText: 'Oui, supprimez le!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Supprimée!',
-          'Paiement prévu supprimé.',
-          'success'
-        )
+        this.backendService. deleteDepense(depense.idDepense).subscribe(
+          (res) => {
+          
+            console.log('Paiement Prévu supprimé avec succès');
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression du paiement prévu', error);
+          } , () => {
+            Swal.fire(
+              'Supprimé!',
+              'Paiement Prévu.',
+              'success'
+            )
+            this.getAllPaiements();
+
+          }
+        );
+
+      
       }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Annulé',
+          'Opération annulée ',
+          'error'
+        )
+        }
+    })
+  }
+  
+  doPaiementPrevu(depense: Depense): void {
+    Swal.fire({
+      title: 'Etes vous sûr ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annuler',
+      confirmButtonText: 'Oui, effectuer le!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.backendService.doPaiementPrevu(depense.idDepense).subscribe(
+          (res) => {
+          
+            console.log('Paiement Prévu éffectué avec succès');
+          },
+          (error) => {
+            console.error('Erreur lors d`effectuation du paiement prévu', error);
+          } , () => {
+            Swal.fire(
+              'Effectué!',
+              'Paiement Prévu.',
+              'success'
+            )
+            this.getAllPaiements();
+
+          }
+        );
+
+      
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Annulé',
+          'Opération annulée ',
+          'error'
+        )
+        }
     })
   }
 

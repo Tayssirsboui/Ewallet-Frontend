@@ -218,7 +218,6 @@ export class CalendrierComponent implements OnInit{
 
    updateDepense(){
     if (this.nouvelledepenseForm.invalid) {
-      // debugger 
       return;
     } else {
      
