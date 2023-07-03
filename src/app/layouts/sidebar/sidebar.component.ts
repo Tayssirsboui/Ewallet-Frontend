@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
+  user:any ;
   constructor() { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(window.sessionStorage.getItem("auth-user") as string) ;
+    console.log("csdsq" , this.user.role)
+
   }
 
 }

@@ -123,12 +123,13 @@ export class PaiementprevusComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Annuler',
-      confirmButtonText: 'Oui, effectuer le!'
+      confirmButtonText: "Oui, c'est effectué !"
     }).then((result) => {
       if (result.isConfirmed) {
         this.backendService.doPaiementPrevu(depense.idDepense).subscribe(
           (res) => {
-          
+            this.backendService.updateNotificationCount("paiement prevu");
+
             console.log('Paiement Prévu éffectué avec succès');
           },
           (error) => {

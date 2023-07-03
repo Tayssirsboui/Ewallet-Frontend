@@ -1,0 +1,4 @@
+.hasEror {
+    border: 2px solid red !important;
+    box-shadow: 1px 1px 1px 1px whitesmoke !important;
+  }

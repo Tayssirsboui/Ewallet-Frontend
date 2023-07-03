@@ -22,10 +22,15 @@ export class DashboardComponent implements OnInit {
   categories: any = []
   montants: any = []
   lineChartData: any = []
+  filteredDepenses: Depense[];
+  searchedKeyword!:string;
+  itemsPerPageOptions: number[] = [5, 10, 20]; // Options for items per page
+  selectedItemsPerPage: number = 5; // Default selected items per page
+  currentPage: number = 1; // Initial current page number
   recentDepenses: any;
   totalAmount: number;
   revenusTotal: number;
-  SoldeDeCompte : number;
+  soldeDeCompte : number;
   userdata:any;
   data!: any
   options: any = {
@@ -95,14 +100,13 @@ export class DashboardComponent implements OnInit {
   }
   
 
-
-  createLineChart(){
-   console.log("dates",this.lineChartData[0])
+  createLineChart() {
+    console.log("dates", this.lineChartData[0]);
     this.lineChart = new Chart("MyLineChart", {
-      type: 'line', //this denotes tha type of chart
-      data: {// values on X-Axis
-        labels: this.lineChartData[0], 
-	       datasets: [
+      type: 'line',
+      data: {
+        labels: this.lineChartData[0].map((date:any)  => new Date(date).toLocaleDateString('fr-FR')),
+        datasets: [
           {
             label: "Dépenses",
             data: this.lineChartData[1],
@@ -112,15 +116,39 @@ export class DashboardComponent implements OnInit {
             label: "Revenus",
             data: this.lineChartData[2],
             backgroundColor: 'limegreen'
-          }  
+          }
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio: 2.5
       }
-      
     });
   }
+  // createLineChart(){
+  //  console.log("dates",this.lineChartData[0])
+  //   this.lineChart = new Chart("MyLineChart", {
+  //     type: 'line', //this denotes tha type of chart
+  //     data: {// values on X-Axis
+  //       labels: this.lineChartData[0], 
+	//        datasets: [
+  //         {
+  //           label: "Dépenses",
+  //           data: this.lineChartData[1],
+  //           backgroundColor: 'blue'
+  //         },
+  //         {
+  //           label: "Revenus",
+  //           data: this.lineChartData[2],
+  //           backgroundColor: 'limegreen'
+  //         }  
+  //       ]
+  //     },
+  //     options: {
+  //       aspectRatio:2.5
+  //     }
+      
+  //   });
+  // }
   createChart() {
     this.chart = new Chart("MyChart", this.options);
   }
@@ -197,7 +225,7 @@ export class DashboardComponent implements OnInit {
   getSoldeDeCompte(){
     this.utilisateurService.getSoldeDeCompte(this.userdata.idUtilisateur).subscribe(
       soldeDeCompte => {
-        this.SoldeDeCompte = soldeDeCompte;
+        this.soldeDeCompte = soldeDeCompte;
   
       },
       
@@ -207,4 +235,22 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  onItemsPerPageChange(): void {
+    this.currentPage = 1; // Reset to the first page when items per page changes
+ }
+ 
+ onPageChange(page: number): void {
+    this.currentPage = page;
+ }
+ getDisplayingFrom(): number {
+  if (this.depenses.length === 0) {
+    return 0;
+  }
+  return (this.currentPage - 1) * this.selectedItemsPerPage + 1;
+}
+
+getDisplayingTo(): number {
+  const lastItemIndex = this.currentPage * this.selectedItemsPerPage;
+  return Math.min(lastItemIndex, this.depenses.length);
+}
 }

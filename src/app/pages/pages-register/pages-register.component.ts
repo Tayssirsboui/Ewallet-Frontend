@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class PagesRegisterComponent implements OnInit {
   form: any = {
     nom: null,
+    prenom:null,
     email: null,
     motDePasse: null
   };
@@ -30,10 +31,10 @@ export class PagesRegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { nom, email, motDePasse } = this.form;
+    const { nom, prenom ,email, motDePasse } = this.form;
    
   
-    this.authService.register(nom, email, motDePasse).subscribe({
+    this.authService.register(nom, prenom,email, motDePasse).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;
@@ -47,7 +48,7 @@ export class PagesRegisterComponent implements OnInit {
 
 
 
-    this.router.navigate(['/pages-login']);
+    this.router.navigate(['/login']);
 
     const Toast = Swal.mixin({
       toast: true,

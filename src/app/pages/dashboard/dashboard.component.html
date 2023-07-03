@@ -26,7 +26,8 @@
                         </ul>
                      </div>
                      <div class="card-body">
-                        <h5 class="card-title">Dépenses <span>| Aujourd'hui</span></h5>
+                        <h5 class="card-title" style="font-size: 20px; ">Dépenses</h5>
+
                         <div class="d-flex align-items-center">
                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                             <i class="bi bi-cart"></i>
@@ -52,11 +53,10 @@
                         </ul>
                      </div>
                      <div class="card-body">
-                        <h5 class="card-title">Revenus <span>| Ce mois</span></h5>
+                        <h5 class="card-title" style="font-size: 20px;">Revenus </h5>
                         <div class="d-flex align-items-center">
                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                             <i class="bi bi-cart"></i>
-                           </div>
+                              <i class="fas fa-coins"></i>                           </div>
                            <div class="ps-3">
                              <h6>{{ revenusTotal }} DT</h6>
                            </div>
@@ -78,12 +78,11 @@
                         </ul>
                      </div>
                      <div class="card-body">
-                        <h5 class="card-title">Solde du compte <span>| Ce mois</span></h5>
+                        <h5 class="card-title" style="font-size: 20px;">Solde du compte </h5>
                         <div class="d-flex align-items-center">
-                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
-                                 class="bi bi-people"></i></div>
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bi bi-wallet2"></i></div>
                            <div class="ps-3">
-                              <h6>{{SoldeDeCompte}} DT</h6>
+                              <h6>{{soldeDeCompte}} DT</h6>
                            </div>
                         </div>
                      </div>
@@ -103,7 +102,7 @@
                         </ul>
                      </div>
                      <div class="card-body">
-                        <h5 class="card-title">Rapports <span>/Aujourd'hui</span></h5>
+                        <h5 class="card-title" style="font-size: 20px;">Rapports <span>/Aujourd'hui</span></h5>
                         <div class="chart-container">
                            <canvas  id="MyLineChart" >{{ lineChart }}</canvas>
                      </div>
@@ -125,12 +124,24 @@
                         </ul>
                      </div>
                      <div class="card-body">
-                        <h5 class="card-title">Paiement prévu <span>| Ce mois</span></h5>
-                        <table class="table table-borderless datatable">
+                        <h5 class="card-title" style="font-size: 20px;">Paiements prévus <span>| Ce mois</span></h5>
+                        <div class="search-container">
+                           <input [(ngModel)]="searchedKeyword" type="text" placeholder="Recherche..." class="search-input">
+                        </div>
+                        <div class="pagination-controls">
+                           <div class="items-per-page">
+      
+                              <select [(ngModel)]="selectedItemsPerPage" id="itemsPerPage" (change)="onItemsPerPageChange()">
+                                 <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                              </select>
+                              <label for="itemsPerPage">éléments par page</label>
+                           </div>
+                        </div>
+                        <table class="table table-borderless dashboard">
                            <thead>
                               <tr>
                                  <th scope="col">Paiement</th>
-                                 <th scope="col">Date prévue</th>
+                                 <th scope="col">Date prévue </th>
                                  <th scope="col">Montant</th>
                                  <th scope="col">Statut</th>
 
@@ -138,10 +149,10 @@
                               </tr>
                            </thead>
                            <tbody>
-                           <tr *ngFor="let depense of depenses ">
+                           <tr *ngFor="let depense of depenses | filter: searchedKeyword">
                               
                               <td>{{ depense.description}}</td>
-                              <td>{{ depense.datePrevue }}</td>
+                              <td>{{ depense.datePrevue | date:'dd/MM/yyyy' }}</td>
                               <td>{{ depense.montant }}</td>
                               <td *ngIf="depense.statut==='TODO'"><span class="badge bg-success">Effectué</span></td>
                               <td *ngIf="depense.statut==='DONE'"><span class="badge bg-danger">A faire</span></td>
@@ -149,6 +160,11 @@
                            </tr>
                            </tbody>
                         </table>
+                        <div class="pagination-controls">
+                           <div class="item-range">
+                              <span>Affichage {{ getDisplayingFrom() }} à {{ getDisplayingTo() }} sur {{ depenses.length }} éléments</span>
+                           </div>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -169,7 +185,7 @@
                   </ul>
                </div>
                <div class="card-body">
-                   <h5 class="card-title">Dépenses récentes <span>| Aujourd'hui</span></h5>
+                   <h5 class="card-title" style="font-size: 20px;">Dépenses récentes <span>| Aujourd'hui</span></h5>
                    <div class="activity">
                      <div class="activity-item d-flex" *ngFor="let depense of recentDepenses">
                        <div class="activite-label">{{ depense.date  | dateAsAgo  }}</div>
@@ -209,7 +225,7 @@
                   </ul>
                </div>
                <div class="card-body pb-0">
-                  <h5 class="card-title">Dépenses par Catégorie<span>| Ajourdh'hui</span></h5>
+                  <h5 class="card-title" style="font-size: 20px;">Dépenses par Catégorie<span>| Ajourdh'hui</span></h5>
                   <div class="chart-container">
                      <canvas id="MyChart">{{ chart }}</canvas>
                   </div>

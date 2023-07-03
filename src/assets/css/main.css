@@ -59,7 +59,7 @@ a:focus {
   outline: none; }
 
 a:not([href]):not([tabindex]) {
-  color: #000000; }
+  color: #012970; }
 
 a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   color: #fff; }

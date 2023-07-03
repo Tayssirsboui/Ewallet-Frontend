@@ -15,7 +15,7 @@
              <div class="card">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                    <img src="assets/img/Capture.PNG" alt="Profile" class="rounded-circle">
-                   <h2>Nesrine</h2>
+                   <h2> {{profile.nom}} {{profile.prenom}}</h2>
                 </div>
              </div>
           </div>
@@ -33,35 +33,44 @@
                          <h2 >Détails du profil</h2>
                          <div class="row">
                             <div class="col-lg-3 col-md-4 label ">Nom </div>
-                            <div class="col-lg-9 col-md-8">Samaali</div>
+                            <div class="col-lg-9 col-md-8">{{profile.nom}}</div>
                          </div>
                          <div class="row">
                            <div class="col-lg-3 col-md-4 label ">Prénom </div>
-                           <div class="col-lg-9 col-md-8">Nesrine</div>
+                           <div class="col-lg-9 col-md-8">{{profile.prenom}}</div>
                         </div>
                         <div class="row">
-                           <div class="col-lg-3 col-md-4 label ">solde de compte </div>
-                           <div class="col-lg-9 col-md-8">2160 DT</div>
+                           <div class="col-lg-3 col-md-4 label ">solde du compte </div>
+                           <div class="col-lg-9 col-md-8">{{profile.solde}} DT</div>
                         </div>
                          <div class="row">
                             <div class="col-lg-3 col-md-4 label">Email</div>
-                            <div class="col-lg-9 col-md-8"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e982c788878d8c9b9a8687a98c91888499858cc78a8684">nesrine.samaali@gmail.com</a></div>
+                            <div class="col-lg-9 col-md-8"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e982c788878d8c9b9a8687a98c91888499858cc78a8684">{{profile.email}}</a></div>
                          </div>
                       </div>
                       <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                         <form>
+                         <form [formGroup]="formProfile" (ngSubmit)="onSubmit()">
                      
                             <div class="row mb-3">
                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nom </label>
-                               <div class="col-md-8 col-lg-9"> <input name="fullName" type="text" class="form-control" id="fullName" value="Nesrine"></div>
+                               <div class="col-md-8 col-lg-9"> 
+                                 <input name="nom" formControlName="nom"  type="text" class="form-control" id="fullName"
+                                 [ngClass]="submitted && f['nom'].errors? { hasEror: true } : {}" >
+                              </div>
                             </div>
                             <div class="row mb-3">
                               <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Prénom </label>
-                              <div class="col-md-8 col-lg-9"> <input name="fullName" type="text" class="form-control" id="fullName" value="Samaali"></div>
+                              <div class="col-md-8 col-lg-9">
+                                  <input name="fullName" formControlName="prenom"  type="text" class="form-control" id="fullName"
+                                  [ngClass]="submitted && f['prenom'].errors? { hasEror: true } : {}">
+                                 </div>
                            </div>
                             <div class="row mb-3">
                                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                               <div class="col-md-8 col-lg-9"> <input name="email" type="email" class="form-control" id="Email" value="nesrine.samaali.com"></div>
+                               <div class="col-md-8 col-lg-9">
+                                  <input name="email" formControlName="email"  type="email" class="form-control" id="Email" 
+                                  [ngClass]="submitted && f['email'].errors? { hasEror: true } : {}">
+                                 </div>
                             </div>
             
                             <div class="text-center"> <button type="submit" class="btn btn-primary">Enregistrer les changements</button></div>

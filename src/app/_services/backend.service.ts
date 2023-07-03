@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Depense } from '../models/depense.model';
 
 
@@ -8,6 +8,13 @@ import { Depense } from '../models/depense.model';
   providedIn: 'root'
 })
 export class BackendService {
+
+  private notificationSubject = new Subject<string>();
+  notification$ = this.notificationSubject.asObservable();
+
+  updateNotificationCount(msg: string): void {
+    this.notificationSubject.next(msg);
+  }
   postFormData(formData: any) {
     throw new Error('Method not implemented.');
   }
@@ -23,7 +30,6 @@ export class BackendService {
     return this.http.get<Depense[]>(`${this.baseUrl}/getOwnDepenses`)
   }
 
- 
 
   getDepenseById(id: number): Observable<Depense> {
     return this.http.get<Depense>(`${this.baseUrl}/getDepense/${id}`)

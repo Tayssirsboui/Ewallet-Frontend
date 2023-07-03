@@ -29,14 +29,9 @@ export class TableUtilisateursComponent implements OnInit {
     s.type = "text/javascript";
     s.src = "../assets/js/main.js";
     this.elementRef.nativeElement.appendChild(s);
+    this.getAllUsers()
 
-
-    this.utilisateurService.findAll().subscribe(data => {
-      console.log('res ' , data)
-      this.utilisateurs = data;
-    } , error => {
-      console.error(error)
-    });
+   
   }
   // ajouterUtilisateur() {
   //   this.afficherFormulaire = true;
@@ -50,7 +45,15 @@ export class TableUtilisateursComponent implements OnInit {
   //     console.log(result);
   //   });
   // }
-  
+  getAllUsers()
+  {
+    this.utilisateurService.findAll().subscribe(data => {
+      console.log('res ' , data)
+      this.utilisateurs = data;
+    } , error => {
+      console.error(error)
+    });
+  }
  
   openModal(): void {
     const dialogRef = this.dialog.open(UtilisateurFormComponent, {
@@ -59,7 +62,7 @@ export class TableUtilisateursComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.getAllUsers()
     });
   }
   modifierUtilisateur(utilisateur: Utilisateur): void {

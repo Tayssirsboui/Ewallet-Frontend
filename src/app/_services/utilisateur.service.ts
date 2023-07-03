@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { Profile } from '../models/profile.model';
 import { Utilisateur } from '../utilisateur';
 import { AuthService } from './auth.service';
 
@@ -12,18 +13,18 @@ export class UtilisateurService {
   private utilisateursUrl: string;
 
   constructor(private http: HttpClient) {
-    this.utilisateursUrl = 'http://localhost:8080';
+    this.utilisateursUrl = 'http://localhost:8080/utilisateurs';
   }
-  public findAll(): Observable<Utilisateur[]> {
+   findAll(): Observable<Utilisateur[]> {
     
-    return this.http.get(this.utilisateursUrl+'utilisateurs' ).pipe(
+    return this.http.get(this.utilisateursUrl+'/getAll' ).pipe(
       map((response:any) => response as Utilisateur[])
     );
   }
 
-  public save(utilisateur:Utilisateur) {
+   save(utilisateur:Utilisateur) {
     
-    return this.http.post<Utilisateur>(this.utilisateursUrl , utilisateur);
+    return this.http.post<Utilisateur>(this.utilisateursUrl + "/saveUtilisateur", utilisateur);
   }
   
   modifierUtilisateur(utilisateur: Utilisateur): Observable<any> {
@@ -37,4 +38,15 @@ export class UtilisateurService {
   getSoldeDeCompte(idUtilisateur:number): Observable<number> {
     return this.http.get<number>(`${this.utilisateursUrl}/soldeDeCompte/${idUtilisateur}`);
   }
+
+  getProfile(): Observable<Profile> {
+    return this.http.get<Profile>(`${this.utilisateursUrl}/getProfile`);
+  }
+
+  updateProfile(profile:Profile): Observable<any>
+  {
+    return this.http.put<any>(`${this.utilisateursUrl}/updateProfile` , profile);
+
+  }
+
 }

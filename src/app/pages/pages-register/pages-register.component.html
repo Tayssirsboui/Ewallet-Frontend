@@ -25,6 +25,13 @@
                                <div class="invalid-feedback">S'il vous plaît, entrez votre nom!</div>
                             </div>
                             <div class="col-12">
+                              <label for="votreNom" class="form-label">Votre Prénom</label> <input type="text" name="prenom" class="form-control" id="VotrePrenom"  [(ngModel)]="form.prenom" required #prenom="ngModel" minlength="3"
+                              maxlength="20"
+                              >
+                           
+                              <div class="invalid-feedback">S'il vous plaît, entrez votre prénom!</div>
+                           </div>
+                            <div class="col-12">
                                <label for="votreEmail" class="form-label">Votre Email</label> <input type="email" name="email" class="form-control" id="votreEmail"    [(ngModel)]="form.email" required  #email="ngModel">
                                <div class="invalid-feedback">s'il vous plaît, entrez une adresse email valide!</div>
                             </div>

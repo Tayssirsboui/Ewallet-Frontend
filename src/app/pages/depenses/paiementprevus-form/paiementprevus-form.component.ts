@@ -75,6 +75,7 @@ export class PaiementprevusFormComponent implements OnInit {
     this.depense.userId=this.userdata.idUtilisateur; 
     console.log(this.depense)
     this.backendService.saveDepense(this.depense).subscribe(result => {
+      this.backendService.updateNotificationCount("nouvelle notif");
       this.dialogRef.close(this.depense);
     });
   }

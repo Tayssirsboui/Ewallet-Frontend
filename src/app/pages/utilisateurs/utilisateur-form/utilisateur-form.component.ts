@@ -51,6 +51,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Utilisateur } from 'src/app/utilisateur';
 import { UtilisateurService } from 'src/app/_services/utilisateur.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-utilisateur-form',
@@ -59,7 +60,7 @@ import { UtilisateurService } from 'src/app/_services/utilisateur.service';
 })
 export class UtilisateurFormComponent implements OnInit {
   utilisateur :Utilisateur = {
-    nom: '', prenom: '', email: '',
+    nom: '', prenom: '', email: '',motDePasse:'',
     idUtilisateur: '',soldeDeCompte:0
   };
   nomControl = new FormControl('');
@@ -87,7 +88,14 @@ export class UtilisateurFormComponent implements OnInit {
       // if (this.form.valid) {
       //    this.dialogRef.close(this.form.value);
       //   }
-          this.utilisateurService.save(this.utilisateur).subscribe(result => this.gotoUtilisateursList());
+          this.utilisateurService.save(this.utilisateur).subscribe(res => 
+            {
+              Swal.fire('Utilisateur ajouté!', '','success')
+
+              this.dialogRef.close();
+            } , error => {
+              console.error(error)
+            });
     // this.dialogRef.close(this.utilisateur);
   }
    gotoUtilisateursList() {
