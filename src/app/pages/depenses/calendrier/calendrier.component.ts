@@ -112,6 +112,7 @@ export class CalendrierComponent implements OnInit{
   getOwnDepenses()
   {
     this.backendService.getOwnDepenses().subscribe((response) => {
+      console.log('own depenses ' , response)
       this.depenses = response;
       const events: any = [];
 
@@ -218,6 +219,7 @@ export class CalendrierComponent implements OnInit{
       }
     )
    }
+   
    listBudgetAtteint()
    {
     this.categorieService.listBudgetAtteint().subscribe(

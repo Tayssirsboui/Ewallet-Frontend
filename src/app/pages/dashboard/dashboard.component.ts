@@ -28,9 +28,9 @@ export class DashboardComponent implements OnInit {
   selectedItemsPerPage: number = 5; // Default selected items per page
   currentPage: number = 1; // Initial current page number
   recentDepenses: any;
-  totalAmount: number;
-  revenusTotal: number;
-  soldeDeCompte : number;
+  totalAmount: number = 0 ;
+  revenusTotal: number = 0;
+  soldeDeCompte : number = 0;
   userdata:any;
   data!: any
   options: any = {
